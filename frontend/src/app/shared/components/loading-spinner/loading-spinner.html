@@ -1,0 +1,6 @@
+<div [class]="containerClass()">
+  <div [class]="spinnerClass()"></div>
+  @if (message()) {
+    <p class="mt-3 text-base text-title/60 dark:text-white/60">{{ message() | translate }}</p>
+  }
+</div>

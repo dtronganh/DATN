@@ -1,0 +1,157 @@
+<div data-aos="fade-up" data-aos-duration="400" class="admin-page space-y-6">
+  <div>
+    <h1 class="text-3xl font-primary font-bold text-title dark:text-white">{{ 'admin.users.title' | translate }}</h1>
+    <p class="mt-1 text-base text-title/60 dark:text-white/60">{{ total() }} {{ 'admin.users.title' | translate }}</p>
+  </div>
+
+  <div class="admin-surface bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk p-4">
+    <admin-search [placeholder]="'admin.users.search' | translate" (search)="onSearch($event)" />
+  </div>
+
+  <app-admin-table
+    [loading]="loading()"
+    [empty]="users().length === 0"
+    emptyIcon="lnr-users"
+    [emptyMessage]="'admin.users.noUsers'"
+    [totalPages]="totalPages()"
+    [currentPage]="currentPage()"
+    (pageChange)="onPageChange($event)"
+  >
+    <div mobile class="divide-y divide-bdr-clr dark:divide-bdr-clr-drk">
+      @for (user of users(); track user.id) {
+        <div class="p-4 space-y-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border-2"
+              [class.border-primary]="user.role === 'admin'"
+              [class.border-bdr-clr]="user.role !== 'admin'"
+              [class.dark:border-bdr-clr-drk]="user.role !== 'admin'">
+              <img [src]="user.image || 'assets/img/profile.jpg'" [alt]="user.fullName" class="w-full h-full object-cover">
+            </div>
+            <div class="min-w-0">
+              <p class="text-base font-semibold text-title dark:text-white truncate">
+                {{ user.fullName }}
+                @if (isCurrentUser(user)) {
+                  <span class="text-sm text-primary font-normal">(you)</span>
+                }
+              </p>
+              <p class="text-sm text-title/70 dark:text-white/70 truncate">{{ user.email }}</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-title/60 dark:text-white/60">{{ 'admin.users.role' | translate }}</span>
+            <span class="py-1 px-2 font-semibold leading-none text-xs rounded" [ngClass]="getRoleColor(user.role)">
+              {{ 'admin.users.roles.' + user.role | translate }}
+            </span>
+          </div>
+          <div class="text-xs text-title/50 dark:text-white/50">{{ formatDate(user.createdAt) }}</div>
+
+          <div class="flex flex-wrap gap-2">
+            @if (user.role === 'user') {
+              <app-button
+                color="btn-outline"
+                size="btn-xs"
+                [text]="'admin.users.setAdmin' | translate"
+                (clicked)="toggleRole(user)"
+              />
+            } @else {
+              <app-button
+                color="btn-outline"
+                size="btn-xs"
+                [text]="'admin.users.setUser' | translate"
+                [disabled]="isCurrentUser(user)"
+                (clicked)="toggleRole(user)"
+              />
+            }
+
+            @if (!isCurrentUser(user)) {
+              <app-button
+                size="btn-xs"
+                [text]="'admin.users.deleteUser' | translate"
+                (clicked)="deleteUser(user)"
+              />
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <div table>
+      <table class="w-full min-w-[900px] table-fixed">
+        <colgroup>
+          <col class="w-[25%]">
+          <col class="w-[25%]">
+          <col class="w-[12%]">
+          <col class="w-[18%]">
+          <col class="w-[20%]">
+        </colgroup>
+        <thead
+          appSortableTableHeader
+          [columns]="tableColumns"
+          [sortField]="sortField()"
+          [sortDirection]="sortDirection()"
+          (sortChange)="onSortChange($event)"
+        ></thead>
+        <tbody>
+          @for (user of users(); track user.id) {
+            <tr class="border-b border-bdr-clr/50 dark:border-bdr-clr-drk/50 hover:bg-primary/5 dark:hover:bg-primary/5 transition-colors duration-200">
+              <td class="px-4 py-3 align-middle">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border-2"
+                    [class.border-primary]="user.role === 'admin'"
+                    [class.border-bdr-clr]="user.role !== 'admin'"
+                    [class.dark:border-bdr-clr-drk]="user.role !== 'admin'">
+                    <img [src]="user.image || 'assets/img/profile.jpg'" [alt]="user.fullName" class="w-full h-full object-cover">
+                  </div>
+                  <div class="min-w-0">
+                    <p class="text-xl font-medium text-title dark:text-white truncate">
+                      {{ user.fullName }}
+                      @if (isCurrentUser(user)) {
+                        <span class="text-base text-primary font-normal">(you)</span>
+                      }
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3.5 align-middle text-base text-title/70 dark:text-white/70 truncate">{{ user.email }}</td>
+              <td class="px-4 py-3 align-middle">
+                <span class="py-[7px] px-[10px] font-semibold leading-none text-sm rounded inline-block" [ngClass]="getRoleColor(user.role)">
+                  {{ 'admin.users.roles.' + user.role | translate }}
+                </span>
+              </td>
+              <td class="px-4 py-3.5 align-middle text-base text-title/70 dark:text-white/70 whitespace-nowrap">{{ formatDate(user.createdAt) }}</td>
+              <td class="px-4 py-3 align-middle">
+                <div class="flex items-center justify-end gap-2">
+                  @if (user.role === 'user') {
+                    <app-button
+                      color="btn-outline"
+                      size="btn-xs"
+                      [text]="'admin.users.setAdmin' | translate"
+                      (clicked)="toggleRole(user)"
+                    />
+                  } @else {
+                    <app-button
+                      color="btn-outline"
+                      size="btn-xs"
+                      [text]="'admin.users.setUser' | translate"
+                      [disabled]="isCurrentUser(user)"
+                      (clicked)="toggleRole(user)"
+                    />
+                  }
+
+                  @if (!isCurrentUser(user)) {
+                    <app-button
+                      size="btn-xs"
+                      [text]="'admin.users.deleteUser' | translate"
+                      (clicked)="deleteUser(user)"
+                    />
+                  }
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </app-admin-table>
+</div>

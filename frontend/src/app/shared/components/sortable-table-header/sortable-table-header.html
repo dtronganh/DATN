@@ -1,0 +1,19 @@
+<tr>
+  @for (column of columns(); track column.field) {
+    <th
+      [class]="getHeaderClass(column)"
+      [style.width]="column.width || 'auto'"
+      (click)="column.sortable ? onSort(column.field) : null"
+    >
+      <span class="inline-flex items-center gap-1.5">
+        {{ column.label | translate }}
+        @if (column.sortable) {
+          <span class="inline-flex flex-col leading-none text-[10px]">
+            <span [class]="getSortIconClass(column.field, 'ASC')">▲</span>
+            <span [class]="getSortIconClass(column.field, 'DESC')">▼</span>
+          </span>
+        }
+      </span>
+    </th>
+  }
+</tr>

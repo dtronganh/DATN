@@ -1,0 +1,202 @@
+﻿<app-navbar/>
+
+<app-breadcrumb
+  [title]="'shop.checkout.title' | translate"
+  [items]="[{ label: ('nav.home' | translate), link: '/' }, { label: ('shop.checkout.title' | translate) }]"
+/>
+
+<div class="sticker-safe">
+
+<div class="s-py-100">
+  <div class="container">
+    <div class="max-w-[1220px] mx-auto grid lg:grid-cols-2 gap-[30px] lg:gap-[70px]">
+      <div class="bg-[#FAFAFA] dark:bg-dark-secondary p-[30px] md:p-[40px] lg:p-[50px] border border-[#17243026] border-opacity-15 rounded-xl" data-aos="fade-up">
+        
+        <h4 class="font-semibold leading-none text-xl md:text-2xl mb-6 md:mb-[30px]">{{ 'shop.checkout.deliveryAddress' | translate }}</h4>
+
+        @if (loadingAddresses()) {
+          <div class="text-center py-10">
+            <p class="text-title dark:text-white">{{ 'shop.checkout.loadingAddresses' | translate }}</p>
+          </div>
+        } @else if (addresses().length === 0 && !showAddressForm()) {
+          <div class="text-center py-10 mb-6">
+            <p class="text-title dark:text-white mb-4">{{ 'shop.checkout.noAddresses' | translate }}</p>
+            <app-button
+              [text]="'shop.checkout.addNewAddress' | translate" 
+              (clicked)="toggleAddressForm()" />
+          </div>
+        } @else {
+          @if (addresses().length > 0 && !showAddressForm()) {
+            <div class="space-y-4 mb-6">
+              @for (address of addresses(); track address.id) {
+                <label 
+                  class="block p-4 border-2 rounded-lg cursor-pointer transition-all duration-300"
+                  [class.border-primary]="selectedAddressId() === address.id"
+                  [class.bg-white]="selectedAddressId() === address.id"
+                  [class.dark:bg-title]="selectedAddressId() === address.id"
+                  [class.border-gray-300]="selectedAddressId() !== address.id"
+                  [class.dark:border-gray-600]="selectedAddressId() !== address.id"
+                  (click)="selectAddress(address.id)">
+                  <div class="flex items-start gap-3">
+                    <input 
+                      type="radio" 
+                      name="address" 
+                      [checked]="selectedAddressId() === address.id"
+                      class="mt-1">
+                    <div class="flex-1">
+                      <div class="flex items-center gap-2 mb-2">
+                        <span class="font-semibold text-title dark:text-white">{{address.receiverName}}</span>
+                        @if (address.isDefault) {
+                          <span class="text-xs bg-primary text-white px-2 py-1 rounded">{{ 'shop.checkout.default' | translate }}</span>
+                        }
+                      </div>
+                      <p class="text-sm text-title dark:text-white mb-1">{{address.phone}}</p>
+                      <p class="text-sm text-title dark:text-white">{{getFullAddress(address)}}</p>
+                    </div>
+                  </div>
+                </label>
+              }
+            </div>
+
+            <app-button
+              [text]="'shop.checkout.addNewAddressPlus' | translate" 
+              (clicked)="toggleAddressForm()" />
+          }
+
+          @if (showAddressForm()) {
+            <form [formGroup]="addressForm" class="space-y-5">
+              <div>
+                <label class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block">
+                  {{ 'shop.checkout.receiverName' | translate }} <span class="text-red-500">*</span>
+                </label>
+                <input 
+                  formControlName="receiverName"
+                  class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300" 
+                  type="text" 
+                  [placeholder]="'shop.checkout.receiverPlaceholder' | translate">
+                @if (getErrorMessage('receiverName')) {
+                  <span class="text-red-500 text-sm mt-1 block">{{ getErrorMessage('receiverName') }}</span>
+                }
+              </div>
+
+              <div>
+                <label class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block">
+                  {{ 'shop.checkout.phoneNumber' | translate }} <span class="text-red-500">*</span>
+                </label>
+                <input 
+                  formControlName="phone"
+                  class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300" 
+                  type="text" 
+                  [placeholder]="'shop.checkout.phonePlaceholder' | translate">
+                @if (getErrorMessage('phone')) {
+                  <span class="text-red-500 text-sm mt-1 block">{{ getErrorMessage('phone') }}</span>
+                }
+              </div>
+
+              <app-location-selector
+                [provinceControl]="provinceControl"
+                [districtControl]="districtControl"
+                [wardControl]="wardControl"
+              />
+
+              <div>
+                <label class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block">
+                  {{ 'shop.checkout.specificAddress' | translate }} <span class="text-red-500">*</span>
+                </label>
+                <input 
+                  formControlName="specificAddress"
+                  class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300" 
+                  type="text" 
+                  [placeholder]="'shop.checkout.specificPlaceholder' | translate">
+                @if (getErrorMessage('specificAddress')) {
+                  <span class="text-red-500 text-sm mt-1 block">{{ getErrorMessage('specificAddress') }}</span>
+                }
+              </div>
+
+              <div class="flex items-center gap-2">
+                <input 
+                  formControlName="isDefault"
+                  type="checkbox" 
+                  id="isDefault"
+                  class="w-4 h-4">
+                <label for="isDefault" class="text-base text-title dark:text-white">{{ 'shop.checkout.setDefault' | translate }}</label>
+              </div>
+
+              <div class="flex gap-3">
+                <app-button
+                  class="flex-1"
+                  [text]="submitting() ? ('shop.checkout.saving' | translate) : ('shop.checkout.saveAddress' | translate)" 
+                  [disabled]="submitting()"
+                  
+                  (clicked)="saveNewAddress()" />
+                <app-button
+                  [text]="'shop.checkout.cancel' | translate" 
+                  
+                  (clicked)="toggleAddressForm()" />
+              </div>
+            </form>
+          }
+
+          @if (!showAddressForm()) {
+            <div class="mt-6">
+              <label class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block">{{ 'shop.checkout.orderNote' | translate }}</label>
+              <textarea 
+                [(ngModel)]="orderNote"
+                [ngModelOptions]="{standalone: true}"
+                class="w-full h-[100px] bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300" 
+                [placeholder]="'shop.checkout.orderNotePlaceholder' | translate"></textarea>
+            </div>
+          }
+        }
+      </div>
+
+      <div class="bg-[#FAFAFA] dark:bg-dark-secondary p-[30px] md:p-[40px] lg:p-[50px] border border-[#17243026] border-opacity-15 rounded-xl" data-aos="fade-up" data-aos-delay="200">
+        <h4 class="font-semibold leading-none text-xl md:text-2xl mb-[30px]">{{ 'shop.checkout.orderSummary' | translate }}</h4>
+        
+        <div class="space-y-4 mb-6 pb-6 border-b border-[#17243026]">
+          @for (item of cartStore.items(); track item.id) {
+            <div class="flex gap-4 items-center">
+              <div class="w-16 h-20 flex-none bg-white dark:bg-title rounded overflow-hidden">
+                <img [src]="item.product.thumbnail" [alt]="item.product.name" class="w-full h-full object-cover">
+              </div>
+              <div class="flex-1">
+                <p class="font-medium text-title dark:text-white mb-1 line-clamp-1">{{ item.product.name }}</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{{ 'shop.cart.qty' | translate }}: {{ item.quantity }} × {{ formatVND(item.product.price) }}đ</p>
+              </div>
+              <p class="font-semibold text-title dark:text-white ml-4 whitespace-nowrap">{{ formatVND(item.product.price * item.quantity) }}đ</p>
+            </div>
+          }
+        </div>
+
+        <div class="space-y-3 mb-6">
+          <div class="flex justify-between items-center">
+            <span class="text-title dark:text-white">{{ 'shop.cart.subtotal' | translate }}</span>
+            <span class="font-medium text-title dark:text-white">{{ formatVND(cartStore.total()) }}đ</span>
+          </div>
+          <div class="flex justify-between items-center pb-3 border-b border-[#17243026]">
+            <span class="text-title dark:text-white">{{ 'shop.cart.shipping' | translate }}</span>
+            <span class="font-medium text-title dark:text-white">{{ 'shop.cart.free' | translate }}</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="font-semibold text-lg text-title dark:text-white">{{ 'shop.cart.total' | translate }}</span>
+            <span class="font-bold text-2xl text-primary">{{ formatVND(cartStore.total()) }}đ</span>
+          </div>
+        </div>
+
+        <app-button
+          [text]="submitting() ? ('shop.checkout.processing' | translate) : ('shop.checkout.placeOrder' | translate)"
+          [disabled]="!selectedAddressId() || submitting() || cartStore.isEmpty()"
+          (clicked)="placeOrder()"
+          padding="w-full"
+        />
+
+        @if (!selectedAddressId()) {
+          <p class="text-sm text-red-500 mt-3 text-center">{{ 'shop.checkout.selectAddress' | translate }}</p>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<app-footer/>

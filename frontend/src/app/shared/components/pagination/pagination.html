@@ -1,0 +1,26 @@
+
+<div class="mt-10 md:mt-12 flex items-center justify-center gap-[10px]">
+    <button (click)="onPrevious()" [disabled]="currentPage() === 1"
+        class="text-title dark:text-white text-xl disabled:opacity-50 disabled:cursor-not-allowed hover:text-primary dark:hover:text-primary">
+        <span class="lnr lnr-arrow-left"></span>
+    </button>
+
+    @for (page of pageNumbers(); track $index) {
+        @if (page === -1) {
+            <span class="text-title dark:text-white text-3xl sm:text-4xl transform">...</span>
+        } @else {
+            <button (click)="onPageChange(page)" 
+                [class.bg-title]="currentPage() === page"
+                [class.dark:bg-white]="currentPage() === page" 
+                [class.bg-opacity-100]="currentPage() === page"
+                class="w-8 sm:w-10 h-8 sm:h-10 flex items-center justify-center leading-none text-base sm:text-lg font-medium text-title transition-all duration-300  bg-title bg-opacity-5 hover:bg-opacity-100 dark:bg-opacity-5 dark:text-white dark:hover:bg-opacity-100 hover:text-primary dark:hover:text-primary">
+                {{page.toString().padStart(2, '0')}}
+            </button>
+        }
+    }
+
+    <button (click)="onNext()" [disabled]="currentPage() === totalPages()"
+        class="text-title dark:text-white text-xl disabled:opacity-50 disabled:cursor-not-allowed hover:text-primary dark:hover:text-primary">
+        <span class="lnr lnr-arrow-right"></span>
+    </button>
+</div>

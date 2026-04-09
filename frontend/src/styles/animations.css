@@ -1,0 +1,28 @@
+.scroll-down-icon {
+  -webkit-animation: slidein 1s linear infinite;
+          animation: slidein 1s linear infinite;
+}
+@-webkit-keyframes slidein {
+  from {
+    -webkit-transform: translateY(-80%);
+            transform: translateY(-80%);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: translateY(80%);
+            transform: translateY(80%);
+    opacity: 1;
+  }
+}
+@keyframes slidein {
+  from {
+    -webkit-transform: translateY(-80%);
+            transform: translateY(-80%);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: translateY(80%);
+            transform: translateY(80%);
+    opacity: 1;
+  }
+}

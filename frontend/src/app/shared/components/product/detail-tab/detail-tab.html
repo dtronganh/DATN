@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <div class="max-w-[985px] mx-auto">
+    <div class="product-dtls-navtab  border-y border-bdr-clr dark:border-bdr-clr-drk">
+      <ul id="user-nav-tabs" class=" text-title dark:text-white text-base sm:text-lg lg:text-xl flex leading-none gap-3 sm:gap-6 md:gap-12 lg:gap-24 justify-between sm:justify-start max-w-md sm:max-w-full">
+        <li (click)="setActiveTab(1)" class="py-3 sm:py-5 lg:6 relative before:absolute before:w-full before:h-[1px] before:bg-title before:top-full before:left-0 before:duration-300 dark:before:bg-white before:opacity-0 cursor-pointer" [class.active]="activeTab() === 1"><a class="duration-300 hover:text-primary">{{ 'product.tabs.description' | translate }}</a></li>
+        <li (click)="setActiveTab(2)" class="py-3 sm:py-5 lg:6 relative before:absolute before:w-full before:h-[1px] before:bg-title before:top-full before:left-0 before:duration-300 dark:before:bg-white before:opacity-0 cursor-pointer" [class.active]="activeTab() === 2"><a class="duration-300 hover:text-primary">{{ 'product.tabs.review' | translate }}</a></li>
+        <li (click)="setActiveTab(3)" class="py-3 sm:py-5 lg:6 relative before:absolute before:w-full before:h-[1px] before:bg-title before:top-full before:left-0 before:duration-300 dark:before:bg-white before:opacity-0 cursor-pointer" [class.active]="activeTab() === 3"><a class="duration-300 hover:text-primary">{{ 'product.tabs.shipping' | translate }}</a></li>
+      </ul>
+    </div>
+    <div class="mt-5 sm:mt-8 lg:mt-12 mx-0 sm:mr-5 md:mr-8 lg:mr-12">
+      @if (activeTab() === 1) {
+        <div class="description-content max-w-none">
+          @if (descriptionHtml()) {
+            <div [innerHTML]="descriptionHtml()"></div>
+          } @else {
+            <p class="sm:text-lg">{{ 'product.noDescription' | translate }}</p>
+          }
+        </div>
+      }
+      @if (activeTab() === 2) {
+        <div>
+          <div class="max-w-[905px] flex items-start xl:justify-between gap-8 flex-wrap">
+            @for (item of detailReviewList(); track item.nameKey) {
+              <div class="sm:max-w-[260px] w-full">
+                <svg class="dark:invert" width="60" height="51" viewBox="0 0 60 51" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M0 25.5539C0 20.8097 0.974729 16.5328 2.92419 12.723C4.94585 8.91332 7.87004 5.89429 11.6968 3.66596C15.5235 1.36575 20.1083 0.143763 25.4513 0V11.2135C20.9025 11.2135 17.509 12.4715 15.2708 14.9873C13.1047 17.5032 12.0217 21.0254 12.0217 25.5539V28.1416H24.3682V51H0V25.5539ZM60 11.2135C55.4513 11.2135 52.0578 12.4715 49.8195 14.9873C47.6534 17.5032 46.5704 21.0254 46.5704 25.5539V28.1416H58.917V51H34.5487V25.5539C34.5487 20.8097 35.5235 16.5328 37.4729 12.723C39.4946 8.91332 42.4188 5.89429 46.2455 3.66596C50.0722 1.36575 54.657 0.143763 60 0V11.2135Z" fill="#E8E9EA" />
+                </svg>
+                <ul class="flex items-center gap-2 mt-4 sm:mt-6">
+                  <li><i class="fa-solid fa-star text-[#EE9818] text-[14px]"></i></li>
+                  <li><i class="fa-solid fa-star text-[#EE9818] text-[14px]"></i></li>
+                  <li><i class="fa-solid fa-star text-[#EE9818] text-[14px]"></i></li>
+                  <li><i class="fa-solid fa-star text-[#EE9818] text-[14px]"></i></li>
+                  <li><i class="fa-solid fa-star text-slate-300 text-[14px]"></i></li>
+                  <li class="dark:text-gray-100">( 125 )</li>
+                </ul>
+                <h6 class="font-semibold leading-none mt-[10px]">{{ item.nameKey | translate }}</h6>
+                <p class="sm:text-lg mt-3">{{ item.descKey | translate }}</p>
+              </div>
+            }
+          </div>
+        </div>
+      }
+      @if (activeTab() === 3) {
+        <div>
+          @for (item of shippingAboutList(); track item.titleKey) {
+            <div class="mt-5 sm:mt-6 first:mt-0">
+              <h4 class="text-xl sm:text-2xl leading-none font-medium">{{ item.titleKey | translate }}</h4>
+              <p class="sm:text-lg mt-3">{{ item.descKey | translate }}</p>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

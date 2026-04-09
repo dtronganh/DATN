@@ -1,0 +1,113 @@
+﻿
+.about-label-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background-color: color-mix(in srgb, #e30000 12%, transparent);
+  color: #e30000;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+:where(.dark) .about-label-badge {
+  background-color: color-mix(in srgb, #e30000 20%, transparent);
+}
+
+.about-feature-card {
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.about-feature-card:hover {
+  border-color: #e30000 !important;
+  box-shadow: 0 10px 40px -10px rgba(227, 0, 0, 0.2);
+  transform: translateY(-4px);
+}
+
+@media (min-width: 768px) {
+  .about-feature-card {
+    padding: 2rem;
+  }
+}
+
+.about-feature-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: color-mix(in srgb, #e30000 10%, transparent);
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e30000;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.about-feature-card:hover .about-feature-icon {
+  background-color: #e30000;
+  color: #ffffff;
+}
+
+.about-offer-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.about-offer-card:hover {
+  box-shadow: 0 10px 40px -10px rgba(227, 0, 0, 0.2);
+  transform: translateY(-4px);
+}
+
+.about-offer-bar {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.about-offer-card:hover .about-offer-bar {
+  transform: scaleX(1);
+}
+
+.about-cta-block {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  background-color: #e30000;
+  padding: 3.5rem 2rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .about-cta-block {
+    padding: 5rem 4rem;
+  }
+}
+
+.about-cta-circle-1 {
+  position: absolute;
+  top: -5rem;
+  right: -5rem;
+  width: 18rem;
+  height: 18rem;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+.about-cta-circle-2 {
+  position: absolute;
+  bottom: -4rem;
+  left: -4rem;
+  width: 14rem;
+  height: 14rem;
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: 9999px;
+  pointer-events: none;
+}

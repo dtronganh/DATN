@@ -1,0 +1,40 @@
+<div class="bg-[#FAFAFA] dark:bg-dark-secondary p-[30px] md:p-[50px] border border-[#17243026] border-opacity-15 rounded-xl">
+  <div [class]="iconWrapperClass()">
+    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="iconPath()"></path>
+    </svg>
+  </div>
+
+  <h3 class="text-2xl md:text-3xl font-semibold mb-4 text-title dark:text-white">{{ titleKey() | translate }}</h3>
+
+  @if (messageKey()) {
+    <p class="text-title dark:text-white" [class.mb-4]="subMessageKey()" [class.mb-8]="!subMessageKey()">
+      {{ messageKey() | translate }}
+    </p>
+  } @else if (message()) {
+    <p class="text-title dark:text-white" [class.mb-4]="subMessageKey()" [class.mb-8]="!subMessageKey()">
+      {{ message() }}
+    </p>
+  }
+
+  @if (subMessageKey()) {
+    <p class="text-sm text-title dark:text-white mb-8">
+      {{ subMessageKey() | translate }}
+    </p>
+  }
+
+  @if (visibleDetails().length) {
+    <div [class]="detailsClass()">
+      @for (item of visibleDetails(); track item.labelKey) {
+        <div class="flex justify-between items-center">
+          <span class="text-title dark:text-white">{{ item.labelKey | translate }}:</span>
+          <span [class]="item.valueClass || defaultValueClass">{{ item.value }}</span>
+        </div>
+      }
+    </div>
+  }
+
+  <div [class]="actionsClass()">
+    <ng-content select="[actions]"></ng-content>
+  </div>
+</div>

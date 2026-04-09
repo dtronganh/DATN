@@ -1,0 +1,61 @@
+{
+  "address": {
+    "errors": {
+      "not_found": "Địa chỉ không tồn tại"
+    }
+  },
+  "auth": {
+    "errors": {
+      "invalid_credentials": "Email hoặc mật khẩu không hợp lệ",
+      "access_denied": "Truy cập bị từ chối",
+      "email_already_in_use": "Email đã được sử dụng"
+    }
+  },
+  "products": {
+    "errors": {
+      "not_found": "Không tìm thấy sản phẩm với id {id}",
+      "insufficient_stock": "Không đủ tồn kho cho sản phẩm với id {id}",
+      "category_not_found": "Không tìm thấy danh mục",
+      "product_not_found": "Không tìm thấy sản phẩm"
+    }
+  },
+  "carts": {
+    "errors": {
+      "item_not_found": "Không tìm thấy sản phẩm trong giỏ hàng",
+      "cart_not_found": "Không tìm thấy giỏ hàng"
+    }
+  },
+  "categories": {
+    "errors": {
+      "not_found": "Không tìm thấy danh mục"
+    }
+  },
+  "orders": {
+    "errors": {
+      "address_not_found": "Không thể tìm thấy địa chỉ với id: {id}",
+      "order_not_found": "Không tìm thấy đơn hàng",
+      "product_not_found": "Một hoặc nhiều sản phẩm không được tìm thấy",
+      "insufficient_stock": "Không đủ tồn kho cho sản phẩm: {productId}",
+      "cannot_cancel_completed_order": "Không thể hủy đơn hàng vì đơn đã hoàn thành",
+      "invalid_status_transition": "Không thể chuyển trạng thái từ {from} sang {to}"
+    }
+  },
+  "payment": {
+    "errors": {
+      "order_not_found": "Không tìm thấy đơn hàng với id: {id}",
+      "order_already_has_payment": "Đơn hàng đã có thanh toán",
+      "user_mismatch": "Không khớp id người dùng",
+      "amount_mismatch": "Số tiền các sản phẩm không khớp với dữ liệu trong hệ thống",
+      "payment_not_found": "Không tìm thấy thanh toán"
+    }
+  },
+  "users": {
+    "errors": {
+      "user_not_found": "Không tìm thấy người dùng",
+      "email_already_in_use": "Email đã được sử dụng"
+    }
+  },
+  "response": {
+    "success": "Thành công"
+  }
+}

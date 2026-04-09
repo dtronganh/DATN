@@ -1,0 +1,117 @@
+<app-navbar />
+<div class="sticker-safe">
+<div class="s-py-50">
+  <div class="container-fluid">
+    <div class="max-w-[1720px] mx-auto space-y-6 md:space-y-8">
+      <section class="category-hero" data-aos="fade-up">
+        <div class="hero-content">
+          <p class="hero-kicker">{{ 'shop.title' | translate }}</p>
+          <h1 class="hero-title">
+            @if (category()) {
+              {{ category()!.name }}
+            } @else {
+              {{ 'shop.title' | translate }}
+            }
+          </h1>
+          <p class="hero-subtitle">
+            {{ 'shop.sort.title' | translate }}: {{ selectedSortLabelKey() | translate }}
+          </p>
+          <div class="hero-stats">
+            <div class="hero-chip">
+              <span class="hero-chip-label">{{ 'shop.categoryPage.items' | translate }}</span>
+              <strong>{{ totalItems() }}</strong>
+            </div>
+            <div class="hero-chip">
+              <span class="hero-chip-label">{{ 'shop.categoryPage.page' | translate }}</span>
+              <strong>{{ currentPage() }}/{{ totalPages() }}</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-sort-panel">
+          <p class="hero-sort-title">{{ 'shop.sort.title' | translate }}</p>
+          <div class="sort-pill-wrap">
+            @for (opt of sortOptions(); track opt.value) {
+              <button
+                type="button"
+                class="sort-pill"
+                [class.is-active]="sortOption() === opt.value"
+                (click)="handleSortSelect(opt.value)">
+                {{ opt.labelKey | translate }}
+              </button>
+            }
+          </div>
+
+          <div class="price-range-wrap">
+            <p class="hero-sort-title mb-2">{{ 'shop.priceRange.title' | translate }}</p>
+            <div class="price-inputs">
+              <input
+                type="number"
+                min="0"
+                class="price-input"
+                [placeholder]="'shop.categoryPage.min' | translate"
+                [value]="priceMin() ?? ''"
+                (input)="onPriceInput('min', $event)">
+              <span class="price-sep">-</span>
+              <input
+                type="number"
+                min="0"
+                class="price-input"
+                [placeholder]="'shop.categoryPage.max' | translate"
+                [value]="priceMax() ?? ''"
+                (input)="onPriceInput('max', $event)">
+            </div>
+            @if (hasActivePriceRange()) {
+              <button type="button" class="clear-price-btn" (click)="clearPriceRange()">{{ 'shop.categoryPage.resetPrice' | translate }}</button>
+            }
+          </div>
+        </div>
+      </section>
+
+      <section class="category-content" data-aos="fade-up" data-aos-delay="100">
+        @if (loading()) {
+          <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5">
+            @for (skeleton of [1,2,3,4,5,6,7,8,9,10]; track skeleton) {
+              <div class="skeleton-card">
+                <div class="skeleton-thumb"></div>
+                <div class="skeleton-line w-4/5"></div>
+                <div class="skeleton-line w-2/5"></div>
+                <div class="skeleton-line w-3/5"></div>
+              </div>
+            }
+          </div>
+        } @else if (filteredProducts().length === 0) {
+          <div class="empty-state">
+            <div class="empty-icon">
+              <i class="mdi mdi-package-variant-closed text-4xl"></i>
+            </div>
+            <h3 class="empty-title">{{ 'shop.categories.empty' | translate }}</h3>
+            <p class="empty-desc">{{ 'shop.categoryPage.emptyByPrice' | translate }}</p>
+          </div>
+        } @else {
+          <div class="result-head">
+            <p>
+              {{ 'shop.categoryPage.showing' | translate }} <strong>{{ pageStart() }}</strong> - <strong>{{ pageEnd() }}</strong>
+              {{ 'shop.categoryPage.of' | translate }} <strong>{{ filteredProducts().length }}</strong> / <strong>{{ totalItems() }}</strong> {{ 'shop.categoryPage.products' | translate }}
+            </p>
+          </div>
+
+          <app-product-card
+            [classList]="'max-w-[1720px] mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5'"
+            [productList]="filteredProducts()"
+            (onAddToCart)="onAddToCart($event)" />
+
+          <div class="mt-10 md:mt-12 flex items-center justify-center gap-[10px]">
+            <app-pagination
+              [currentPage]="currentPage()"
+              [totalPages]="totalPages()"
+              (pageChange)="goToPage($event)" />
+          </div>
+        }
+      </section>
+    </div>
+  </div>
+</div>
+</div>
+
+<app-footer/>

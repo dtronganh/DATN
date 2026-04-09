@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap");
+@import "aos/dist/aos.css";
+@import "jquery-nice-select/css/nice-select.css";
+@import "datatables.net-dt/css/dataTables.dataTables.min.css";
+@import "magnific-popup/dist/magnific-popup.css";
+@import "jquery-ui-dist/jquery-ui.min.css";
+@import "linearicons/dist/web-font/style.css";
+@import './tailwind/base.css';
+@import './tailwind/spacing.css';
+@import './tailwind/sizing.css';
+@import './tailwind/transforms.css';
+@import './tailwind/borders.css';
+@import './tailwind/effects.css';
+@import './tailwind/typography.css';
+@import './tailwind/components.css';
+@import './tailwind/responsive.css';
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+@import './auth.css';
+@import './admin.css';
+@media (min-width: 1600px) {
+  .sticker-safe {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+}

@@ -1,0 +1,53 @@
+﻿<app-navbar/>
+
+<app-breadcrumb
+  [title]="'shop.payment.title' | translate"
+  [items]="[{ label: ('nav.home' | translate), link: '/' }, { label: ('shop.payment.title' | translate) }]"
+/>
+
+<div class="sticker-safe">
+
+<div class="s-py-100">
+  <div class="container">
+    <div class="max-w-[800px] mx-auto">
+      <div class="bg-[#FAFAFA] dark:bg-dark-secondary p-[30px] md:p-[40px] lg:p-[50px] border border-[#17243026] border-opacity-15 rounded-xl" data-aos="fade-up">
+        
+        <h3 class="font-semibold text-2xl md:text-3xl mb-6">{{ 'shop.payment.selectMethod' | translate }}</h3>
+        
+        <div class="mb-8">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-title dark:text-white">{{ 'shop.payment.orderId' | translate }}:</span>
+            <span class="font-semibold text-title dark:text-white">#{{ orderId() || '-' }}</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-title dark:text-white">{{ 'shop.payment.amountToPay' | translate }}:</span>
+            <span class="text-2xl font-bold text-primary">{{formatVND(orderAmount())}}đ</span>
+          </div>
+        </div>
+
+        <div class="space-y-4 mb-8">
+          @for (method of paymentMethods(); track method.value) {
+            <app-payment-method-option
+              [value]="method.value"
+              [titleKey]="method.titleKey"
+              [descKey]="method.descKey"
+              [iconPath]="method.iconPath"
+              [isSelected]="selectedMethod() === method.value"
+              (selectClicked)="selectMethod(method.value)"
+            />
+          }
+        </div>
+
+        <app-button 
+          padding="w-full" 
+          color="btn-theme-solid" 
+          [text]="processing() ? ('shop.payment.processing' | translate) : ('shop.payment.confirm' | translate)" 
+          [disabled]="processing()" 
+          (clicked)="processPayment()" />
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<app-footer/>

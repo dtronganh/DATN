@@ -1,0 +1,21 @@
+<div class="relative">
+  <input
+    type="text"
+    [placeholder]="placeholder() | translate"
+    [(ngModel)]="searchQuery"
+    (ngModelChange)="onSearchChange($event)"
+    [class]="inputClass()"
+  />
+  <span class="absolute top-1/2 -translate-y-1/2 left-4 text-title/40 dark:text-white/40">
+    <i class="lnr lnr-magnifier text-xl"></i>
+  </span>
+  @if (searchQuery) {
+    <button
+      type="button"
+      (click)="clearSearch()"
+      class="absolute top-1/2 -translate-y-1/2 right-4 text-title/40 dark:text-white/40 hover:text-primary dark:hover:text-primary transition-colors"
+    >
+      <i class="lnr lnr-cross text-lg"></i>
+    </button>
+  }
+</div>

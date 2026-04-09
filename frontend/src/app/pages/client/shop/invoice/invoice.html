@@ -1,0 +1,200 @@
+
+<div class="switcher z-20 w-12 h-12 fixed bottom-[10px] md:bottom-5 left-[10px] md:left-5 rounded-full bg-white dark:bg-dark-secondary shadow-lg flex items-center justify-center cursor-pointer border border-bdr-clr dark:border-bdr-clr-drk no-print">
+  <app-switcher [showLangToggle]="false"/>
+</div>
+
+<div class="invoice-page-bg">
+  @if (loading()) {
+    <div class="flex justify-center items-center min-h-[400px]">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+    </div>
+  } @else if (order()) {
+
+    
+    <div class="invoice-action-bar no-print">
+      <a [routerLink]="'/order-history'" class="invoice-back-btn">
+        <i class="mdi mdi-arrow-left"></i>
+        {{ 'shop.invoice.backToOrders' | translate }}
+      </a>
+      <button class="invoice-print-btn" (click)="printInvoice()">
+        <i class="mdi mdi-printer"></i>
+        {{ 'shop.invoice.print' | translate }}
+      </button>
+    </div>
+
+    
+    <div class="invoice-paper" id="invoice-print">
+
+      
+      <div class="invoice-watermark" aria-hidden="true">
+        <svg viewBox="0 0 54 50" fill="currentColor">
+          <path fill-rule="evenodd" d="M39.47 19.83 L45.86 22.68 L45.86 27.32 L39.47 30.17 L41.97 36.70 L38.70 39.97 L32.17 37.47 L29.32 43.86 L24.68 43.86 L21.83 37.47 L15.30 39.97 L12.03 36.70 L14.53 30.17 L8.14 27.32 L8.14 22.68 L14.53 19.83 L12.03 13.30 L15.30 10.03 L21.83 12.53 L24.68 6.14 L29.32 6.14 L32.17 12.53 L38.70 10.03 L41.97 13.30 Z M33 25 A6 6 0 1 0 21 25 A6 6 0 1 0 33 25 Z"/>
+        </svg>
+      </div>
+
+      
+      <div class="invoice-header">
+        <div class="invoice-header-logo">
+          <img src="assets/img/svg/logo.svg" alt="Gear Store" class="invoice-logo">
+          <div class="invoice-shop-meta">
+            <p><strong>{{ 'shop.invoice.shopName' | translate }}</strong></p>
+            <p>{{ 'shop.invoice.shopAddress1' | translate }}, {{ 'shop.invoice.shopAddress2' | translate }}</p>
+            <p>{{ 'shop.invoice.phoneLabel' | translate }} <strong>{{ 'shop.invoice.shopPhone' | translate }}</strong> &nbsp;|&nbsp; {{ 'shop.invoice.websiteLabel' | translate }} <strong>{{ 'shop.invoice.shopWebsite' | translate }}</strong></p>
+            <p>{{ 'shop.invoice.shopTax' | translate }}: <strong>{{ 'shop.invoice.shopTaxNum' | translate }}</strong></p>
+          </div>
+        </div>
+        <div class="invoice-header-title">
+          <h1 class="invoice-main-title">{{ 'shop.invoice.invoiceTitle' | translate }}</h1>
+          <p class="invoice-subtitle">{{ 'shop.invoice.invoiceSubtitle' | translate }}</p>
+          <p class="invoice-subtitle">{{ 'shop.invoice.dateDay' | translate }} {{order()!.createdAt | date:'dd'}} {{ 'shop.invoice.dateMonth' | translate }} {{order()!.createdAt | date:'MM'}} {{ 'shop.invoice.dateYear' | translate }} {{order()!.createdAt | date:'yyyy'}}</p>
+          <div class="invoice-serial">
+            <span>{{ 'shop.invoice.serialLabel' | translate }} <strong>{{ 'shop.invoice.serialValue' | translate }}</strong></span>
+            <span>{{ 'shop.invoice.noLabel' | translate }} <strong>{{order()!.id | number:'8.0-0'}}</strong></span>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="invoice-tables-wrapper">
+      <div class="invoice-bank-row">
+        <span>{{ 'shop.invoice.bankAccLabel' | translate }} <strong>{{ 'shop.invoice.shopBankAcc' | translate }}</strong></span>
+        <span>{{ 'shop.invoice.bankLabel' | translate }} <strong>{{ 'shop.invoice.shopBank' | translate }}</strong></span>
+      </div>
+
+      
+      <table class="invoice-info-table">
+        <tbody>
+          <tr>
+            <td class="invoice-info-label">{{ 'shop.invoice.customerLabel' | translate }}</td>
+            <td class="invoice-info-value"><strong>{{order()!.receiverName}}</strong></td>
+            <td class="invoice-info-label">{{ 'shop.invoice.taxIdLabel' | translate }}</td>
+            <td class="invoice-info-value"></td>
+          </tr>
+          <tr>
+            <td class="invoice-info-label">{{ 'shop.invoice.unitNameLabel' | translate }}</td>
+            <td class="invoice-info-value">{{ 'shop.invoice.shopName' | translate }}</td>
+            <td class="invoice-info-label">{{ 'shop.invoice.statusLabel' | translate }}</td>
+            <td class="invoice-info-value"><strong>{{getStatusLabel(order()!.status)}}</strong></td>
+          </tr>
+          <tr>
+            <td class="invoice-info-label">{{ 'shop.invoice.addressLabel' | translate }}</td>
+            <td class="invoice-info-value" colspan="3">{{order()!.receiverAddress}}</td>
+          </tr>
+          <tr>
+            <td class="invoice-info-label">{{ 'shop.invoice.bankAccLabel' | translate }}</td>
+            <td class="invoice-info-value"></td>
+            <td class="invoice-info-label">{{ 'shop.invoice.atBankLabel' | translate }}</td>
+            <td class="invoice-info-value"></td>
+          </tr>
+          <tr>
+            <td class="invoice-info-label">{{ 'shop.invoice.paymentMethod' | translate }}</td>
+            <td class="invoice-info-value">{{ 'shop.invoice.paymentValue' | translate }}</td>
+            <td class="invoice-info-label">{{ 'shop.invoice.paymentDeadlineLabel' | translate }}</td>
+            <td class="invoice-info-value">{{ 'shop.invoice.paymentDeadlineValue' | translate }}</td>
+          </tr>
+          @if (order()!.note) {
+            <tr>
+              <td class="invoice-info-label">{{ 'shop.invoice.noteLabel' | translate }}</td>
+              <td class="invoice-info-value" colspan="3"><em>{{order()!.note}}</em></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      
+      <table class="invoice-items-table">
+        <thead>
+          <tr>
+            <th class="w-10">{{ 'shop.invoice.stt' | translate }}</th>
+            <th>{{ 'shop.invoice.goods' | translate }}</th>
+            <th class="w-20">{{ 'shop.invoice.unit' | translate }}</th>
+            <th class="w-16">{{ 'shop.invoice.qty' | translate }}</th>
+            <th class="w-32">{{ 'shop.invoice.unitPrice' | translate }}</th>
+            <th class="w-36">{{ 'shop.invoice.amount' | translate }}</th>
+          </tr>
+
+        </thead>
+        <tbody>
+          @for (item of order()!.previews; track item.productId; let i = $index) {
+            <tr>
+              <td class="text-center">{{i + 1}}</td>
+              <td>
+                <div class="invoice-product-cell">
+                  <img [src]="item.thumbnail" [alt]="item.productName" class="invoice-product-thumb">
+                  <span>{{item.productName}}</span>
+                </div>
+              </td>
+              <td class="text-center">{{ 'shop.invoice.unitCai' | translate }}</td>
+              <td class="text-center">{{item.quantity}}</td>
+              <td class="text-right">{{formatVND(item.price)}}</td>
+              <td class="text-right font-semibold">{{formatVND(item.price * item.quantity)}}</td>
+            </tr>
+          }
+          <tr class="invoice-empty-row"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr class="invoice-empty-row"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      
+      <table class="invoice-totals-table">
+        <tbody>
+          <tr>
+            <td class="invoice-totals-label">{{ 'shop.invoice.discountRateLabel' | translate }}</td>
+            <td class="invoice-totals-value"></td>
+            <td class="invoice-totals-label">{{ 'shop.invoice.discountAmountLabel' | translate }}</td>
+            <td class="invoice-totals-value"></td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <td class="invoice-totals-label">{{ 'shop.invoice.subtotal' | translate }}:</td>
+            <td class="invoice-totals-value font-semibold">{{formatVND(order()!.totalAmount)}}đ</td>
+          </tr>
+          <tr>
+            <td class="invoice-totals-label">{{ 'shop.invoice.vatRate' | translate }}:</td>
+            <td class="invoice-totals-value">{{ 'shop.invoice.vatRateValue' | translate }}</td>
+            <td class="invoice-totals-label">{{ 'shop.invoice.vatAmount' | translate }}:</td>
+            <td class="invoice-totals-value">{{formatVND(order()!.totalAmount * 0.1)}}đ</td>
+          </tr>
+          <tr class="invoice-grand-total-row">
+            <td colspan="2"></td>
+            <td class="invoice-totals-label font-bold">{{ 'shop.invoice.grandTotal' | translate }}:</td>
+            <td class="invoice-totals-value font-bold text-red-700">{{formatVND(order()!.totalAmount * 1.1)}}đ</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="invoice-totals-label" style="width:100%">
+              {{ 'shop.invoice.inWords' | translate }}: <em class="font-normal">{{numberToWords(order()!.totalAmount * 1.1)}} {{ 'shop.invoice.inWordsUnit' | translate }}</em>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      
+      <div class="invoice-signature-block">
+        <div class="invoice-sig-col">
+          <p class="invoice-sig-title">{{ 'shop.invoice.buyerSig' | translate }}</p>
+          <p class="invoice-sig-note">{{ 'shop.invoice.sigNote' | translate }}</p>
+          <div class="invoice-sig-space"></div>
+        </div>
+        <div class="invoice-sig-col" style="text-align:right">
+          <p class="invoice-sig-title">{{ 'shop.invoice.sellerSig' | translate }}</p>
+          <p class="invoice-sig-note">{{ 'shop.invoice.sigNote' | translate }}</p>
+          <div class="invoice-sig-space"></div>
+          <p class="invoice-sig-company">{{ 'shop.invoice.shopName' | translate }}</p>
+        </div>
+      </div>
+
+      
+      <p class="invoice-verify-note">{{ 'shop.invoice.verifyNote' | translate }}</p>
+
+    </div>
+
+  } @else {
+    <div class="text-center py-20">
+      <p class="text-lg">{{ 'shop.invoice.notFound' | translate }}</p>
+      <a [routerLink]="'/order-history'" class="invoice-back-btn mt-4 inline-flex">
+        <span>{{ 'shop.invoice.backToOrders' | translate }}</span>
+      </a>
+    </div>
+  }
+</div>

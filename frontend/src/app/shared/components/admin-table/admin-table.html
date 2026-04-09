@@ -1,0 +1,23 @@
+<div class="admin-surface bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk overflow-hidden">
+  @if (loading()) {
+    <app-loading-spinner [message]="loadingMessage()" />
+  } @else if (empty()) {
+    <app-empty-state [icon]="emptyIcon()" [message]="emptyMessage()" />
+  } @else {
+    <div class="md:hidden">
+      <ng-content select="[mobile]"></ng-content>
+    </div>
+    <div class="hidden md:block overflow-x-auto">
+      <ng-content select="[table]"></ng-content>
+    </div>
+    @if (totalPages() > 1) {
+      <div class="p-4 border-t border-bdr-clr dark:border-bdr-clr-drk">
+        <app-pagination
+          [currentPage]="currentPage()"
+          [totalPages]="totalPages()"
+          (pageChange)="pageChange.emit($event)"
+        />
+      </div>
+    }
+  }
+</div>

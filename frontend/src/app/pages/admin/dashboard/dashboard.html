@@ -1,0 +1,186 @@
+<div class="admin-page space-y-6 lg:space-y-8">
+  <div>
+    <h1 class="text-3xl sm:text-4xl font-primary font-bold text-title dark:text-white">
+      {{ 'admin.dashboard.title' | translate }}
+    </h1>
+    <p class="mt-1 text-base text-title/60 dark:text-white/60">
+      {{ 'admin.dashboard.welcome' | translate }}, <span class="font-semibold text-primary">{{
+        authStore.currentUser()?.fullName }}</span>
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+    @for (card of statCards(); track card.labelKey; let i = $index) {
+    <div [attr.data-aos]="'fade-up'" [attr.data-aos-delay]="i * 70"
+      class="admin-stat-card bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk p-5 lg:p-6 hover:border-primary dark:hover:border-primary transition-colors duration-300 group">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-base font-primary text-title/60 dark:text-white/60 uppercase tracking-wide">{{ card.labelKey |
+            translate }}</p>
+          <p class="mt-2 text-4xl font-bold text-title dark:text-white">{{ card.value() }}</p>
+        </div>
+        <div
+          [ngClass]="[card.iconBgClass, card.iconColorClass, 'w-14 h-14 flex items-center justify-center group-hover:text-white transition-all duration-300', card.hoverBgClass]">
+          <span [class]="card.icon" class="text-2xl"></span>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+  <div data-aos="fade-up" data-aos-delay="100" class="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6">
+    <div class="admin-surface bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk">
+      <div class="flex items-center justify-between p-4 lg:p-5 border-b border-bdr-clr dark:border-bdr-clr-drk">
+        <h3 class="font-primary font-bold text-title dark:text-white text-xl">{{ 'admin.dashboard.recentOrders' |
+          translate }}</h3>
+        <a routerLink="/admin/orders" class="text-base text-primary hover:underline font-medium">{{
+          'admin.dashboard.viewAll' | translate }}</a>
+      </div>
+      @if (recentOrders().length > 0) {
+      <div class="md:hidden divide-y divide-bdr-clr dark:divide-bdr-clr-drk">
+        @for (order of recentOrders(); track order.id) {
+        <div class="p-4 space-y-3">
+          <div class="flex items-start justify-between gap-3">
+            <div class="min-w-0">
+              <p class="text-base font-semibold text-title dark:text-white">#{{ order.id }}</p>
+              @if (order.receiverName) {
+              <p class="text-sm text-title/70 dark:text-white/70 truncate">{{ order.receiverName }}</p>
+              }
+              @if (order.itemCount) {
+              <p class="text-xs text-title/50 dark:text-white/50">{{ order.itemCount }} items</p>
+              }
+            </div>
+            <app-status-badge [status]="order.status" />
+          </div>
+          <div class="flex items-center justify-between text-sm text-title/70 dark:text-white/70">
+            <span>{{ 'admin.orders.total' | translate }}</span>
+            <span class="font-semibold text-title dark:text-white">{{ formatVND(order.totalAmount) }}₫</span>
+          </div>
+          <div class="text-xs text-title/50 dark:text-white/50">{{ formatDate(order.createdAt) }}</div>
+        </div>
+        }
+      </div>
+
+      <div class="hidden md:block overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr class="border-b border-bdr-clr dark:border-bdr-clr-drk">
+              <th class="text-left px-4 py-3 text-base font-primary font-bold text-title dark:text-white tracking-wide">
+                {{ 'admin.orders.orderId' | translate }}</th>
+              <th class="text-left px-4 py-3 text-base font-primary font-bold text-title dark:text-white tracking-wide">
+                {{ 'admin.orders.total' | translate }}</th>
+              <th class="text-left px-4 py-3 text-base font-primary font-bold text-title dark:text-white tracking-wide">
+                {{ 'admin.orders.status' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (order of recentOrders(); track order.id) {
+            <tr
+              class="border-b border-bdr-clr/50 dark:border-bdr-clr-drk/50 hover:bg-primary/5 dark:hover:bg-primary/5 transition-colors duration-200">
+              <td class="px-4 py-3.5">
+                <div class="flex flex-col gap-2">
+                  <h5 class="text-base font-semibold leading-none text-title dark:text-white">#{{ order.id }}</h5>
+                  <span class="text-sm text-title/70 dark:text-white/70">{{ formatDate(order.createdAt) }}</span>
+                  @if (order.receiverName) {
+                  <span class="text-sm text-title/70 dark:text-white/70">{{ order.receiverName }}</span>
+                  }
+                  @if (order.itemCount) {
+                  <span class="text-xs text-title/50 dark:text-white/50">{{ order.itemCount }} items</span>
+                  }
+                </div>
+              </td>
+              <td class="px-4 py-3.5 text-base font-medium text-title dark:text-white">{{ formatVND(order.totalAmount)
+                }}₫</td>
+              <td class="px-4 py-3">
+                <app-status-badge [status]="order.status" />
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      } @else {
+      <div class="p-8 text-center text-base text-title/40 dark:text-white/40">
+        {{ 'admin.dashboard.noOrders' | translate }}
+      </div>
+      }
+    </div>
+
+    <div class="admin-surface bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk">
+      <div class="flex items-center justify-between p-4 lg:p-5 border-b border-bdr-clr dark:border-bdr-clr-drk">
+        <h3 class="font-primary font-bold text-title dark:text-white text-xl">{{ 'admin.dashboard.recentProducts' |
+          translate }}</h3>
+        <a routerLink="/admin/products" class="text-base text-primary hover:underline font-medium">{{
+          'admin.dashboard.viewAll' | translate }}</a>
+      </div>
+      @if (recentProducts().length > 0) {
+      <div class="md:hidden divide-y divide-bdr-clr dark:divide-bdr-clr-drk">
+        @for (product of recentProducts(); track product.id) {
+        <div class="p-4 space-y-3">
+          <div class="flex items-center gap-3">
+            <div class="w-14 h-20 flex-shrink-0 border border-bdr-clr dark:border-bdr-clr-drk overflow-hidden">
+              <img [src]="product.thumbnail" [alt]="product.name" class="w-full h-full object-cover">
+            </div>
+            <div class="min-w-0">
+              <p class="text-base font-semibold text-title dark:text-white truncate">{{ product.name }}</p>
+              <p class="text-xs text-title/50 dark:text-white/50">#{{ product.id }}</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-title/60 dark:text-white/60">{{ 'admin.products.price' | translate }}</span>
+            <span class="font-semibold text-title dark:text-white">{{ formatVND(product.price) }}₫</span>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <span class="text-title/60 dark:text-white/60">{{ 'admin.products.stock' | translate }}</span>
+            <span class="font-semibold text-title dark:text-white">{{ product.stock }}</span>
+          </div>
+          <div class="text-xs text-title/50 dark:text-white/50">{{ formatDate(product.createdAt) }}</div>
+        </div>
+        }
+      </div>
+
+      <div class="hidden md:block overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr class="border-b border-bdr-clr dark:border-bdr-clr-drk">
+              <th class="text-left px-4 py-3 text-base font-primary font-bold text-title dark:text-white tracking-wide">
+                {{ 'admin.products.name' | translate }}</th>
+              <th class="text-left px-4 py-3 text-base font-primary font-bold text-title dark:text-white tracking-wide">
+                {{ 'admin.products.price' | translate }}</th>
+              <th class="text-left px-4 py-3 text-base font-primary font-bold text-title dark:text-white tracking-wide">
+                {{ 'admin.products.stock' | translate }}</th>
+              <th class="text-left px-4 py-3 text-base font-primary font-bold text-title dark:text-white tracking-wide">
+                {{ 'admin.orders.date' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (product of recentProducts(); track product.id) {
+            <tr
+              class="border-b border-bdr-clr/50 dark:border-bdr-clr-drk/50 hover:bg-primary/5 dark:hover:bg-primary/5 transition-colors duration-200">
+              <td class="px-4 py-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-16 h-24 flex-shrink-0 border border-bdr-clr dark:border-bdr-clr-drk overflow-hidden">
+                    <img [src]="product.thumbnail" [alt]="product.name" class="w-full h-full object-cover">
+                  </div>
+                  <span class="text-lg font-medium text-title dark:text-white truncate max-w-[180px]">{{ product.name
+                    }}</span>
+                </div>
+              </td>
+              <td class="px-4 py-3.5 text-base font-medium text-title dark:text-white">{{ formatVND(product.price) }}₫
+              </td>
+              <td class="px-4 py-3.5 text-base text-title dark:text-white">{{ product.stock }}</td>
+              <td class="px-4 py-3.5 text-sm text-title/70 dark:text-white/70 whitespace-nowrap">{{
+                formatDate(product.createdAt) }}</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      } @else {
+      <div class="p-8 text-center text-base text-title/40 dark:text-white/40">
+        {{ 'admin.dashboard.noProducts' | translate }}
+      </div>
+      }
+    </div>
+  </div>
+</div>

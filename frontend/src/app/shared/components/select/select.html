@@ -1,0 +1,28 @@
+<div [class]="containerClass()">
+  @if (label()) {
+    <label class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block">
+      {{ label() | translate }}
+      @if (required()) {
+        <span class="text-red-500">*</span>
+      }
+    </label>
+  }
+  <div class="relative">
+    <select
+      [formControl]="control()"
+      (change)="onChange()"
+      class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary px-4 outline-none duration-300 appearance-none disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      <option [ngValue]="null">{{ placeholder() | translate }}</option>
+      @for (opt of options(); track opt.value) {
+        <option [ngValue]="opt.value">{{ opt.label }}</option>
+      }
+    </select>
+    <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-title/50 dark:text-white/50">
+      <span class="lnr lnr-chevron-down text-xs"></span>
+    </div>
+  </div>
+  @if (error()) {
+    <span class="text-red-500 text-sm mt-1 block">{{ error() | translate }}</span>
+  }
+</div>

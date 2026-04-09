@@ -1,0 +1,84 @@
+:host ::ng-deep .description-content {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: #3C474E;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+:host ::ng-deep .description-content h1,
+:host ::ng-deep .description-content h2,
+:host ::ng-deep .description-content h3,
+:host ::ng-deep .description-content h4,
+:host ::ng-deep .description-content h5,
+:host ::ng-deep .description-content h6 {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 700;
+  margin-top: 1.25em;
+  margin-bottom: 0.5em;
+  color: #172430;
+}
+:host ::ng-deep .description-content p {
+  margin-bottom: 0.75em;
+}
+:host ::ng-deep .description-content a {
+  color: #e30000;
+  text-decoration: none;
+}
+:host ::ng-deep .description-content a:hover {
+  text-decoration: underline;
+}
+:host ::ng-deep .description-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 0.75em 0;
+}
+:host ::ng-deep .description-content strong {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 700;
+}
+.dark :host ::ng-deep .description-content {
+  color: #d1d5db;
+}
+.dark :host ::ng-deep .description-content h1,
+.dark :host ::ng-deep .description-content h2,
+.dark :host ::ng-deep .description-content h3,
+.dark :host ::ng-deep .description-content h4,
+.dark :host ::ng-deep .description-content h5,
+.dark :host ::ng-deep .description-content h6 {
+  color: #ffffff;
+}
+:host ::ng-deep .spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+:host ::ng-deep .spec-table td {
+  padding: 10px 14px;
+  border: 1px solid #E3E5E6;
+  vertical-align: middle;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+:host ::ng-deep .spec-table tr td:first-child {
+  width: 200px;
+  min-width: 160px;
+  max-width: 200px;
+  white-space: normal;
+  word-break: break-word;
+  background-color: #fafafa;
+}
+:host ::ng-deep .spec-table td:first-child strong {
+  color: #e30000;
+  font-weight: 600;
+}
+:host ::ng-deep .spec-table td:last-child {
+  color: #3C474E;
+}
+.dark :host ::ng-deep .spec-table td {
+  border-color: #3C474E;
+}
+.dark :host ::ng-deep .spec-table tr td:first-child {
+  background-color: #1E2A35;
+}
+.dark :host ::ng-deep .spec-table td:last-child {
+  color: #d1d5db;
+}

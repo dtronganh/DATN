@@ -1,0 +1,201 @@
+<div data-aos="fade-up" data-aos-duration="400" class="admin-page space-y-6">
+  <div class="flex items-center gap-4">
+    <a routerLink="/admin/products"
+      class="w-10 h-10 flex items-center justify-center border border-bdr-clr dark:border-bdr-clr-drk text-title/70 dark:text-white/70 hover:border-primary hover:text-primary dark:hover:border-primary dark:hover:text-primary transition-all duration-200">
+      <span class="lnr lnr-arrow-left"></span>
+    </a>
+    <div>
+      <h1 class="text-3xl font-primary font-bold text-title dark:text-white">
+        {{ (isEditMode() ? 'admin.products.editProduct' : 'admin.products.createProduct') | translate }}
+      </h1>
+    </div>
+  </div>
+
+  @if (loading()) {
+  <div class="p-12 text-center">
+    <div class="inline-block w-8 h-8 border-2 border-primary border-t-transparent animate-spin"></div>
+  </div>
+  } @else {
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+    <div class="xl:col-span-2 space-y-6">
+      <div class="admin-surface bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk p-5 lg:p-6 space-y-5">
+        <h3 class="font-primary font-bold text-title dark:text-white text-xl">{{ 'admin.products.title' | translate }}
+        </h3>
+
+        <div>
+          <label class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block">{{
+            'admin.products.name' | translate }} *</label>
+          <input formControlName="name" type="text" [placeholder]="'admin.products.namePlaceholder' | translate"
+            class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300">
+          @if (getErrorMessage('name')) {
+          <span class="text-red-500 text-sm mt-1 block">{{ getErrorMessage('name') }}</span>
+          }
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block">{{
+              'admin.products.price' | translate }} (VNĐ) *</label>
+            <input formControlName="price" type="number" min="1000" max="10000000" step="1000"
+              [placeholder]="'admin.products.pricePlaceholder' | translate" (keydown)="onNumberKeyDown($event)"
+              (wheel)="$event.preventDefault()"
+              class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300">
+            @if (getErrorMessage('price')) {
+            <span class="text-red-500 text-sm mt-1 block">{{ getErrorMessage('price') }}</span>
+            }
+          </div>
+          <div>
+            <label class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block">{{
+              'admin.products.stock' | translate }} *</label>
+            <input formControlName="stock" type="number" min="0" max="9999"
+              [placeholder]="'admin.products.stockPlaceholder' | translate" (keydown)="onNumberKeyDown($event)"
+              (wheel)="$event.preventDefault()"
+              class="w-full h-12 md:h-14 bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300">
+            @if (getErrorMessage('stock')) {
+            <span class="text-red-500 text-sm mt-1 block">{{ getErrorMessage('stock') }}</span>
+            }
+          </div>
+        </div>
+
+        <div>
+          <label class="text-base md:text-lg text-title dark:text-white leading-none mb-2 sm:mb-3 block">{{
+            'admin.products.description' | translate }}</label>
+          <button
+            type="button"
+            (click)="openDescriptionEditor()"
+            class="w-full h-12 md:h-14 px-4 border border-[#E3E5E6] text-left text-title dark:text-white hover:border-primary dark:hover:border-primary transition-colors duration-200 flex items-center justify-between"
+          >
+            <span class="truncate text-sm md:text-base text-title/70 dark:text-white/70">
+              {{ (form.get('description')?.value ? 'admin.products.descriptionEditor.edit' : 'admin.products.descriptionEditor.open') | translate }}
+            </span>
+            <span class="lnr lnr-pencil text-base"></span>
+          </button>
+
+          <div class="mt-3 p-3 border border-bdr-clr dark:border-bdr-clr-drk bg-white/70 dark:bg-dark-secondary/60 min-h-16">
+            @if (form.get('description')?.value) {
+              <p class="text-sm text-title/80 dark:text-white/80 whitespace-pre-line line-clamp-3">{{ form.get('description')?.value }}</p>
+            } @else {
+              <p class="text-sm text-title/50 dark:text-white/50">{{ 'admin.products.descriptionEditor.empty' | translate }}</p>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-surface bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk p-5 lg:p-6 space-y-4">
+        <div>
+          <h3 class="font-primary font-bold text-title dark:text-white text-xl">{{ 'admin.products.images' | translate
+            }}</h3>
+          <p class="text-xs text-title/50 dark:text-white/50 mt-1">{{ 'admin.products.imagesHint' | translate }}</p>
+        </div>
+
+        @if (images().length < 10) { <div
+          class="border-2 border-dashed border-bdr-clr dark:border-bdr-clr-drk p-8 text-center cursor-pointer hover:border-primary dark:hover:border-primary transition-colors duration-200"
+          [class.border-primary]="dragOver()" [class.bg-primary/5]="dragOver()" (click)="fileInput.click()"
+          (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+          <span class="lnr lnr-cloud-upload text-3xl text-title/30 dark:text-white/30"></span>
+          <p class="mt-2 text-base text-title/50 dark:text-white/50 font-primary">{{ 'admin.products.uploadImages' |
+            translate }}</p>
+          <p class="text-xs text-title/30 dark:text-white/30 mt-1">{{ images().length }}/10</p>
+          <input #fileInput type="file" class="hidden" accept="image/*" multiple (change)="onFileSelected($event)">
+      </div>
+      }
+
+      @if (images().length > 0) {
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+        @for (img of images(); track $index) {
+        <div class="relative group aspect-square border border-bdr-clr dark:border-bdr-clr-drk overflow-hidden"
+          [class.border-primary]="$index === 0" [class.border-2]="$index === 0">
+          <img [src]="img" class="w-full h-full object-cover">
+
+          @if ($index === 0) {
+          <div class="absolute top-0 left-0 bg-primary text-white text-sm px-2 py-0.5 font-semibold">
+            {{ 'admin.products.thumbnail' | translate }}
+          </div>
+          }
+
+          <button type="button" (click)="removeImage($index)"
+            class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-white text-title text-sm hover:bg-primary hover:text-white transition-colors opacity-0 group-hover:opacity-100 shadow-md z-10">
+            <svg class="fill-current" width="15" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M11.742 12.0717C11.6006 12.2131 11.445 12.2838 11.2753 12.2838C11.1056 12.2838 10.9501 12.2131 10.8086 12.0717L6.16295 7.42598L1.55968 12.0292C1.41826 12.1707 1.2627 12.2414 1.09299 12.2414C0.923289 12.2414 0.767726 12.1707 0.626304 12.0292L0.32932 11.7323C0.187898 11.5908 0.117187 11.4353 0.117188 11.2656C0.117187 11.0959 0.187898 10.9403 0.329319 10.7989L4.93258 6.19561L0.414172 1.6772C0.272751 1.53578 0.20204 1.38021 0.20204 1.21051C0.20204 1.0408 0.272751 0.885239 0.414172 0.743817L0.73237 0.42562C0.873792 0.284198 1.02935 0.213487 1.19906 0.213487C1.36877 0.213488 1.52433 0.284198 1.66575 0.42562L6.18416 4.94403L10.8086 0.319553C10.9501 0.178132 11.1056 0.107421 11.2753 0.107422C11.445 0.107422 11.6006 0.178133 11.742 0.319554L12.039 0.616539C12.1804 0.75796 12.2511 0.913524 12.2511 1.08323C12.2511 1.25293 12.1804 1.4085 12.039 1.54992L7.41453 6.1744L12.0602 10.8201C12.2016 10.9615 12.2724 11.1171 12.2724 11.2868C12.2724 11.4565 12.2016 11.612 12.0602 11.7535L11.742 12.0717Z" />
+            </svg>
+          </button>
+
+          <div
+            class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-2 pointer-events-none">
+            @if ($index > 0) {
+            <button type="button" (click)="moveImage($index, $index - 1)"
+              class="w-8 h-8 flex items-center justify-center bg-white text-title text-sm hover:bg-primary hover:text-white transition-colors pointer-events-auto font-bold">
+              <svg class="fill-current" width="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            }
+            @if ($index < images().length - 1) { <button type="button" (click)="moveImage($index, $index + 1)"
+              class="w-8 h-8 flex items-center justify-center bg-white text-title text-sm hover:bg-primary hover:text-white transition-colors pointer-events-auto font-bold">
+              <svg class="fill-current" width="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              </button>
+              }
+          </div>
+        </div>
+        }
+      </div>
+
+      @if (images().length < 3) { <p class="text-xs text-red-500">{{ 'admin.products.imagesMin' | translate }} ({{
+        images().length }}/3)</p>
+        }
+        }
+    </div>
+</div>
+
+<div class="space-y-6">
+  <div class="admin-surface bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk p-5 lg:p-6">
+    <h3 class="font-primary font-bold text-title dark:text-white text-xl  pb-4">{{ 'admin.products.category' | translate
+      }}</h3>
+
+    <app-select
+      [control]="$any(form.get('categoryId'))"
+      [placeholder]="'admin.products.selectCategory'"
+      [options]="categoryOptions()"
+    />
+
+    <a routerLink="/admin/products/categories"
+      class="text-base text-primary hover:underline font-primary inline-flex items-center gap-1 pt-4">
+      <span class="lnr lnr-layers"></span>
+      {{ 'admin.categories.manage' | translate }}
+    </a>
+  </div>
+
+  <div class="admin-surface bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk p-5 lg:p-6 space-y-3">
+    <h3 class="font-primary font-bold text-title dark:text-white text-xl  pb-4">Summary</h3>
+    <div class="space-y-2 text-base">
+      <div class="flex justify-between text-title/70 dark:text-white/70">
+        <span>{{ 'admin.products.images' | translate }}</span>
+        <span class="font-medium" [class.text-red-500]="images().length < 3">{{ images().length }}/10</span>
+      </div>
+      @if (form.get('price')?.value && form.get('price')!.value! >= 1000) {
+      <div class="flex justify-between text-title dark:text-white pt-2 border-t border-bdr-clr dark:border-bdr-clr-drk">
+        <span class="font-semibold">{{ 'admin.products.price' | translate }}</span>
+        <span class="font-bold text-lg text-primary">{{ formatVND(form.get('price')!.value!) }}₫</span>
+      </div>
+      }
+    </div>
+  </div>
+
+  <div class="admin-surface bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk p-5 lg:p-6">
+    <div class="flex flex-col gap-3">
+      <app-button padding="w-full" color="btn-secondary-solid"
+        [text]="(isEditMode() ? 'admin.products.save' : 'admin.products.addProduct') | translate" [disabled]="saving()"
+        (clicked)="onSubmit()" />
+      <app-button padding="w-full" color="btn-outline" routerLink="/admin/products"
+        [text]="'admin.products.cancel' | translate" />
+    </div>
+  </div>
+</div>
+</form>
+}
+</div>

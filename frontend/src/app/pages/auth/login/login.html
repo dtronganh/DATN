@@ -1,0 +1,100 @@
+<app-navbar/>
+
+<div class="auth-page">
+
+  
+  <div class="auth-bg-shapes" aria-hidden="true">
+    <svg class="auth-gear-decor auth-gear-decor--tr" viewBox="0 0 54 50" fill="currentColor">
+      <path fill-rule="evenodd" d="M39.47 19.83 L45.86 22.68 L45.86 27.32 L39.47 30.17 L41.97 36.70 L38.70 39.97 L32.17 37.47 L29.32 43.86 L24.68 43.86 L21.83 37.47 L15.30 39.97 L12.03 36.70 L14.53 30.17 L8.14 27.32 L8.14 22.68 L14.53 19.83 L12.03 13.30 L15.30 10.03 L21.83 12.53 L24.68 6.14 L29.32 6.14 L32.17 12.53 L38.70 10.03 L41.97 13.30 Z M33 25 A6 6 0 1 0 21 25 A6 6 0 1 0 33 25 Z"/>
+    </svg>
+    <svg class="auth-gear-decor auth-gear-decor--bl" viewBox="0 0 54 50" fill="currentColor">
+      <path fill-rule="evenodd" d="M39.47 19.83 L45.86 22.68 L45.86 27.32 L39.47 30.17 L41.97 36.70 L38.70 39.97 L32.17 37.47 L29.32 43.86 L24.68 43.86 L21.83 37.47 L15.30 39.97 L12.03 36.70 L14.53 30.17 L8.14 27.32 L8.14 22.68 L14.53 19.83 L12.03 13.30 L15.30 10.03 L21.83 12.53 L24.68 6.14 L29.32 6.14 L32.17 12.53 L38.70 10.03 L41.97 13.30 Z M33 25 A6 6 0 1 0 21 25 A6 6 0 1 0 33 25 Z"/>
+    </svg>
+    <svg class="auth-gear-decor auth-gear-decor--ml" viewBox="0 0 54 50" fill="currentColor">
+      <path fill-rule="evenodd" d="M39.47 19.83 L45.86 22.68 L45.86 27.32 L39.47 30.17 L41.97 36.70 L38.70 39.97 L32.17 37.47 L29.32 43.86 L24.68 43.86 L21.83 37.47 L15.30 39.97 L12.03 36.70 L14.53 30.17 L8.14 27.32 L8.14 22.68 L14.53 19.83 L12.03 13.30 L15.30 10.03 L21.83 12.53 L24.68 6.14 L29.32 6.14 L32.17 12.53 L38.70 10.03 L41.97 13.30 Z M33 25 A6 6 0 1 0 21 25 A6 6 0 1 0 33 25 Z"/>
+    </svg>
+    <svg class="auth-gear-decor auth-gear-decor--mr" viewBox="0 0 54 50" fill="currentColor">
+      <path fill-rule="evenodd" d="M39.47 19.83 L45.86 22.68 L45.86 27.32 L39.47 30.17 L41.97 36.70 L38.70 39.97 L32.17 37.47 L29.32 43.86 L24.68 43.86 L21.83 37.47 L15.30 39.97 L12.03 36.70 L14.53 30.17 L8.14 27.32 L8.14 22.68 L14.53 19.83 L12.03 13.30 L15.30 10.03 L21.83 12.53 L24.68 6.14 L29.32 6.14 L32.17 12.53 L38.70 10.03 L41.97 13.30 Z M33 25 A6 6 0 1 0 21 25 A6 6 0 1 0 33 25 Z"/>
+    </svg>
+    <div class="auth-blob auth-blob--1"></div>
+    <div class="auth-blob auth-blob--2"></div>
+  </div>
+
+  
+  <div class="auth-card" data-aos="fade-up">
+    <div class="auth-card-accent"></div>
+    <div class="auth-card-body">
+
+      
+      <div class="auth-brand">
+        <a href="/">
+          <img src="assets/img/svg/logo.svg" alt="Gear Store" class="dark:hidden h-10">
+          <img src="assets/img/svg/logo-light.svg" alt="Gear Store" class="hidden dark:block h-10">
+        </a>
+      </div>
+
+      <div class="auth-sep"></div>
+
+      
+      <h2 class="auth-title" data-aos="fade-up">{{ 'auth.login.title' | translate }}</h2>
+      <p class="auth-subtitle" data-aos="fade-up" data-aos-delay="80">{{ 'auth.login.subtitle' | translate }}</p>
+
+      
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <div class="auth-field" data-aos="fade-up" data-aos-delay="150">
+          <label class="auth-label">{{ 'auth.email' | translate }}</label>
+          <input formControlName="email" class="auth-input" type="email" [placeholder]="'auth.emailPlaceholder' | translate">
+          @if (getErrorMessage('email')) {
+            <span class="text-red-500 text-sm mt-1 block">{{ getErrorMessage('email') }}</span>
+          }
+        </div>
+
+        <div class="auth-field" data-aos="fade-up" data-aos-delay="220">
+          <label class="auth-label">{{ 'auth.password' | translate }}</label>
+          <app-password-input
+            [control]="loginForm.controls.password"
+            [errorMessage]="getErrorMessage('password')"
+          />
+        </div>
+
+        <div class="auth-row" data-aos="fade-up" data-aos-delay="290">
+          <app-checkbox
+            [checked]="rememberMe()"
+            (checkedChange)="toggleRememberMe($event)"
+            [label]="'auth.rememberMe'"
+          />
+          <a [routerLink]="'/auth/forgot-password'" class="text-sm font-semibold text-primary hover:underline">
+            {{ 'auth.forgotPassword' | translate }}
+          </a>
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="360">
+          <app-button
+            color="btn-theme-solid"
+            padding="mt-2"
+            [text]="'auth.login.label' | translate"
+            [disabled]="loginForm.invalid"
+            (clicked)="onSubmit()"
+          />
+        </div>
+
+      </form>
+
+      <p class="auth-footer-text" data-aos="fade-up" data-aos-delay="420">
+        {{ 'auth.noAccount' | translate }}
+        <a [routerLink]="'/auth/register'">{{ 'auth.register' | translate }}</a>
+      </p>
+
+    </div>
+  </div>
+
+  
+  <div class="auth-trust-bar" data-aos="fade-up" data-aos-delay="500">
+    <span><i class="mdi mdi-truck-fast-outline"></i> {{ 'auth.trust.shipping' | translate }}</span>
+    <span><i class="mdi mdi-headset"></i> {{ 'auth.trust.support' | translate }}</span>
+  </div>
+
+</div>
+
+<app-footer/>

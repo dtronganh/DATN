@@ -1,0 +1,10 @@
+<div class="flex items-center" [class]="'gap-x-6 ' + gapClass()">
+  <h6 class="font-normal">{{ title() | translate }} : </h6>
+  <div class="flex" [class]="gapClass()">
+    @for (link of links(); track link.icon) {
+      <a [routerLink]="[]" class="text-paragraph duration-300 dark:text-white hover:text-primary dark:hover:text-primary" [attr.aria-label]="link.ariaLabel">
+        <i [class]="link.icon + ' text-[20px]'"></i>
+      </a>
+    }
+  </div>
+</div>

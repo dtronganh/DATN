@@ -1,0 +1,73 @@
+<div class="header-area navbar-bg left-0 right-0 z-50 relative"
+     [class.sticky-header]="scroll()">
+
+  
+  <div class="navbar-promo" [class.navbar-promo--hidden]="scroll()">
+    <div class="max-w-[1720px] mx-auto px-4 sm:px-8 flex items-center justify-center gap-2 sm:gap-5">
+      <span class="flex items-center gap-1.5">
+        <i class="mdi mdi-truck-fast-outline"></i>
+        {{ 'nav.promoShipping' | translate }} <strong>{{ 'nav.promoShippingAmount' | translate }}</strong>
+      </span>
+      <span class="hidden sm:block opacity-30">|</span>
+      <span class="hidden sm:flex items-center gap-1.5">
+        <i class="mdi mdi-headset"></i>
+        {{ 'nav.promoSupport' | translate }} <strong>24/7</strong>
+      </span>
+      <span class="hidden md:block opacity-30">|</span>
+      <span class="hidden md:flex items-center gap-1.5">
+        <i class="mdi mdi-shield-check-outline"></i>
+        {{ 'nav.promoWarranty' | translate }}
+      </span>
+    </div>
+  </div>
+
+  
+  <div class="container-fluid">
+    <div class="flex items-center justify-between gap-x-4 max-w-[1720px] mx-auto relative py-[10px] sm:py-4 lg:py-0">
+
+      
+      <a class="cursor-pointer block ml-8 sm:ml-24 shrink-0" href="/" aria-label="Gear">
+        <img src="assets/img/svg/logo.svg" alt="" class="dark:hidden w-[130px] sm:w-[190px]">
+        <img src="assets/img/svg/logo-light.svg" alt="" class="dark:block hidden w-[130px] sm:w-[190px]">
+      </a>
+
+      
+      <div class="hidden lg:block w-px h-9 bg-gray-200 dark:bg-white/10 shrink-0"></div>
+
+      <div class="flex items-center gap-12 2xl:gap-24">
+        <div class="main-menu absolute z-50 w-full lg:w-auto top-full left-0 lg:static bg-white dark:bg-title lg:bg-transparent lg:dark:bg-transparent px-5 sm:px-[30px] py-[10px] sm:py-5 lg:px-0 lg:py-0"
+             [class.active]="toggle()">
+          <ul class="text-lg leading-none text-title dark:text-white lg:flex lg:gap-[30px]">
+            <li [class.active]="currentPath() === '/'"><a href="/">{{ 'nav.home' | translate }}</a></li>
+            <li class="relative" [class.active]="categoryOpen()">
+              <a (click)="toggleCategory($event)" class="cursor-pointer">{{ 'nav.category' | translate }}<span></span></a>
+              <div class="mega-menu mega-menu--red-gradient lg:absolute z-50 lg:top-full lg:left-0 lg:w-auto lg:min-w-[480px] lg:invisible lg:transition-all lg:py-6 lg:px-8">
+                @if (loadingCategories()) {
+                  <ul><li><a href="#">{{ 'common.loading' | translate }}</a></li></ul>
+                } @else if (categories().length === 0) {
+                  <ul><li><a href="#">{{ 'nav.noCategories' | translate }}</a></li></ul>
+                } @else {
+                  <ul class="grid grid-cols-2 lg:grid-cols-3">
+                    @for (category of categories(); track category.id) {
+                      <li><a [href]="'/product-category/' + category.id">{{category.name}}</a></li>
+                    }
+                  </ul>
+                }
+              </div>
+            </li>
+            <li [class.active]="currentPath() === '/contact'"><a href="/contact">{{ 'nav.contact' | translate }}</a></li>
+            @if (!authStore.isAuthenticated()) {
+              <li class="lg:hidden"><a href="/auth/login">{{ 'nav.login' | translate }}</a></li>
+            }
+          </ul>
+        </div>
+
+        <app-nav-menu [toggle]="toggle()" [categories]="categories()" (childValueChange)="onChildValueChange($event)"/>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="navbar-accent-line"></div>
+
+</div>

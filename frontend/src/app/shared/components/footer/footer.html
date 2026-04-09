@@ -1,0 +1,48 @@
+<div class="s-pt-100 bg-snow dark:bg-title 2xl:pb-[100px]">
+  <div class="container-fluid max-w-[1720px] mx-auto">
+    <div class="flex flex-col 2xl:flex-row items-start justify-between gap-10">
+      <div class="max-w-[478px] w-full text-left sm:text-center 2xl:text-left sm:mx-auto 2xl:mx-0">
+        <a routerLink="/">
+          <img src="assets/img/svg/logo.svg" alt="Gear Logo" class="dark:hidden w-[120px] sm:w-[200px]">
+          <img src="assets/img/svg/logo-light.svg" alt="Gear Logo" class="dark:block hidden w-[120px] sm:w-[200px]">
+        </a>
+        <p class="mt-[15px]">{{ 'footer.aboutText' | translate }}</p>
+        <div class="flex items-center gap-4 mt-6 sm:justify-center 2xl:justify-start">
+          @for (social of socialLinks(); track social.label) {
+            <a [href]="social.url" 
+               class="w-10 h-10 rounded-full border border-[#898F95] border-opacity-50 flex items-center justify-center group hover:border-primary duration-300" 
+               [attr.aria-label]="social.label">
+              <i class="fa-brands {{ social.icon }} text-[#5B646D] dark:text-white group-hover:text-primary duration-300"></i>
+            </a>
+          }
+        </div>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 2xl:max-w-[1094px] w-full lg:flex items-start justify-between gap-10">
+        <div class="lg:w-[300px] order-7 2xl:order-none col-span-2 md:col-span-1">
+          <h4 class="leading-none mb-5 md:mb-6 text-xl">{{ 'footer.subscribeTitle' | translate }}</h4>
+          <div class="flex flex-col gap-[10px] sm:items-start">
+            <input class="w-full h-12 md:h-14 bg-transparent border border-primary p-4 outline-none dark:text-white placeholder:text-title dark:placeholder:text-white" 
+                   type="email" 
+                   [placeholder]="'footer.emailPlaceholder' | translate">
+            <app-button [text]="'footer.subscribe' | translate" />
+          </div>
+        </div>
+        @for (section of footerSections(); track section.title) {
+          <div>
+            <h4 class="leading-none mb-5 md:mb-6 text-xl">{{ section.title | translate }}</h4>
+            <ul class="text-title dark:text-white leading-none flex flex-col gap-4">
+              @for (link of section.links; track link.name) {
+                <li class="duration-100 hover:text-primary inline-block group">
+                  <a class="text-underline-primary" [routerLink]="link.link">{{ link.name | translate }}</a>
+                </li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+    </div>
+    <p class="text-title dark:text-white pb-5 2xl:pb-0 mt-12 2xl:mt-6 text-center 2xl:text-left">
+      {{ 'footer.copyright' | translate:{ year: currentYear() } }}
+    </p>
+  </div>
+</div>

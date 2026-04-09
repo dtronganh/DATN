@@ -1,0 +1,55 @@
+<div (clickOutside)="onClickedOutside($event)">
+  <button class="relative hdr_cart_btn" (click)="toggleOpen()">
+    <span
+      class="absolute w-[22px] h-[22px] bg-secondary -top-[0px] -right-[11px] rounded-full flex items-center justify-center text-xs leading-none text-white">{{cartStore.count()}}</span>
+    <span
+      class="mdi mdi-shopping-outline text-title dark:text-white text-[24px] sm:text-[28px] hover:text-primary transition-all duration-300"></span>
+  </button>
+  <div
+    class="hdr_cart_popup w-80 md:w-96 absolute z-50 top-full right-0 sm:right-10 xl:right-0 bg-white dark:bg-title p-5 md:p-[30px] border border-primary"
+    [class.hidden]="!open()">
+    <h4 class="font-medium leading-none mb-4 text-xl md:text-2xl">{{ 'cart.listTitle' | translate }}</h4>
+    <div>
+      @if (cartStore.loading()) {
+        <p class="text-center py-4">{{ 'common.loading' | translate }}</p>
+      } @else if (cartStore.isEmpty()) {
+        <p class="text-center py-4">{{ 'cart.empty' | translate }}</p>
+      } @else {
+        <div class="hdr-cart-item pr-4 md:pr-5">
+          @for (item of cartStore.items(); track item.id) {
+          <a [routerLink]="['/product-details', item.product.slug]"
+            class="flex items-center gap-[15px] relative pb-[15px] mb-[15px] border-b border-bdr-clr dark:border-bdr-clr-drk">
+            <img class="w-[60px] aspect-[2/3] object-cover" [src]="item.product.thumbnail" [alt]="item.product.name">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-[14px] md:text-[15px] leading-none block">{{ formatVND(item.product.price) }}đ</span>
+                <span class="w-[6px] h-[6px] rounded-full bg-primary"></span>
+                <span class="text-[14px] md:text-[15px] leading-none block">x{{item.quantity}}</span>
+              </div>
+              <h6 class="text-base md:text-lg font-semibold leading-none mt-3">{{item.product.name}}</h6>
+            </div>
+            <div
+              class="wishList_item_close absolute top-0 right-0 w-6 h-6 flex items-center justify-center bg-title dark:bg-white bg-opacity-10 dark:bg-opacity-10 group duration-300 hover:bg-primary dark:hover:bg-primary"
+              (click)="cartStore.removeCartItem(item.id); $event.preventDefault(); $event.stopPropagation()">
+              <svg class="duration-300 dark:invert" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M0.636719 1.56306L1.56306 0.636719L4.98839 4.06204L8.41371 0.636719L9.31851 1.54152L5.89319 4.96685L9.3616 8.43526L8.43526 9.3616L4.96685 5.89319L1.54152 9.31851L0.636719 8.41371L4.06204 4.98839L0.636719 1.56306Z" fill="#172430" />
+              </svg>
+            </div>
+          </a>
+          }
+        </div>
+      }
+      <div class="pt-5 md:pt-[30px] mt-5 md:mt-[30px] border-t border-bdr-clr dark:border-bdr-clr-drk">
+        <h4 class="mb-5 md:mb-[30px] font-medium !leading-none text-lg md:text-xl text-right">{{ 'cart.subtotal' | translate }} : {{formatVND(cartStore.total())}}đ</h4>
+        <div class="grid grid-cols-2 gap-4">
+          <a routerLink="/cart" class="btn btn-outline btn-sm" [attr.data-text]="'cart.viewCart' | translate">
+            <span>{{ 'cart.viewCart' | translate }}</span>
+          </a>
+          <a routerLink="/checkout" class="btn btn-theme-solid btn-sm" [attr.data-text]="'cart.checkout' | translate">
+            <span>{{ 'cart.checkout' | translate }}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

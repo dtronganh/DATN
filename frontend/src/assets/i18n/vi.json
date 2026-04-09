@@ -1,0 +1,932 @@
+{
+  "common": {
+    "loading": "Đang tải...",
+    "close": "Đóng",
+    "shopNow": "Mua ngay"
+  },
+  "nav": {
+    "home": "Trang chủ",
+    "shop": "Cửa hàng",
+    "category": "Danh mục",
+    "noCategories": "Không có danh mục",
+    "contact": "Liên hệ",
+    "login": "Đăng nhập",
+    "toggleMenu": "Mở menu",
+    "uncategorized": "Chưa phân loại",
+    "promoShipping": "Miễn phí vận chuyển đơn từ",
+    "promoShippingAmount": "500.000₫",
+    "promoSupport": "Hỗ trợ",
+    "promoWarranty": "Bảo hành chính hãng",
+    "searchLabel": "Tìm kiếm"
+  },
+  "cart": {
+    "listTitle": "Giỏ hàng",
+    "empty": "Giỏ hàng trống",
+    "subtotal": "Tạm tính",
+    "viewCart": "Xem giỏ hàng",
+    "checkout": "Thanh toán",
+    "loginToAdd": "Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng",
+    "toast": {
+      "loadFailed": "Không thể tải giỏ hàng",
+      "added": "Đã thêm vào giỏ hàng",
+      "addFailed": "Không thể thêm vào giỏ hàng",
+      "quantityMin": "Số lượng tối thiểu là 1",
+      "updated": "Đã cập nhật giỏ hàng",
+      "updateFailed": "Không thể cập nhật sản phẩm trong giỏ",
+      "removed": "Đã xóa khỏi giỏ hàng",
+      "removeFailed": "Không thể xóa khỏi giỏ",
+      "cleared": "Đã xóa giỏ hàng",
+      "clearFailed": "Không thể xóa giỏ hàng"
+    }
+  },
+  "wishlist": {
+    "title": "Danh sách yêu thích",
+    "viewAll": "Xem tất cả yêu thích",
+    "add": "Thêm vào yêu thích",
+    "remove": "Bỏ khỏi yêu thích",
+    "loginToAdd": "Vui lòng đăng nhập để thêm vào yêu thích",
+    "added": "Đã thêm vào yêu thích",
+    "removed": "Đã bỏ khỏi yêu thích",
+    "toast": {
+      "loginToAdd": "Vui lòng đăng nhập để thêm vào yêu thích",
+      "added": "Đã thêm vào yêu thích",
+      "addFailed": "Không thể thêm vào yêu thích",
+      "removed": "Đã bỏ khỏi yêu thích",
+      "removeFailed": "Không thể xóa khỏi yêu thích",
+      "cleared": "Đã xóa danh sách yêu thích",
+      "clearFailed": "Không thể xóa danh sách yêu thích"
+    }
+  },
+  "search": {
+    "placeholder": "Nhập từ khóa",
+    "searching": "Đang tìm...",
+    "results": "Kết quả tìm kiếm",
+    "noResultsFor": "Không tìm thấy sản phẩm cho \"{{query}}\"",
+    "popularTags": "Thẻ phổ biến"
+  },
+  "footer": {
+    "aboutText": "Gear là cửa hàng công nghệ uy tín, cung cấp laptop, PC, linh kiện máy tính và thiết bị gaming chính hãng.",
+    "subscribeTitle": "Đăng ký nhận tin",
+    "emailPlaceholder": "Nhập email của bạn",
+    "subscribe": "Đăng ký",
+    "sitemap": "Sơ đồ trang",
+    "others": "Khác",
+    "customerService": "Chăm sóc khách hàng",
+    "categories": "Danh mục",
+    "aboutUs": "Về chúng tôi",
+    "allProducts": "Tất cả sản phẩm",
+    "copyright": "© {{year}} Gear Store."
+  },
+  "profile": {
+    "myProfile": "Hồ sơ của tôi",
+    "editProfile": "Chỉnh sửa hồ sơ",
+    "orderHistory": "Lịch sử đơn hàng",
+    "wishlist": "Danh sách yêu thích",
+    "logout": "Đăng xuất",
+    "profile": "Hồ sơ",
+    "myProfilePage": {
+      "avatarAlt": "Ảnh đại diện người dùng",
+      "contactInfo": "Thông tin liên hệ",
+      "phone": "Số điện thoại",
+      "email": "Địa chỉ email",
+      "address": "Địa chỉ giao hàng"
+    },
+    "edit": {
+      "avatarAlt": "Ảnh đại diện hồ sơ",
+      "changeImage": "Đổi ảnh",
+      "fields": {
+        "fullName": "Họ và tên",
+        "phone": "Số điện thoại",
+        "email": "Email",
+        "province": "Tỉnh/Thành",
+        "district": "Quận/Huyện",
+        "ward": "Phường/Xã",
+        "specificAddress": "Địa chỉ cụ thể"
+      },
+      "placeholders": {
+        "fullName": "Nhập họ và tên",
+        "phone": "Nhập số điện thoại",
+        "email": "Nhập email",
+        "specificAddress": "Nhập số nhà, đường, tòa nhà..."
+      },
+      "select": {
+        "province": "Chọn tỉnh/thành",
+        "district": "Chọn quận/huyện",
+        "ward": "Chọn phường/xã"
+      },
+      "saveChange": "Lưu thay đổi",
+      "errors": {
+        "required": "{{field}} là bắt buộc",
+        "invalidEmail": "Email không đúng định dạng",
+        "minLength": "{{field}} tối thiểu {{min}} ký tự",
+        "maxLength": "{{field}} tối đa {{max}} ký tự",
+        "invalidPhone": "Số điện thoại Việt Nam không hợp lệ (vd: 0912345678)"
+      },
+      "toasts": {
+        "loginRequired": "Vui lòng đăng nhập để truy cập trang này",
+        "loadingLocationError": "Lỗi tải dữ liệu địa chỉ",
+        "loadingDistrictsError": "Lỗi tải quận/huyện",
+        "loadingWardsError": "Lỗi tải phường/xã",
+        "fillRequired": "Vui lòng điền đầy đủ các trường bắt buộc",
+        "updateProfileError": "Lỗi cập nhật hồ sơ",
+        "updateAddressError": "Lỗi cập nhật địa chỉ",
+        "createAddressError": "Lỗi tạo địa chỉ",
+        "updateSuccess": "Cập nhật hồ sơ thành công!",
+        "loadingAddressError": "Lỗi tải địa chỉ",
+        "imageUpdateSuccess": "Cập nhật ảnh đại diện thành công!",
+        "imageUpdateError": "Không thể cập nhật ảnh đại diện",
+        "invalidImageType": "Vui lòng chọn tệp ảnh hợp lệ (JPG, PNG, GIF, v.v.)",
+        "imageTooLarge": "Kích thước ảnh không được vượt quá 5MB"
+      }
+    },
+    "orderHistoryPage": {
+      "emptyTitle": "Không có đơn hàng nào",
+      "startShopping": "Mua sắm ngay",
+      "headers": {
+        "orderInfo": "Thông tin đơn",
+        "total": "Tổng tiền",
+        "status": "Trạng thái",
+        "actions": "Thao tác"
+      },
+      "orderNumber": "Đơn hàng #{{id}}",
+      "itemsCount": "{{count}} sản phẩm",
+      "invoice": "Hóa đơn",
+      "cancel": "Hủy",
+      "cancelling": "Đang hủy...",
+      "confirm": {
+        "message": "Bạn chắc chắn muốn hủy đơn hàng này? Hành động này không thể hoàn tác.",
+        "title": "Hủy đơn hàng",
+        "confirmText": "Có, hủy",
+        "cancelText": "Không, giữ lại"
+      },
+      "status": {
+        "pending": "Đang chờ",
+        "paid": "Đã thanh toán",
+        "shipping": "Đang giao",
+        "shipped": "Đã giao",
+        "cancelled": "Đã hủy",
+        "completed": "Hoàn thành"
+      }
+    },
+    "wishlistPage": {
+      "emptyTitle": "Danh sách yêu thích của bạn đang trống",
+      "emptyDesc": "Bắt đầu thêm những sản phẩm bạn yêu thích!",
+      "browseProducts": "Xem sản phẩm",
+      "itemsCount": "{{count}} sản phẩm trong danh sách yêu thích",
+      "clearAll": "Xóa tất cả",
+      "addToCart": "Thêm vào giỏ",
+      "remove": "Xóa",
+      "clearConfirm": {
+        "message": "Bạn có chắc muốn xóa tất cả danh sách yêu thích?",
+        "title": "Xóa danh sách yêu thích",
+        "confirmText": "Xóa",
+        "cancelText": "Hủy"
+      }
+    },
+    "logoutConfirm": {
+      "message": "Bạn có chắc muốn đăng xuất?",
+      "title": "Đăng xuất",
+      "confirmText": "Đồng ý",
+      "cancelText": "Hủy"
+    }
+  },
+  "product": {
+    "inStock": "Còn hàng ({{count}})",
+    "outOfStock": "Hết hàng",
+    "outOfStockMessage": "Sản phẩm đã hết hàng",
+    "noDescription": "Chưa có mô tả",
+    "notFound": "Không tìm thấy sản phẩm",
+    "size": "Kích cỡ",
+    "color": "Màu sắc",
+    "sku": "Mã SKU",
+    "category": "Danh mục",
+    "tagsLabel": "Thẻ",
+    "share": "Chia sẻ",
+    "addToCart": "Thêm vào giỏ",
+    "quickView": "Xem nhanh",
+    "inWishlist": "Đã yêu thích",
+    "addedToCart": "Đã thêm sản phẩm vào giỏ",
+    "addToCartFailed": "Không thể thêm sản phẩm vào giỏ",
+    "viewDetails": "Xem chi tiết",
+    "tabs": {
+      "description": "Mô tả",
+      "review": "Đánh giá",
+      "shipping": "Vận chuyển"
+    },
+    "reviews": {
+    },
+    "shipping": {
+      "1": {
+        "title": "Giao hàng & Vận chuyển",
+        "desc": "Miễn phí giao tiêu chuẩn cho đơn hàng trên 100.000đ. Có giao nhanh cho nhu cầu gấp. Đơn hàng xử lý trong 1–2 ngày làm việc, giao tiêu chuẩn 3–7 ngày tùy khu vực."
+      },
+      "2": {
+        "title": "Đổi trả",
+        "desc": "Chấp nhận đổi trả trong 30 ngày. Sản phẩm phải chưa sử dụng, còn nguyên tag. Hỗ trợ đổi trả miễn phí, hoàn tiền trong 5–7 ngày làm việc sau khi nhận hàng."
+      },
+      "3": {
+        "title": "Hướng dẫn chọn size",
+        "desc": "Vui lòng xem bảng size chi tiết để đo chính xác. Khuyến nghị đo cơ thể và so sánh trước khi đặt. Nếu giữa hai size, nên chọn size lớn hơn."
+      },
+      "4": {
+        "title": "Hướng dẫn bảo quản",
+        "desc": "Tuân theo hướng dẫn trên nhãn. Phần lớn có thể giặt máy nước lạnh, sấy nhẹ hoặc phơi tự nhiên. Ủi nhiệt thấp nếu cần. Với vải mỏng, nên giặt khô."
+      }
+    },
+    "related": {
+      "title": "Sản phẩm liên quan",
+      "desc": "Khám phá các lựa chọn bổ sung giúp nâng cao trải nghiệm của bạn. Tìm các sản phẩm liên quan được tuyển chọn riêng cho bạn."
+    }
+  },
+  "order": {
+    "toast": {
+      "loadOrdersFailed": "Không thể tải danh sách đơn hàng",
+      "loadOrderFailed": "Không thể tải đơn hàng",
+      "loadOrderDetailsFailed": "Không thể tải chi tiết đơn hàng",
+      "created": "Tạo đơn hàng thành công",
+      "createFailed": "Không thể tạo đơn hàng",
+      "cancelled": "Hủy đơn hàng thành công",
+      "cancelFailed": "Không thể hủy đơn hàng"
+    },
+    "status": {
+      "pending": "Chờ xử lý",
+      "paid": "Đã thanh toán",
+      "shipped": "Đang giao",
+      "cancelled": "Đã hủy",
+      "completed": "Hoàn thành"
+    }
+  },
+  "auth": {
+    "login": {
+      "label": "Đăng nhập",
+      "title": "Chào mừng quay lại!",
+      "subtitle": "Mua & bán sản phẩm chỉ tại Gear Store"
+    },
+    "register": "Đăng ký",
+    "registerTitle": "Tạo tài khoản mới",
+    "email": "Email",
+    "fullName": "Họ và tên",
+    "password": "Mật khẩu",
+    "rememberMe": "Ghi nhớ đăng nhập",
+    "forgotPassword": "Quên mật khẩu?",
+    "emailPlaceholder": "Nhập email của bạn",
+    "fullNamePlaceholder": "Nhập họ và tên",
+    "noAccount": "Chưa có tài khoản?",
+    "haveAccount": "Đã có tài khoản?",
+    "forgotTitle": "Quên mật khẩu",
+    "sendInfo": "Gửi thông tin",
+    "resetNote": "Lưu ý: Chúng tôi sẽ gửi liên kết đặt lại mật khẩu qua email",
+    "rememberPassword": "Bạn nhớ mật khẩu?",
+    "resetComingSoon": "Tính năng đặt lại mật khẩu sẽ sớm được cập nhật",
+    "trust": {
+      "shipping": "Vận chuyển toàn quốc",
+      "support": "Hỗ trợ 24/7",
+      "warranty": "Bảo hành chính hãng"
+    },
+    "loginSuccess": "Đăng nhập thành công",
+    "loginFailed": "Đăng nhập thất bại",
+    "toasts": {
+      "loginRequired": "Vui lòng đăng nhập để tiếp tục"
+    },
+    "registerSuccess": "Đăng ký thành công! Chào mừng đến với Gear Store",
+    "registerFailed": "Đăng ký thất bại",
+    "errors": {
+      "emailRequired": "Email là bắt buộc",
+      "fullNameRequired": "Họ và tên là bắt buộc",
+      "passwordRequired": "Mật khẩu là bắt buộc",
+      "invalidEmail": "Email không đúng định dạng",
+      "passwordMin": "Mật khẩu tối thiểu {{min}} ký tự",
+      "passwordMax": "Mật khẩu tối đa {{max}} ký tự",
+      "fullNameMin": "Họ và tên tối thiểu {{min}} ký tự",
+      "fullNameMax": "Họ và tên tối đa {{max}} ký tự",
+      "invalidCredentials": "Email hoặc mật khẩu không đúng",
+      "emailExists": "Email đã tồn tại",
+      "invalidRegistration": "Dữ liệu đăng ký không hợp lệ",
+      "invalidEmailEntry": "Vui lòng nhập email hợp lệ",
+      "serverError": "Lỗi máy chủ. Vui lòng thử lại sau"
+    }
+  },
+  "home": {
+    "hero": {
+      "get": "Giảm",
+      "off": "",
+      "slide1": {
+        "title": "Hàng mới về: Laptop & Máy trạm",
+        "desc": "Khám phá dòng laptop, máy bàn và máy trạm hiệu năng cao mới nhất. Từ làm việc hàng ngày đến sức mạnh chuyên nghiệp — tìm chiếc máy được tạo ra cho bạn."
+      },
+      "slide2": {
+        "title": "Nâng cấp dàn chiến gaming của bạn",
+        "desc": "Khám phá màn hình gaming, bàn phím cơ, chuột DPI cao và tai nghe đỉnh cao. Xây dựng góc chiến hoàn hảo với phụ kiện gaming cao cấp từ Gear."
+      },
+      "slide3": {
+        "title": "Linh kiện & Phụ kiện chính hãng",
+        "desc": "Mua CPU, GPU, RAM, SSD và nhiều hơn nữa — tất cả 100% chính hãng, bảo hành đầy đủ. Dù lắp mới hay nâng cấp, Gear có mọi thứ bạn cần."
+      }
+    },
+    "why": {
+      "title": "Vì sao chọn",
+      "subtitle": "Điểm đến tin cậy cho sản phẩm công nghệ chính hãng và hỗ trợ chuyên nghiệp"
+    },
+    "services": {
+      "fastShipping": {
+        "title": "Giao nhanh & miễn phí",
+        "product": "Đơn từ 500.000đ",
+        "desc": "Miễn phí giao tiêu chuẩn cho đơn hàng trên 500.000đ. Sản phẩm công nghệ được đóng gói cẩn thận và theo dõi từ kho đến tay bạn."
+      },
+      "easyReturns": {
+        "title": "Bảo hành chính hãng",
+        "product": "Bảo hành nhà sản xuất",
+        "desc": "Tất cả sản phẩm đều có bảo hành chính hãng. Đội ngũ bảo hành chuyên nghiệp xử lý mọi yêu cầu nhanh chóng và không rắc rối."
+      },
+      "securePayment": {
+        "title": "Thanh toán an toàn",
+        "product": "Giao dịch 100% bảo mật",
+        "desc": "Thông tin thanh toán được bảo vệ bằng mã hóa tiêu chuẩn. Thanh toán qua thẻ, ngân hàng hoặc COD — tất cả đều an toàn."
+      },
+      "support": {
+        "title": "Hỗ trợ kỹ thuật 24/7",
+        "product": "Chuyên gia tư vấn kỹ thuật",
+        "desc": "Chuyên gia kỹ thuật luôn sẵn sàng 24/7 hỗ trợ tư vấn chọn máy, hướng dẫn cài đặt và giải đáp mọi câu hỏi sau mua hàng."
+      }
+    },
+    "products": {
+      "new": "New",
+      "title": "SẢN PHẨM",
+      "heading": "Sản phẩm nổi bật",
+      "seeAll": "Xem tất cả sản phẩm"
+    },
+    "promo": {
+      "dresses": "Giảm đến {{percent}} cho mọi laptop",
+      "summer": "Thiết bị thiết yếu",
+      "accessories": "Giảm đến {{percent}} cho thiết bị ngoại vi",
+      "trending": "Gaming Gear",
+      "1": {
+        "title": "Giảm đến 30% cho mọi laptop",
+        "subtitle": "Thiết bị thiết yếu"
+      },
+      "2": {
+        "title": "Giảm đến 20% cho thiết bị ngoại vi",
+        "subtitle": "Gaming Gear"
+      }
+    },
+    "stats": {
+      "title": "Gear qua những con số",
+      "subtitle": "Được tin dùng bởi hàng nghìn tín đồ công nghệ trên toàn Việt Nam",
+      "customers": {
+        "title": "Khách hàng hài lòng",
+        "desc": "Hài lòng trên toàn cầu"
+      },
+      "products": {
+        "title": "Sản phẩm",
+        "desc": "Bộ sưu tập tuyển chọn"
+      },
+      "countries": {
+        "title": "Quốc gia",
+        "desc": "Giao hàng toàn cầu"
+      },
+      "satisfaction": {
+        "title": "Mức hài lòng",
+        "desc": "Đánh giá khách hàng"
+      },
+      "learnMore": "Tìm hiểu thêm về chúng tôi"
+    }
+  },
+  "special": {
+    "thankYou": {
+      "title": "Cảm ơn bạn đã mua sắm tại Gear",
+      "descText": "Vui lòng kiểm tra email để tải hóa đơn . Hoặc",
+      "descLink": "Nhấp vào đây",
+      "button": "Quay lại trang chủ"
+    },
+    "error": {
+      "title": "Trang không tìm thấy",
+      "desc": "Trang bạn đang tìm kiếm không tồn tại hoặc đã bị di chuyển. Vui lòng kiểm tra URL hoặc quay lại trang chủ để khám phá sản phẩm công nghệ mới nhất.",
+      "button": "Quay lại trang chủ"
+    }
+  },
+  "shop": {
+    "title": "Cửa hàng",
+    "category": {
+      "title": "Danh mục"
+    },
+    "categories": {
+      "title": "Danh mục",
+      "loading": "Đang tải danh mục...",
+      "empty": "Không có danh mục"
+    },
+    "sort": {
+      "title": "Sắp xếp",
+      "dateNewest": "Ngày: Mới nhất",
+      "dateOldest": "Ngày: Cũ nhất",
+      "priceLowHigh": "Giá: Thấp đến cao",
+      "priceHighLow": "Giá: Cao đến thấp",
+      "nameAToZ": "Tên: A đến Z"
+    },
+    "priceRange": {
+      "title": "Khoảng giá",
+      "label": "Giá"
+    },
+    "categoryPage": {
+      "items": "Sản phẩm",
+      "page": "Trang",
+      "min": "Thấp nhất",
+      "max": "Cao nhất",
+      "resetPrice": "Đặt lại giá",
+      "emptyByPrice": "Không có sản phẩm trong khoảng giá đã chọn.",
+      "showing": "Hiển thị",
+      "of": "trên",
+      "products": "sản phẩm"
+    },
+    "errors": {
+      "loadProducts": "Không thể tải sản phẩm"
+    },
+    "cart": {
+      "title": "Giỏ hàng",
+      "loading": "Đang tải giỏ hàng...",
+      "emptyTitle": "Giỏ hàng trống",
+      "emptyDesc": "Hãy thêm sản phẩm để bắt đầu!",
+      "continue": "Tiếp tục mua sắm",
+      "checkout": "Thanh toán",
+      "subtotal": "Tạm tính",
+      "total": "Tổng cộng",
+      "shipping": "Vận chuyển",
+      "free": "Miễn phí",
+      "qty": "SL",
+      "table": {
+        "product": "Thông tin sản phẩm",
+        "price": "Giá",
+        "quantity": "Số lượng",
+        "total": "Tổng",
+        "remove": "Xóa"
+      }
+    },
+    "checkout": {
+      "title": "Thanh toán",
+      "deliveryAddress": "Địa chỉ giao hàng",
+      "loadingAddresses": "Đang tải địa chỉ...",
+      "noAddresses": "Không có địa chỉ đã lưu",
+      "addNewAddress": "Thêm địa chỉ mới",
+      "addNewAddressPlus": "+ Thêm địa chỉ mới",
+      "default": "Mặc định",
+      "receiverName": "Tên người nhận",
+      "receiverPlaceholder": "Nhập tên người nhận",
+      "phoneNumber": "Số điện thoại",
+      "phonePlaceholder": "vd: 0912345678",
+      "province": "Tỉnh/Thành phố",
+      "selectProvince": "Chọn Tỉnh/Thành phố",
+      "district": "Quận/Huyện",
+      "selectDistrict": "Chọn Quận/Huyện",
+      "ward": "Phường/Xã",
+      "selectWard": "Chọn Phường/Xã",
+      "specificAddress": "Địa chỉ cụ thể",
+      "specificPlaceholder": "Số nhà, tên đường, ...",
+      "setDefault": "Đặt làm địa chỉ mặc định",
+      "saving": "Đang lưu...",
+      "saveAddress": "Lưu địa chỉ",
+      "cancel": "Hủy",
+      "orderNote": "Ghi chú đơn hàng (Tùy chọn)",
+      "orderNotePlaceholder": "Ghi chú giao hàng...",
+      "orderSummary": "Tóm tắt đơn hàng",
+      "shipping": "Vận chuyển",
+      "free": "MIỄN PHÍ",
+      "placeOrder": "Đặt hàng",
+      "processing": "Đang xử lý...",
+      "selectAddress": "Vui lòng chọn địa chỉ giao hàng",
+      "loginRequired": "Vui lòng đăng nhập để thanh toán",
+      "cartEmpty": "Giỏ hàng trống",
+      "loadAddressesFailed": "Không thể tải địa chỉ",
+      "fillRequired": "Vui lòng điền đầy đủ thông tin bắt buộc",
+      "addressAdded": "Đã thêm địa chỉ thành công",
+      "createAddressFailed": "Không thể tạo địa chỉ",
+      "errors": {
+        "required": "{{field}} là bắt buộc",
+        "minLength": "{{field}} tối thiểu {{min}} ký tự",
+        "maxLength": "{{field}} tối đa {{max}} ký tự",
+        "invalidPhone": "Số điện thoại Việt Nam không hợp lệ (vd: 0912345678)"
+      }
+    },
+    "payment": {
+      "title": "Phương thức thanh toán",
+      "selectMethod": "Chọn phương thức thanh toán",
+      "orderId": "Mã đơn hàng",
+      "amountToPay": "Số tiền cần thanh toán",
+      "cod": {
+        "title": "Thanh toán khi nhận hàng",
+        "desc": "Thanh toán khi bạn nhận đơn"
+      },
+      "card": {
+        "title": "Thẻ ghi nợ/Thẻ tín dụng",
+        "desc": "Thanh toán an toàn bằng thẻ"
+      },
+      "bank": {
+        "title": "Chuyển khoản ngân hàng",
+        "desc": "Chuyển khoản trực tiếp đến tài khoản ngân hàng"
+      },
+      "confirm": "Xác nhận thanh toán",
+      "processing": "Đang xử lý...",
+      "invalidRequest": "Yêu cầu thanh toán không hợp lệ",
+      "invalidOrder": "Đơn hàng không hợp lệ",
+      "failed": "Thanh toán thất bại"
+    },
+    "paymentConfirmation": {
+      "title": "Xác nhận thanh toán",
+      "heading": "Xác nhận thanh toán",
+      "date": "Ngày",
+      "cardHolder": "Chủ thẻ",
+      "cardType": "Loại thẻ",
+      "cardNumber": "Số thẻ",
+      "email": "Email",
+      "phone": "Số điện thoại",
+      "cancel": "Hủy thanh toán"
+    },
+    "paymentSuccess": {
+      "title": "Thanh toán thành công",
+      "heading": "Thanh toán thành công!",
+      "message": "Cảm ơn bạn đã đặt hàng. Thanh toán của bạn đã được xử lý thành công.",
+      "paymentId": "Mã thanh toán",
+      "amountPaid": "Số tiền đã thanh toán",
+      "method": "Phương thức thanh toán",
+      "viewInvoice": "Xem hóa đơn",
+      "viewOrders": "Xem đơn hàng"
+    },
+    "paymentFailure": {
+      "title": "Thanh toán thất bại",
+      "heading": "Thanh toán thất bại",
+      "help": "Vui lòng thử lại hoặc liên hệ hỗ trợ nếu sự cố vẫn tiếp diễn.",
+      "tryAgain": "Thử lại",
+      "backToCart": "Quay lại giỏ hàng",
+      "contactSupport": "Liên hệ hỗ trợ",
+      "defaultError": "Xử lý thanh toán thất bại"
+    },
+    "shipping": {
+      "title": "Phương thức giao hàng",
+      "deliveryOption": "Tùy chọn giao hàng",
+      "deliveryDesc": "Tùy chọn giao hàng: Chọn phương thức phù hợp để nhận hàng thuận tiện và nhanh chóng.",
+      "time": "Thời gian",
+      "cost": "Chi phí",
+      "standard": "Giao hàng tiêu chuẩn",
+      "quick": "Giao hàng nhanh",
+      "regular": "Ngày làm việc thông thường",
+      "superFast": "Giao hàng siêu tốc",
+      "days": "{{count}} ngày",
+      "hours": "{{count}} giờ",
+      "free": "MIỄN PHÍ",
+      "rulesTitle": "Quy định giao hàng",
+      "rulesDesc": "Quy định giao hàng: Chúng tôi cung cấp quy trình giao hàng minh bạch và rõ ràng, đảm bảo hàng đến an toàn và đúng thời gian."
+    },
+    "invoice": {
+      "title": "Hóa đơn #{{id}}",
+      "print": "In hóa đơn",
+      "orderDate": "Ngày đặt hàng",
+      "deliveryDate": "Ngày giao hàng",
+      "status": "Trạng thái",
+      "shopInfo": "Thông tin cửa hàng",
+      "shopName": "Gear Store",
+      "shopAddress1": "123 Gear Street",
+      "shopAddress2": "TP. Hồ Chí Minh, Việt Nam",
+      "shopPhone": "0123 456 789",
+      "shopWebsite": "gearstore.vn",
+      "shopTax": "Mã số thuế",
+      "shopTaxNum": "0123456789",
+      "shopBank": "Vietcombank - Chi nhánh TP. Hồ Chí Minh",
+      "shopBankAcc": "0123456789",
+      "customerInfo": "Thông tin khách hàng",
+      "note": "Ghi chú",
+      "orderInfo": "Thông tin đơn hàng",
+      "totalAmount": "Tổng tiền",
+      "notFound": "Không tìm thấy đơn hàng",
+      "backToOrders": "Quay lại đơn hàng",
+      "invoiceTitle": "HÓA ĐƠN GIÁ TRỊ GIA TĂNG",
+      "invoiceSubtitle": "(Bản thể hiện của hóa đơn điện tử)",
+      "serialLabel": "Ký hiệu:",
+      "serialValue": "GS26TQB",
+      "noLabel": "Số:",
+      "sellerLabel": "Người bán hàng (Seller)",
+      "buyerLabel": "Người mua hàng (Buyer)",
+      "buyerName": "Tên người mua:",
+      "buyerAddress": "Địa chỉ:",
+      "buyerPhone": "Điện thoại:",
+      "paymentMethod": "Hình thức thanh toán:",
+      "paymentValue": "Chuyển khoản / Tiền mặt",
+      "stt": "STT",
+      "goods": "Tên hàng hóa, dịch vụ",
+      "unit": "Đơn vị tính",
+      "qty": "Số lượng",
+      "unitPrice": "Đơn giá",
+      "amount": "Thành tiền",
+      "subtotal": "Cộng tiền hàng",
+      "vatRate": "Thuế suất GTGT",
+      "vatRateValue": "10%",
+      "vatAmount": "Tiền thuế GTGT",
+      "grandTotal": "Tổng tiền thanh toán",
+      "inWords": "Số tiền viết bằng chữ",
+      "buyerSig": "Người mua hàng",
+      "sellerSig": "Người bán hàng",
+      "sigNote": "(Ký, ghi rõ họ, tên)",
+      "verifyNote": "(Cần kiểm tra, đối chiếu trước khi lập, giao, nhận hóa đơn)",
+      "phoneLabel": "Điện thoại:",
+      "websiteLabel": "Website:",
+      "dateDay": "Ngày",
+      "dateMonth": "tháng",
+      "dateYear": "năm",
+      "bankAccLabel": "Số tài khoản:",
+      "bankLabel": "Ngân hàng:",
+      "customerLabel": "Khách hàng:",
+      "taxIdLabel": "Mã số thuế:",
+      "unitNameLabel": "Tên đơn vị:",
+      "statusLabel": "Trạng thái:",
+      "addressLabel": "Địa chỉ:",
+      "atBankLabel": "Tại ngân hàng:",
+      "paymentDeadlineLabel": "Thời hạn thanh toán:",
+      "paymentDeadlineValue": "Ngay khi đặt hàng",
+      "noteLabel": "Ghi chú:",
+      "unitCai": "Cái",
+      "discountRateLabel": "Tỷ lệ CK:",
+      "discountAmountLabel": "Số tiền chiết khấu:",
+      "inWordsUnit": "đồng chẵn"
+    }
+  },
+  "about": {
+    "title": "Về chúng tôi",
+    "story": {
+      "label": "Câu chuyện",
+      "title": "Gear Store – Nơi Công Nghệ Gặp Đam Mê",
+      "paragraph1": "Tại Gear Store, câu chuyện của chúng tôi là sự đam mê, chuyên môn kỹ thuật và khát vọng hoàn thiện không ngừng. Chúng tôi bắt đầu với tầm nhìn thay đổi cách mọi người trải nghiệm công nghệ – không chỉ là thiết bị, mà còn là công cụ thúc đẩy sáng tạo, năng suất và hiệu suất vượt trội.",
+      "paragraph2": "Qua nhiều năm, sự đổi mới và đặt khách hàng làm trung tâm đã giúp chúng tôi phát triển mạnh mẽ và xây dựng uy tín vững chắc. Từ khởi đầu khiêm tốn, Gear Store đã trở thành thương hiệu bán lẻ công nghệ tin cậy, được biết đến với những sản phẩm vượt mong đợi."
+    },
+    "stats": {
+      "customers": "Khách hàng hài lòng",
+      "products": "Sản phẩm đa dạng",
+      "years": "Năm kinh nghiệm",
+      "support": "Hỗ trợ 24/7",
+      "rating": "Đánh giá trung bình"
+    },
+    "why": {
+      "label": "Vì sao chọn chúng tôi",
+      "title": "Vì Sao Chọn Gear Store",
+      "subtitle": "Chúng tôi nổi bật với sản phẩm chính hãng, giá cạnh tranh và đội ngũ hỗ trợ kỹ thuật tận tâm cho mọi khách hàng."
+    },
+    "features": {
+      "1": {
+        "title": "Hàng chính hãng",
+        "desc": "Mọi sản phẩm chúng tôi bán đều 100% chính hãng, nhập từ nhà phân phối và nhà sản xuất chính thức trên toàn thế giới."
+      },
+      "2": {
+        "title": "Hỗ trợ chuyên gia",
+        "desc": "Đội ngũ kỹ thuật tư vấn chuyên nghiệp và hỗ trợ sau bán hàng tận tâm để bạn luôn phát huy tốt nhất."
+      },
+      "3": {
+        "title": "Bảo hành uy tín",
+        "desc": "Tất cả sản phẩm đều được bảo hành đầy đủ từ nhà sản xuất và cam kết dịch vụ riêng tại cửa hàng."
+      },
+      "4": {
+        "title": "Giá cạnh tranh",
+        "desc": "Giá bán hợp lý và khuyến mãi thường xuyên giúp công nghệ mới nhất đến gần hơn với mọi người."
+      },
+      "5": {
+        "title": "Giao hàng toàn quốc",
+        "desc": "Vận chuyển nhanh và đáng tin cậy khắp cả nước với theo dõi đơn hàng thời gian thực từ kho đến tay bạn."
+      },
+      "6": {
+        "title": "Đánh giá xác thực",
+        "desc": "Hàng nghìn đánh giá từ khách hàng đã xác minh giúp bạn đưa ra quyết định mua sắm tốt nhất."
+      }
+    },
+    "offer": {
+      "label": "Dịch vụ của chúng tôi",
+      "title": "Giải Pháp Công Nghệ Toàn Diện",
+      "subtitle": "Từ máy tính gaming đến trạm làm việc chuyên nghiệp — chúng tôi có tất cả để bạn xây dựng, nâng cấp và vươn xa.",
+      "items": {
+        "1": {
+          "title": "Laptop & PC",
+          "desc": "Từ laptop văn phòng đến máy trạm hiệu năng cao — chúng tôi phân phối các thương hiệu hàng đầu cho mọi nhu cầu."
+        },
+        "2": {
+          "title": "Linh kiện PC",
+          "desc": "CPU, GPU, RAM, SSD và nhiều hơn — tự build hoặc nâng cấp hệ thống với linh kiện cao cấp, có chứng nhận."
+        },
+        "3": {
+          "title": "Thiết bị Gaming",
+          "desc": "Chuột, bàn phím, tai nghe, màn hình gaming hiệu năng cao cho setup thi đấu chuyên nghiệp."
+        },
+        "4": {
+          "title": "Phụ kiện",
+          "desc": "Cáp, dock, webcam và ngoại vi — hoàn thiện không gian làm việc với đầy đủ công cụ cần thiết."
+        }
+      }
+    },
+    "cta": {
+      "title": "Sẵn Sàng Nâng Cấp Setup Của Bạn?",
+      "subtitle": "Khám phá hàng nghìn sản phẩm công nghệ chính hãng với giá cạnh tranh và giao hàng toàn quốc nhanh chóng.",
+      "button": "Mua ngay"
+    }
+  },
+  "contact": {
+    "title": "Liên hệ",
+    "heading": "Kết nối với chúng tôi",
+    "subtitle": "Chúng tôi sẵn sàng hỗ trợ mọi thắc mắc, góp ý và cơ hội hợp tác của bạn.",
+    "fullName": "Họ và tên",
+    "fullNamePlaceholder": "Nhập họ và tên",
+    "email": "Email",
+    "emailPlaceholder": "Nhập email của bạn",
+    "phone": "Số điện thoại",
+    "phonePlaceholder": "Nhập số điện thoại",
+    "subject": "Chủ đề",
+    "selectSubject": "Chọn chủ đề",
+    "subjects": {
+      "payment": "Vấn đề thanh toán",
+      "quality": "Chất lượng sản phẩm",
+      "shipping": "Vận chuyển & giao hàng",
+      "return": "Đổi trả",
+      "size": "Kích cỡ & vừa vặn",
+      "other": "Khác"
+    },
+    "message": "Nội dung",
+    "messagePlaceholder": "Nhập nội dung",
+    "submit": "Gửi"
+  },
+
+  "admin": {
+    "sidebar": {
+      "title": "Quản trị",
+      "dashboard": "Tổng quan",
+      "products": "Sản phẩm",
+      "orders": "Đơn hàng",
+      "users": "Người dùng",
+      "backToSite": "Về trang chủ",
+      "logout": "Đăng xuất"
+    },
+    "dashboard": {
+      "title": "Tổng quan",
+      "welcome": "Chào mừng trở lại",
+      "totalUsers": "Tổng người dùng",
+      "totalProducts": "Tổng sản phẩm",
+      "totalOrders": "Tổng đơn hàng",
+      "totalRevenue": "Tổng doanh thu",
+      "recentOrders": "Đơn hàng gần đây",
+      "recentProducts": "Sản phẩm mới nhất",
+      "noOrders": "Không có đơn hàng",
+      "noProducts": "Không có sản phẩm",
+      "viewAll": "Xem tất cả"
+    },
+    "products": {
+      "title": "Sản phẩm",
+      "addProduct": "Thêm sản phẩm",
+      "editProduct": "Sửa sản phẩm",
+      "createProduct": "Tạo sản phẩm",
+      "productList": "Danh sách sản phẩm",
+      "search": "Tìm kiếm sản phẩm...",
+      "name": "Tên sản phẩm",
+      "namePlaceholder": "Nhập tên sản phẩm",
+      "price": "Giá",
+      "pricePlaceholder": "Nhập giá (VND)",
+      "priceMin": "Giá tối thiểu là 1.000₫",
+      "stock": "Tồn kho",
+      "stockPlaceholder": "Nhập số lượng tồn kho",
+      "description": "Mô tả",
+      "descriptionPlaceholder": "Nhập mô tả sản phẩm",
+      "descriptionEditor": {
+        "title": "Trình chỉnh sửa mô tả",
+        "markdown": "Markdown",
+        "preview": "Xem trước",
+        "placeholder": "Nhập mô tả sản phẩm bằng Markdown...",
+        "empty": "Chưa có mô tả",
+        "open": "Mở trình soạn Markdown",
+        "edit": "Chỉnh sửa mô tả",
+        "apply": "Áp dụng mô tả",
+        "cancel": "Huỷ"
+      },
+      "category": "Danh mục",
+      "selectCategory": "Chọn danh mục",
+      "thumbnail": "Ảnh đại diện",
+      "images": "Hình ảnh",
+      "imagesHint": "Tải lên 3 đến 10 hình ảnh. Ảnh đầu tiên sẽ là ảnh đại diện.",
+      "imagesMin": "Cần tối thiểu 3 hình ảnh",
+      "imagesMax": "Tối đa 10 hình ảnh",
+      "uploadImages": "Nhấn hoặc kéo ảnh vào đây",
+      "attributes": "Thuộc tính",
+      "size": "Kích cỡ",
+      "color": "Màu sắc",
+      "selectSizes": "Chọn kích cỡ",
+      "selectColors": "Chọn màu sắc",
+      "actions": "Thao tác",
+      "edit": "Sửa",
+      "delete": "Xoá",
+      "confirmDelete": "Bạn có chắc muốn xoá sản phẩm này?",
+      "deleteSuccess": "Đã xoá sản phẩm",
+      "createSuccess": "Đã tạo sản phẩm",
+      "updateSuccess": "Đã cập nhật sản phẩm",
+      "save": "Lưu",
+      "cancel": "Huỷ",
+      "noProducts": "Không có sản phẩm",
+      "backToList": "Quay lại danh sách",
+      "errors": {
+        "required": "{{field}} là bắt buộc",
+        "minLength": "{{field}} phải có ít nhất {{min}} ký tự",
+        "priceMin": "Giá tối thiểu là 1.000₫",
+        "priceMax": "Giá không được vượt quá 10.000.000₫",
+        "stockMin": "Tồn kho tối thiểu là 0",
+        "stockMax": "Tồn kho không được vượt quá 9.999"
+      }
+    },
+    "categories": {
+      "title": "Danh mục",
+      "manage": "Quản lý danh mục",
+      "addCategory": "Thêm danh mục",
+      "name": "Tên danh mục",
+      "namePlaceholder": "Nhập tên danh mục",
+      "nameRequired": "Tên danh mục là bắt buộc",
+      "nameTooShort": "Tên danh mục phải có ít nhất 2 ký tự",
+      "description": "Mô tả",
+      "descriptionPlaceholder": "Nhập mô tả danh mục",
+      "edit": "Sửa",
+      "delete": "Xoá",
+      "confirmDelete": "Bạn có chắc muốn xoá danh mục này?",
+      "deleteSuccess": "Đã xoá danh mục",
+      "createSuccess": "Đã tạo danh mục",
+      "updateSuccess": "Đã cập nhật danh mục",
+      "save": "Lưu",
+      "cancel": "Huỷ",
+      "noCategories": "Không có danh mục"
+    },
+    "orders": {
+      "title": "Đơn hàng",
+      "search": "Tìm kiếm đơn hàng...",
+      "orderId": "Mã đơn",
+      "customer": "Khách hàng",
+      "phone": "SĐT",
+      "total": "Tổng tiền",
+      "status": "Trạng thái",
+      "date": "Ngày tạo",
+      "items": "Sản phẩm",
+      "note": "Ghi chú",
+      "address": "Địa chỉ",
+      "actions": "Thao tác",
+      "updateStatus": "Cập nhật trạng thái",
+      "confirmStatusChange": "Đổi trạng thái đơn hàng thành",
+      "statusUpdateSuccess": "Đã cập nhật trạng thái đơn hàng",
+      "noOrders": "Không có đơn hàng",
+      "filterAll": "Tất cả",
+      "orderDetail": "Chi tiết đơn hàng",
+      "product": "Sản phẩm",
+      "quantity": "SL",
+      "price": "Giá",
+      "subtotal": "Thành tiền",
+      "selectedAttributes": "Thuộc tính",
+      "cancel": "Huỷ",
+      "viewInvoice": "Xem hoá đơn",
+      "failedToLoadDetail": "Không thể tải chi tiết đơn hàng",
+      "statuses": {
+        "PENDING": "Chờ xử lý",
+        "PAID": "Đã thanh toán",
+        "SHIPPED": "Đang giao",
+        "COMPLETED": "Hoàn thành",
+        "CANCELLED": "Đã huỷ"
+      }
+    },
+    "users": {
+      "title": "Người dùng",
+      "search": "Tìm kiếm người dùng...",
+      "avatar": "Ảnh",
+      "fullName": "Họ tên",
+      "email": "Email",
+      "role": "Vai trò",
+      "status": "Trạng thái",
+      "joinDate": "Ngày tham gia",
+      "actions": "Thao tác",
+      "changeRole": "Đổi vai trò",
+      "deleteUser": "Xoá người dùng",
+      "setAdmin": "Đặt làm Admin",
+      "setUser": "Đặt làm User",
+      "confirmRoleChange": "Đổi vai trò người dùng thành",
+      "confirmDelete": "Bạn có chắc muốn xoá người dùng này?",
+      "roleUpdateSuccess": "Đã cập nhật vai trò",
+      "deleteSuccess": "Đã xoá người dùng",
+      "noUsers": "Không có người dùng",
+      "roles": {
+        "admin": "Quản trị viên",
+        "user": "Người dùng"
+      },
+      "active": "Hoạt động",
+      "inactive": "Không hoạt động"
+    },
+    "common": {
+      "confirm": "Xác nhận",
+      "cancel": "Huỷ",
+      "save": "Lưu",
+      "delete": "Xoá",
+      "edit": "Sửa",
+      "create": "Tạo",
+      "search": "Tìm kiếm",
+      "filter": "Lọc",
+      "actions": "Thao tác",
+      "noData": "Không có dữ liệu",
+      "loading": "Đang tải...",
+      "showing": "Hiển thị",
+      "of": "trên",
+      "entries": "mục",
+      "yes": "Có",
+      "no": "Không"
+    }
+  }
+}

@@ -1,0 +1,142 @@
+<app-navbar/>
+
+<div class="sticker-safe">
+
+<section class="hero-banner-section">
+  <div class="max-w-[1720px] mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
+  
+  <div class="flex gap-[5px]">
+
+    
+    <div class="hero-carousel-wrapper w-[65%] flex-shrink-0 overflow-hidden rounded-xl">
+      <owl-carousel-o [options]="customOptions" class="home-banner-slider owl-theme owl-carousel block" [ngClass]="{'is-sliding': isSliding()}" (change)="onSlideChange()" (translated)="onTranslated()" (dragging)="onDragging($event)">
+        @for (slide of heroSlides(); track slide.image; let i = $index) {
+          <ng-template carouselSlide>
+            <div class="crsl-slider-thumb overflow-hidden">
+              <img
+                class="w-full object-cover"
+                [src]="slide.image"
+                alt="banner-slider"
+                [attr.loading]="i === 0 ? 'eager' : 'lazy'"
+                [attr.fetchpriority]="i === 0 ? 'high' : 'auto'"
+              >
+            </div>
+          </ng-template>
+        }
+      </owl-carousel-o>
+    </div>
+
+    
+    <div class="flex-1 flex flex-col gap-[5px]">
+      <a routerLink="/product-category" class="flex-1 overflow-hidden flex rounded-xl">
+        <img class="w-full object-cover hover:scale-105 transition-transform duration-300" src="assets/img/banner/banner-01.png" alt="Banner 1" loading="lazy">
+      </a>
+      <a routerLink="/product-category" class="flex-1 overflow-hidden flex rounded-xl">
+        <img class="w-full object-cover hover:scale-105 transition-transform duration-300" src="assets/img/banner/banner-02.png" alt="Banner 2" loading="lazy">
+      </a>
+    </div>
+  </div>
+
+  
+  <div class="grid grid-cols-3 gap-[5px] mt-[5px]">
+    <a routerLink="/product-category" class="overflow-hidden block rounded-xl">
+      <img class="w-full object-cover hover:scale-105 transition-transform duration-300" src="assets/img/banner/banner-03.png" alt="Banner 3" loading="lazy">
+    </a>
+    <a routerLink="/product-category" class="overflow-hidden block rounded-xl">
+      <img class="w-full object-cover hover:scale-105 transition-transform duration-300" src="assets/img/banner/banner-04.png" alt="Banner 4" loading="lazy">
+    </a>
+    <a routerLink="/product-category" class="overflow-hidden block rounded-xl">
+      <img class="w-full object-cover hover:scale-105 transition-transform duration-300" src="assets/img/banner/banner-05.png" alt="Banner 5" loading="lazy">
+    </a>
+  </div>
+  </div>
+</section>
+
+<div class="py-16 md:py-20 lg:py-24 bg-[#f5f5f5] dark:bg-dark-secondary relative z-10">
+  <div class="container-fluid max-w-[1720px] mx-auto">
+    <div class="text-center mb-12 lg:mb-16" data-aos="fade-up">
+      <h3 class="text-3xl lg:text-4xl font-semibold dark:text-white">{{ 'home.why.title' | translate }} <span class="text-primary">Gear</span></h3>
+      <p class="mt-3 text-lg dark:text-gray-300">{{ 'home.why.subtitle' | translate }}</p>
+    </div>
+    <div class="max-w-[1326px] mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8 xl:gap-12">
+      @for (item of servicesData(); track item; let i = $index) {
+        <div class="text-center group relative" data-aos="fade-up" [attr.data-aos-delay]="i * 100">
+          <div class="w-14 sm:w-[70px] h-14 sm:h-[70px] p-[10px] mx-auto flex items-center justify-center border border-primary rounded-[10px]">
+            <i class="mdi text-3xl sm:text-4xl text-primary" [class]="item.icon"></i>
+          </div>
+          <h4 class="mt-6 font-semibold leading-none text-xl lg:text-2xl dark:text-white group-hover:text-primary transition-colors duration-300">{{ item.titleKey | translate }}</h4>
+          <span class="block leading-none mt-3 text-primary font-medium">{{ item.productKey | translate }}</span>
+          <p class="mt-4 dark:text-gray-300">{{ item.descKey | translate }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+
+<div class="s-py-100-50">
+  <div class="container-fluid max-w-[1720px] mx-auto">
+    <div class="text-center mb-[40px] md:mb-12" data-aos="fade-up">
+      <h3 class="text-3xl md:text-4xl font-semibold text-primary uppercase tracking-widest">{{ 'home.products.heading' | translate }}</h3>
+    </div>
+    <app-product-card 
+      [variant]="'compact'"
+      [productList]="productList().slice(0,4)" 
+      [classList]="'grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-8'" 
+      (onAddToCart)="handleAddToCart($event)"
+      data-aos="fade-up" 
+      data-aos-delay="100"
+    />
+    <div class="text-center mt-7 md:mt-12" data-aos="fade-up" data-aos-delay="200">
+      <app-button [text]="('home.products.seeAll' | translate)" color="btn-outline" routerLink="/product-category" />
+    </div>
+  </div>
+</div>
+
+<div class="s-py-50" data-aos="fade-up">
+  <div class="container-fluid max-w-[1720px] mx-auto">
+    <div class="grid md:grid-cols-2 gap-8">
+      <div data-aos="fade-up" data-aos-delay="0">
+        <img class="w-full object-cover" src="assets/img/pdct/pdct-01.png" alt="product">
+      </div>
+      <div data-aos="fade-up" data-aos-delay="100">
+        <img class="w-full object-cover" src="assets/img/pdct/pdct-02.png" alt="product">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-red-100 dark:bg-dark-secondary py-12 md:py-16">
+  <div class="container-fluid max-w-[1720px] mx-auto">
+    <div class="text-center mb-10 md:mb-12" data-aos="fade-up">
+      <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold dark:text-white leading-tight">
+        {{ 'home.stats.title' | translate }}
+      </h3>
+      <p class="dark:text-white text-opacity-90 mt-4 text-lg">
+        {{ 'home.stats.subtitle' | translate }}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+      @for (stat of statsData(); track stat.titleKey; let i = $index) {
+        <div class="text-center group" data-aos="fade-up" [attr.data-aos-delay]="(i + 1) * 100">
+          <div class="mb-4">
+            <h2 class="text-5xl md:text-6xl font-bold dark:text-white group-hover:text-primary transition-colors duration-300">{{ stat.value }}</h2>
+          </div>
+          <h5 class="dark:text-white text-opacity-90 text-lg font-medium">{{ stat.titleKey | translate }}</h5>
+          <p class="dark:text-white text-opacity-70 text-sm mt-2">
+            {{ stat.descKey | translate }}
+          </p>
+        </div>
+      }
+    </div>
+
+    <div class="mt-12 text-center" data-aos="fade-up" data-aos-delay="500">
+      <app-button [text]="('home.stats.learnMore' | translate)" routerLink="/about" />
+    </div>
+  </div>
+</div>
+
+</div>
+
+<app-footer/>

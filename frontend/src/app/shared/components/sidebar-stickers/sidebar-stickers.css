@@ -1,0 +1,33 @@
+:host {
+  display: contents;
+}
+.sidebar-sticker {
+  display: none;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  pointer-events: none;
+  line-height: 0;
+}
+@media (min-width: 1600px) {
+  .sidebar-sticker {
+    display: block;
+  }
+}
+.sidebar-sticker--left {
+  left: 0.75rem;
+}
+.sidebar-sticker--right {
+  right: 0.75rem;
+}
+.sidebar-sticker img {
+  display: block;
+  width: 200px;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  user-select: none;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.16);
+}

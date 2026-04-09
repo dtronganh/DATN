@@ -1,0 +1,88 @@
+<app-navbar/>
+
+<app-breadcrumb
+    [title]="'profile.myProfile' | translate"
+    [items]="[{ label: ('nav.home' | translate), link: '/' }, { label: ('profile.profile' | translate) }]"
+/>
+
+<div class="sticker-safe">
+<div class="s-py-100" data-aos="fade-up">
+    <div class="container-fluid">
+        <div class="max-w-[1720px] mx-auto flex items-start gap-5 md:gap-6 2xl:gap-10 flex-col md:flex-row my-profile-navtab">
+            <div class="w-full flex-none" style="max-width: 280px">
+                <app-account-tab/>
+            </div>
+            <div class="w-full min-w-0" style="flex: 1">
+                <div class="bg-primary dark:bg-[#0f1923] p-5 sm:p-7 flex items-center gap-5 sm:gap-6 mb-[2px]">
+                    <div class="w-20 h-20 sm:w-20 sm:h-20 rounded flex-none overflow-hidden border-2 border-white/50">
+                        <img class="w-full h-full object-cover"
+                             [src]="authStore.currentUser()?.image || 'assets/img/profile.jpg'"
+                             [attr.alt]="'profile.myProfilePage.avatarAlt' | translate">
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-xl sm:text-2xl leading-none">{{ authStore.currentUser()?.fullName }}</h3>
+                        <p class="text-white/70 text-sm mt-1.5 flex items-center gap-1.5">
+                            <i class="mdi mdi-shield-account-outline text-white/80"></i>
+                            <span>{{ authStore.currentUser()?.email }}</span>
+                        </p>
+                    </div>
+                    <div class="ml-auto hidden sm:flex items-center gap-2 text-xs text-white/70 bg-white/10 border border-white/20 px-3 py-2 rounded">
+                        <i class="mdi mdi-circle text-green-300 text-[8px]"></i>
+                        <span class="uppercase tracking-wider font-medium">Active</span>
+                    </div>
+                </div>
+
+                
+                <div class="w-full bg-[#F8F8F9] dark:bg-dark-secondary p-5 sm:p-8 lg:p-[50px] border-t-2 border-primary">
+                    
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-bdr-clr dark:border-bdr-clr-drk">
+                        <div class="w-8 h-8 bg-primary rounded flex items-center justify-center flex-none">
+                            <i class="mdi mdi-information-outline text-white text-base"></i>
+                        </div>
+                        <h4 class="font-semibold text-title dark:text-white text-lg leading-none">{{ 'profile.myProfilePage.contactInfo' | translate }}</h4>
+                    </div>
+
+                    <div class="grid gap-4 sm:gap-5">
+                        @if (primaryAddress(); as address) {
+                        <div class="flex items-center gap-4 p-4 bg-white dark:bg-title border border-bdr-clr dark:border-bdr-clr-drk rounded">
+                            <div class="w-9 h-9 bg-primary/10 dark:bg-primary/20 rounded flex items-center justify-center flex-none">
+                                <i class="fa-solid fa-phone text-primary text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-0.5">{{ 'profile.myProfilePage.phone' | translate }}</span>
+                                <span class="font-semibold text-base text-title dark:text-white leading-none">{{ address.phone }}</span>
+                            </div>
+                        </div>
+                        }
+                        <div class="flex items-center gap-4 p-4 bg-white dark:bg-title border border-bdr-clr dark:border-bdr-clr-drk rounded">
+                            <div class="w-9 h-9 bg-primary/10 dark:bg-primary/20 rounded flex items-center justify-center flex-none">
+                                <i class="fa-solid fa-envelope text-primary text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-0.5">{{ 'profile.myProfilePage.email' | translate }}</span>
+                                <span class="font-semibold text-base text-title dark:text-white leading-none">{{ authStore.currentUser()?.email }}</span>
+                            </div>
+                        </div>
+                        @if (primaryAddress(); as address) {
+                        <div class="flex items-start gap-4 p-4 bg-white dark:bg-title border border-bdr-clr dark:border-bdr-clr-drk rounded">
+                            <div class="w-9 h-9 bg-primary/10 dark:bg-primary/20 rounded flex items-center justify-center flex-none mt-0.5">
+                                <i class="fa-solid fa-location-dot text-primary text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-0.5">{{ 'profile.myProfilePage.address' | translate }}</span>
+                                <span class="font-semibold text-base text-title dark:text-white leading-snug">
+                                    {{ address.specificAddress }}, {{ address.ward }}, {{ address.district }}, {{ address.province }}
+                                </span>
+                            </div>
+                        </div>
+                        }
+                    </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<app-footer/>

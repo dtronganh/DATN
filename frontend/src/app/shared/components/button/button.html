@@ -1,0 +1,29 @@
+@if (routerLink()) {
+  <a
+    [routerLink]="routerLink()"
+    [queryParams]="queryParams()"
+    [class]="hostClass()"
+    [class.is-disabled]="disabled()"
+    [style.width]="width()"
+    [style.height]="height()"
+  >
+    @if (icon()) {
+      <i [class]="'mdi ' + icon() + ' btn-icon'"></i>
+    }
+    <span class="btn-text">{{ text() }}</span>
+  </a>
+} @else {
+  <button
+    type="button"
+    [class]="hostClass()"
+    [style.width]="width()"
+    [style.height]="height()"
+    [disabled]="disabled()"
+    (click)="onClick()"
+  >
+    @if (icon()) {
+      <i [class]="'mdi ' + icon() + ' btn-icon'"></i>
+    }
+    <span class="btn-text">{{ text() }}</span>
+  </button>
+}

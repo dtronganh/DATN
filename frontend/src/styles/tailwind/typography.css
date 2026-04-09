@@ -1,0 +1,322 @@
+.text-left{
+  text-align: left;
+}
+.text-center{
+  text-align: center;
+}
+.text-right{
+  text-align: right;
+}
+.text-justify{
+  text-align: justify;
+}
+.font-primary{
+  font-family: Josefin Sans, sans-serif;
+}
+.font-secondary{
+  font-family: July it, sans-serif;
+}
+.\!text-base{
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
+}
+.text-2xl{
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.text-3xl{
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+.text-4xl{
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+.text-5xl{
+  font-size: 3rem;
+  line-height: 1;
+}
+.text-6xl{
+  font-size: 3.75rem;
+  line-height: 1;
+}
+.text-7xl{
+  font-size: 4.5rem;
+  line-height: 1;
+}
+.text-\[14px\]{
+  font-size: 14px;
+}
+.text-\[15px\]{
+  font-size: 15px;
+}
+.text-\[18px\]{
+  font-size: 18px;
+}
+.text-\[20px\]{
+  font-size: 20px;
+}
+.text-\[30px\]{
+  font-size: 30px;
+}
+.text-\[60px\]{
+  font-size: 60px;
+}
+.text-base{
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+.text-lg{
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.text-sm{
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.text-xl{
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.text-xs{
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.\!font-normal{
+  font-weight: 400 !important;
+}
+.font-\[300\]{
+  font-weight: 300;
+}
+.font-bold{
+  font-weight: 700;
+}
+.font-extralight{
+  font-weight: 200;
+}
+.font-medium{
+  font-weight: 500;
+}
+.font-normal{
+  font-weight: 400;
+}
+.font-semibold{
+  font-weight: 600;
+}
+.uppercase{
+  text-transform: uppercase;
+}
+.italic{
+  font-style: italic;
+}
+.not-italic{
+  font-style: normal;
+}
+.\!leading-\[1\.3\]{
+  line-height: 1.3 !important;
+}
+.\!leading-\[1\.5\]{
+  line-height: 1.5 !important;
+}
+.\!leading-none{
+  line-height: 1 !important;
+}
+.leading-\[1\.2\]{
+  line-height: 1.2;
+}
+.leading-\[1\.5\]{
+  line-height: 1.5;
+}
+.leading-none{
+  line-height: 1;
+}
+.leading-normal{
+  line-height: 1.5;
+}
+.leading-snug{
+  line-height: 1.375;
+}
+.leading-tight{
+  line-height: 1.25;
+}
+.tracking-\[\.5em\]{
+  letter-spacing: .5em;
+}
+.tracking-\[0\.5em\]{
+  letter-spacing: 0.5em;
+}
+.\!text-\[\#E13939\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(225 57 57 / var(--tw-text-opacity)) !important;
+}
+.\!text-title{
+  --tw-text-opacity: 1 !important;
+  color: rgb(23 36 48 / var(--tw-text-opacity)) !important;
+}
+.\!text-white{
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+.text-\[\#209A60\]{
+  --tw-text-opacity: 1;
+  color: rgb(32 154 96 / var(--tw-text-opacity));
+}
+.text-\[\#3C474E\]{
+  --tw-text-opacity: 1;
+  color: rgb(60 71 78 / var(--tw-text-opacity));
+}
+.text-\[\#5B646D\]{
+  --tw-text-opacity: 1;
+  color: rgb(91 100 109 / var(--tw-text-opacity));
+}
+.text-\[\#5D656E\]{
+  --tw-text-opacity: 1;
+  color: rgb(93 101 110 / var(--tw-text-opacity));
+}
+.text-\[\#627952\]{
+  --tw-text-opacity: 1;
+  color: rgb(98 121 82 / var(--tw-text-opacity));
+}
+.text-\[\#85A3B4\]{
+  --tw-text-opacity: 1;
+  color: rgb(133 163 180 / var(--tw-text-opacity));
+}
+.text-\[\#E13939\]{
+  --tw-text-opacity: 1;
+  color: rgb(225 57 57 / var(--tw-text-opacity));
+}
+.text-\[\#E8E9EA\]{
+  --tw-text-opacity: 1;
+  color: rgb(232 233 234 / var(--tw-text-opacity));
+}
+.text-\[\#eaeaea\]{
+  --tw-text-opacity: 1;
+  color: rgb(234 234 234 / var(--tw-text-opacity));
+}
+.text-gray-100{
+  --tw-text-opacity: 1;
+  color: rgb(243 244 246 / var(--tw-text-opacity));
+}
+.text-paragraph{
+  --tw-text-opacity: 1;
+  color: rgb(60 71 78 / var(--tw-text-opacity));
+}
+.text-primary{
+  --tw-text-opacity: 1;
+  color: rgb(227 0 0 / var(--tw-text-opacity));
+}
+.text-secondary{
+  --tw-text-opacity: 1;
+  color: rgb(225 57 57 / var(--tw-text-opacity));
+}
+.text-tertiary{
+  --tw-text-opacity: 1;
+  color: rgb(133 163 180 / var(--tw-text-opacity));
+}
+.text-title{
+  --tw-text-opacity: 1;
+  color: rgb(23 36 48 / var(--tw-text-opacity));
+}
+.text-title\/50{
+  color: rgb(23 36 48 / 0.5);
+}
+.text-white{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.text-white-light{
+  --tw-text-opacity: 1;
+  color: rgb(219 219 219 / var(--tw-text-opacity));
+}
+.text-white\/60{
+  color: rgb(255 255 255 / 0.6);
+}
+.text-opacity-70{
+  --tw-text-opacity: 0.7;
+}
+.text-opacity-\[0\.03\]{
+  --tw-text-opacity: 0.03;
+}
+.underline{
+  -webkit-text-decoration-line: underline;
+     -moz-text-decoration-line: underline;
+          text-decoration-line: underline;
+}
+.line-through{
+  -webkit-text-decoration-line: line-through;
+     -moz-text-decoration-line: line-through;
+          text-decoration-line: line-through;
+}
+.underline-offset-4{
+  text-underline-offset: 4px;
+}
+.opacity-0{
+  opacity: 0;
+}
+.shadow-lg{
+  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  -webkit-box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+          box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.outline-none{
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.backdrop-blur-\[3px\]{
+  --tw-backdrop-blur: blur(3px);
+  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+.transition{
+  -webkit-transition-property: color, background-color, border-color, fill, stroke, opacity, -webkit-text-decoration-color, -webkit-box-shadow, -webkit-transform, -webkit-filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, fill, stroke, opacity, -webkit-text-decoration-color, -webkit-box-shadow, -webkit-transform, -webkit-filter, -webkit-backdrop-filter;
+  -o-transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -moz-text-decoration-color, -webkit-box-shadow, -webkit-transform, -webkit-filter, -webkit-backdrop-filter;
+  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+       -o-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition-duration: 150ms;
+       -o-transition-duration: 150ms;
+          transition-duration: 150ms;
+}
+.transition-all{
+  -webkit-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+       -o-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition-duration: 150ms;
+       -o-transition-duration: 150ms;
+          transition-duration: 150ms;
+}
+.duration-100{
+  -webkit-transition-duration: 100ms;
+       -o-transition-duration: 100ms;
+          transition-duration: 100ms;
+}
+.duration-200{
+  -webkit-transition-duration: 200ms;
+       -o-transition-duration: 200ms;
+          transition-duration: 200ms;
+}
+.duration-300{
+  -webkit-transition-duration: 300ms;
+       -o-transition-duration: 300ms;
+          transition-duration: 300ms;
+}
+.duration-500{
+  -webkit-transition-duration: 500ms;
+       -o-transition-duration: 500ms;
+          transition-duration: 500ms;
+}
+.duration-700{
+  -webkit-transition-duration: 700ms;
+       -o-transition-duration: 700ms;
+          transition-duration: 700ms;
+}
+html {
+  scroll-behavior: unset !important;
+}

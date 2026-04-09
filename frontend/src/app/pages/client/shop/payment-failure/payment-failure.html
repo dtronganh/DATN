@@ -1,0 +1,45 @@
+﻿<app-navbar/>
+
+<app-breadcrumb
+  [title]="'shop.paymentFailure.title' | translate"
+  [items]="[{ label: ('nav.home' | translate), link: '/' }, { label: ('shop.paymentFailure.title' | translate) }]"
+/>
+
+<div class="sticker-safe">
+
+<div class="s-py-100">
+  <div class="container">
+    <div class="max-w-[700px] mx-auto text-center" data-aos="fade-up">
+      <app-payment-result-card
+        iconBgClass="bg-red-500"
+        [iconPath]="failureIconPath"
+        titleKey="shop.paymentFailure.heading"
+        [message]="errorMessage()"
+        subMessageKey="shop.paymentFailure.help"
+        [details]="paymentDetails()"
+        detailsClass="bg-white dark:bg-title p-6 rounded-lg mb-8"
+      >
+        @if (orderId()) {
+          <app-button
+            actions
+            color="btn-secondary-solid"
+            [text]="'shop.paymentFailure.tryAgain' | translate"
+            (clicked)="onTryAgain()"></app-button>
+        }
+        <app-button
+          actions
+          color="btn-outline"
+          [text]="'shop.paymentFailure.backToCart' | translate"
+          (clicked)="goToCart()"></app-button>
+        <app-button
+          actions
+          color="btn-outline"
+          [text]="'shop.paymentFailure.contactSupport' | translate"
+          (clicked)="goToContact()"></app-button>
+      </app-payment-result-card>
+    </div>
+  </div>
+</div>
+</div>
+
+<app-footer/>

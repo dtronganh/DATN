@@ -1,0 +1,938 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "close": "Close",
+    "shopNow": "Shop Now"
+  },
+  "nav": {
+    "home": "Home",
+    "shop": "Shop",
+    "category": "Category",
+    "noCategories": "No categories",
+    "contact": "Contact",
+    "login": "Login",
+    "toggleMenu": "Toggle menu",
+    "uncategorized": "Uncategorized",
+    "promoShipping": "Free shipping from",
+    "promoShippingAmount": "500,000₫",
+    "promoSupport": "Support",
+    "promoWarranty": "Genuine warranty",
+    "searchLabel": "Search"
+  },
+  "cart": {
+    "listTitle": "Cart List",
+    "empty": "Your cart is empty",
+    "subtotal": "Subtotal",
+    "viewCart": "View Cart",
+    "checkout": "Checkout",
+    "loginToAdd": "Please login to add items to cart",
+    "toast": {
+      "loadFailed": "Failed to load cart",
+      "added": "Item added to cart",
+      "addFailed": "Failed to add item to cart",
+      "quantityMin": "Quantity must be at least 1",
+      "updated": "Cart updated",
+      "updateFailed": "Failed to update cart item",
+      "removed": "Item removed from cart",
+      "removeFailed": "Failed to remove cart item",
+      "cleared": "Cart cleared",
+      "clearFailed": "Failed to clear cart"
+    }
+  },
+  "wishlist": {
+    "title": "Wishlist",
+    "viewAll": "View All Wishlist",
+    "add": "Add to Wishlist",
+    "remove": "Remove Wishlist",
+    "loginToAdd": "Please login to add items to wishlist",
+    "added": "Added to wishlist",
+    "removed": "Removed from wishlist",
+    "toast": {
+      "loginToAdd": "Please login to add items to wishlist",
+      "added": "Added to wishlist",
+      "addFailed": "Failed to add to wishlist",
+      "removed": "Removed from wishlist",
+      "removeFailed": "Failed to remove from wishlist",
+      "cleared": "Wishlist cleared",
+      "clearFailed": "Failed to clear wishlist"
+    }
+  },
+  "search": {
+    "placeholder": "Type your keyword",
+    "searching": "Searching...",
+    "results": "Search Results",
+    "noResultsFor": "No products found for \"{{query}}\"",
+    "popularTags": "Popular Tags"
+  },
+  "footer": {
+    "aboutText": "Gear is a trusted tech store providing laptops, PCs, computer components and genuine gaming peripherals.",
+    "subscribeTitle": "Subscribe Newsletter",
+    "emailPlaceholder": "Enter your email address",
+    "subscribe": "Subscribe",
+    "sitemap": "Sitemap",
+    "others": "Others",
+    "customerService": "Customer Service",
+    "categories": "Categories",
+    "aboutUs": "About Us",
+    "allProducts": "All Products",
+    "copyright": "© {{year}} Gear Store."
+  },
+  "profile": {
+    "myProfile": "My Profile",
+    "editProfile": "Edit Profile",
+    "orderHistory": "Order History",
+    "wishlist": "Wishlist",
+    "logout": "Logout",
+    "profile": "Profile",
+    "myProfilePage": {
+      "avatarAlt": "User Avatar",
+      "contactInfo": "Contact Information",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "address": "Shipping Address"
+    },
+    "edit": {
+      "avatarAlt": "Profile Avatar",
+      "changeImage": "Change Image",
+      "fields": {
+        "fullName": "Full Name",
+        "phone": "Phone No.",
+        "email": "Mail",
+        "province": "Province",
+        "district": "District",
+        "ward": "Ward",
+        "specificAddress": "Specific Address"
+      },
+      "placeholders": {
+        "fullName": "Enter your full name",
+        "phone": "Type your phone number",
+        "email": "Enter your email address",
+        "specificAddress": "Enter street address, building, etc."
+      },
+      "select": {
+        "province": "Select Province",
+        "district": "Select District",
+        "ward": "Select Ward"
+      },
+      "saveChange": "Save Change",
+      "errors": {
+        "required": "{{field}} is required",
+        "invalidEmail": "Invalid email format",
+        "minLength": "{{field}} must be at least {{min}} characters",
+        "maxLength": "{{field}} must not exceed {{max}} characters",
+        "invalidPhone": "Invalid Vietnamese phone number format (e.g., 0912345678)"
+      },
+      "toasts": {
+        "loginRequired": "Please login to access this page",
+        "loadingLocationError": "Error loading location data",
+        "loadingDistrictsError": "Error loading districts",
+        "loadingWardsError": "Error loading wards",
+        "fillRequired": "Please fill in all required fields",
+        "updateProfileError": "Error updating profile",
+        "updateAddressError": "Error updating address",
+        "createAddressError": "Error creating address",
+        "updateSuccess": "Profile updated successfully!",
+        "loadingAddressError": "Error loading address",
+        "imageUpdateSuccess": "Avatar updated successfully!",
+        "imageUpdateError": "Failed to update avatar",
+        "invalidImageType": "Please select a valid image file (JPG, PNG, GIF, etc.)",
+        "imageTooLarge": "Image size must not exceed 5MB"
+      }
+    },
+    "orderHistoryPage": {
+      "emptyTitle": "No orders found",
+      "startShopping": "Start Shopping",
+      "headers": {
+        "orderInfo": "Order Info",
+        "total": "Total",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "orderNumber": "Order #{{id}}",
+      "itemsCount": "{{count}} item(s)",
+      "invoice": "Invoice",
+      "cancel": "Cancel",
+      "cancelling": "Cancelling...",
+      "confirm": {
+        "message": "Are you sure you want to cancel this order? This action cannot be undone.",
+        "title": "Cancel Order",
+        "confirmText": "Yes, Cancel",
+        "cancelText": "No, Keep It"
+      },
+      "status": {
+        "pending": "Pending",
+        "paid": "Paid",
+        "shipping": "Shipping",
+        "shipped": "Shipped",
+        "cancelled": "Cancelled",
+        "completed": "Completed"
+      }
+    },
+    "wishlistPage": {
+      "emptyTitle": "Your wishlist is empty",
+      "emptyDesc": "Start adding products you love!",
+      "browseProducts": "Browse Products",
+      "itemsCount": "{{count}} items in your wishlist",
+      "clearAll": "Clear All",
+      "addToCart": "Add to Cart",
+      "remove": "Remove",
+      "clearConfirm": {
+        "message": "Are you sure you want to clear your wishlist?",
+        "title": "Clear Wishlist",
+        "confirmText": "Clear",
+        "cancelText": "Cancel"
+      }
+    },
+    "logoutConfirm": {
+      "message": "Are you sure you want to logout?",
+      "title": "Logout",
+      "confirmText": "Yes, Logout",
+      "cancelText": "Cancel"
+    }
+  },
+  "product": {
+    "inStock": "In Stock ({{count}})",
+    "outOfStock": "Out of Stock",
+    "outOfStockMessage": "Product is out of stock",
+    "noDescription": "No description available",
+    "notFound": "Product not found",
+    "size": "Size",
+    "color": "Color",
+    "sku": "SKU",
+    "category": "Category",
+    "tagsLabel": "Tags",
+    "share": "Share",
+    "addToCart": "Add to Cart",
+    "quickView": "Quick View",
+    "inWishlist": "In Wishlist",
+    "addedToCart": "Product added to cart",
+    "addToCartFailed": "Failed to add product to cart",
+    "viewDetails": "View Full Details",
+    "tabs": {
+      "description": "Description",
+      "review": "Review",
+      "shipping": "Shipping"
+    },
+    "reviews": {
+    },
+    "shipping": {
+      "1": {
+        "title": "Shipping & Delivery",
+        "desc": "We offer free standard shipping on all orders over 100.000đ. Express shipping available for faster delivery. All orders are processed within 1-2 business days. Delivery times vary by location but typically arrive within 3-7 business days for standard shipping."
+      },
+      "2": {
+        "title": "Returns & Exchanges",
+        "desc": "We accept returns within 30 days of purchase. Items must be unworn, unwashed, and in original condition with tags attached. Free return shipping for exchanges. Refunds are processed within 5-7 business days after we receive your return."
+      },
+      "3": {
+        "title": "Size Guide",
+        "desc": "Please refer to our detailed size chart for accurate measurements. We recommend measuring yourself and comparing with our size guide before ordering. If you're between sizes, we suggest sizing up for a more comfortable fit. Contact our customer service for personalized sizing advice."
+      },
+      "4": {
+        "title": "Care Instructions",
+        "desc": "To maintain the quality of your garment, follow the care label instructions. Most items can be machine washed cold with like colors. Tumble dry low or hang to dry. Iron on low heat if needed. For delicate fabrics, dry cleaning is recommended."
+      }
+    },
+    "related": {
+      "title": "Related Products",
+      "desc": "Explore complementary options that enhance your experience. Discover related products curated just for you."
+    }
+  },
+  "order": {
+    "toast": {
+      "loadOrdersFailed": "Failed to load orders",
+      "loadOrderFailed": "Failed to load order",
+      "loadOrderDetailsFailed": "Failed to load order details",
+      "created": "Order created successfully",
+      "createFailed": "Failed to create order",
+      "cancelled": "Order cancelled successfully",
+      "cancelFailed": "Failed to cancel order"
+    },
+    "status": {
+      "pending": "Pending",
+      "paid": "Paid",
+      "shipped": "Shipped",
+      "cancelled": "Cancelled",
+      "completed": "Completed"
+    }
+  },
+  "auth": {
+    "login": {
+      "label": "Login",
+      "title": "Welcome back !",
+      "subtitle": "Buy & sell your product on Gear Store"
+    },
+    "register": "Register",
+    "registerTitle": "Create New Account",
+    "email": "Email",
+    "fullName": "Full Name",
+    "password": "Password",
+    "rememberMe": "Remember Me",
+    "forgotPassword": "Forgot Password?",
+    "emailPlaceholder": "Enter your email address",
+    "fullNamePlaceholder": "Enter your full name",
+    "noAccount": "Don't have an account yet?",
+    "haveAccount": "Already have an account ?",
+    "forgotTitle": "Forget Password",
+    "sendInfo": "Send Info",
+    "resetNote": "Note: We will send a password reset link to your email",
+    "rememberPassword": "Remember your password?",    "trust": {
+      "shipping": "Nationwide Shipping",
+      "support": "24/7 Support",
+      "warranty": "Official Warranty"
+    },    "resetComingSoon": "Password reset feature will be implemented soon",
+    "loginSuccess": "Login successfully",
+    "loginFailed": "Login failed",
+    "toasts": {
+      "loginRequired": "Please login to continue"
+    },
+    "registerSuccess": "Registration successful! Welcome to Gear Store",
+    "registerFailed": "Registration failed",
+    "errors": {
+      "emailRequired": "Email is required",
+      "fullNameRequired": "Full name is required",
+      "passwordRequired": "Password is required",
+      "invalidEmail": "Invalid email format",
+      "passwordMin": "Password min length must be at least {{min}} characters",
+      "passwordMax": "Password max length must be {{max}} characters",
+      "fullNameMin": "Fullname min length must be at least {{min}} characters",
+      "fullNameMax": "Fullname max length must be {{max}} characters",
+      "invalidCredentials": "Invalid email or password",
+      "emailExists": "Email already exists",
+      "invalidRegistration": "Invalid registration data",
+      "invalidEmailEntry": "Please enter a valid email",
+      "serverError": "Server error. Please try again later"
+    }
+  },
+  "home": {
+    "hero": {
+      "get": "Get",
+      "off": "Off",
+      "slide1": {
+        "title": "New Arrivals: Laptops & Workstations",
+        "desc": "Explore our latest lineup of high-performance laptops, desktops and workstations. From everyday productivity to professional-grade power — find the machine built for you."
+      },
+      "slide2": {
+        "title": "Level Up Your Gaming Setup",
+        "desc": "Discover gaming monitors, mechanical keyboards, high-DPI mice and immersive headsets. Build the ultimate battle station with Gear's premium gaming peripherals."
+      },
+      "slide3": {
+        "title": "Genuine Components & Accessories",
+        "desc": "Shop CPUs, GPUs, RAM, SSDs and more — all 100% authentic with full warranty. Whether you're building or upgrading, Gear has every part you need."
+      }
+    },
+    "why": {
+      "title": "Why Choose",
+      "subtitle": "Your trusted destination for genuine tech products and professional support"
+    },
+    "services": {
+      "fastShipping": {
+        "title": "Fast & Free Shipping",
+        "product": "On orders over 500.000đ",
+        "desc": "Free standard shipping on orders over 500.000đ. Fragile tech items are carefully packed and tracked from warehouse to your door."
+      },
+      "easyReturns": {
+        "title": "Genuine Warranty",
+        "product": "Official manufacturer warranty",
+        "desc": "All products carry official manufacturer warranties. Our dedicated after-sales team handles every claim quickly and hassle-free."
+      },
+      "securePayment": {
+        "title": "Secure Payment",
+        "product": "100% secure transactions",
+        "desc": "Your payment is protected with industry-leading encryption. Pay via card, banking, or cash on delivery — all methods are safe."
+      },
+      "support": {
+        "title": "Tech Support 24/7",
+        "product": "Expert technical assistance",
+        "desc": "Our tech experts are available 24/7 to help with product selection, setup guidance, and any post-purchase technical questions."
+      }
+    },
+    "products": {
+      "new": "New",
+      "title": "PRODUCTS",
+      "heading": "Featured Products",
+      "seeAll": "See all Product"
+    },
+    "promo": {
+      "dresses": "Up to {{percent}} off on all laptops",
+      "summer": "Tech Essentials",
+      "accessories": "Up to {{percent}} off on peripherals",
+      "trending": "Gaming Gear",
+      "1": {
+        "title": "Up to 30% off on all laptops",
+        "subtitle": "Tech Essentials"
+      },
+      "2": {
+        "title": "Up to 20% off on peripherals",
+        "subtitle": "Gaming Gear"
+      }
+    },
+    "stats": {
+      "title": "Gear in Numbers",
+      "subtitle": "Trusted by thousands of tech enthusiasts across Vietnam",
+      "customers": {
+        "title": "Happy Customers",
+        "desc": "Worldwide satisfaction"
+      },
+      "products": {
+        "title": "Products",
+        "desc": "Curated collections"
+      },
+      "countries": {
+        "title": "Countries",
+        "desc": "Global shipping"
+      },
+      "satisfaction": {
+        "title": "Satisfaction",
+        "desc": "Customer reviews"
+      },
+      "learnMore": "Learn More About Us"
+    }
+  },
+  "special": {
+    "thankYou": {
+      "title": "For Shopping with Gear",
+      "descText": "Please Check your email for Download Invoice . Or",
+      "descLink": "Click here",
+      "button": "Back to home"
+    },
+    "error": {
+      "title": "Page Not Found",
+      "desc": "The page you are looking for doesn't exist or has been moved. Please check the URL or return to our homepage to explore our latest tech products.",
+      "button": "Go Back To Home"
+    }
+  },
+  "shop": {
+    "title": "Shop",
+    "category": {
+      "title": "Category"
+    },
+    "categories": {
+      "title": "Categories",
+      "loading": "Loading categories...",
+      "empty": "No categories available"
+    },
+    "sort": {
+      "title": "Sort Method",
+      "dateNewest": "Date: Newest",
+      "dateOldest": "Date: Oldest",
+      "priceLowHigh": "Price: Low to High",
+      "priceHighLow": "Price: High to Low",
+      "nameAToZ": "Name: A to Z"
+    },
+    "priceRange": {
+      "title": "Price Range",
+      "label": "Price"
+    },
+    "categoryPage": {
+      "items": "Items",
+      "page": "Page",
+      "min": "Min",
+      "max": "Max",
+      "resetPrice": "Reset price",
+      "emptyByPrice": "No products found in the selected price range.",
+      "showing": "Showing",
+      "of": "of",
+      "products": "products"
+    },
+    "errors": {
+      "loadProducts": "Failed to load products"
+    },
+    "cart": {
+      "title": "Cart",
+      "loading": "Loading cart...",
+      "emptyTitle": "Your cart is empty",
+      "emptyDesc": "Add some items to get started!",
+      "continue": "Continue Shopping",
+      "checkout": "Checkout",
+      "subtotal": "Sub Total",
+      "total": "Total",
+      "shipping": "Shipping",
+      "free": "Free",
+      "qty": "Qty",
+      "table": {
+        "product": "Product Info",
+        "price": "Price",
+        "quantity": "Quantity",
+        "total": "Total",
+        "remove": "Remove"
+      }
+    },
+    "checkout": {
+      "title": "Checkout",
+      "deliveryAddress": "Delivery Address",
+      "loadingAddresses": "Loading addresses...",
+      "noAddresses": "No saved addresses found",
+      "addNewAddress": "Add New Address",
+      "addNewAddressPlus": "+ Add New Address",
+      "default": "Default",
+      "receiverName": "Receiver Name",
+      "receiverPlaceholder": "Enter receiver name",
+      "phoneNumber": "Phone Number",
+      "phonePlaceholder": "e.g., 0912345678",
+      "province": "Province",
+      "selectProvince": "Select Province",
+      "district": "District",
+      "selectDistrict": "Select District",
+      "ward": "Ward",
+      "selectWard": "Select Ward",
+      "specificAddress": "Specific Address",
+      "specificPlaceholder": "House number, street name, etc.",
+      "setDefault": "Set as default address",
+      "saving": "Saving...",
+      "saveAddress": "Save Address",
+      "cancel": "Cancel",
+      "orderNote": "Order Note (Optional)",
+      "orderNotePlaceholder": "Any special instructions for delivery...",
+      "orderSummary": "Order Summary",
+      "shipping": "Shipping",
+      "free": "Free",
+      "placeOrder": "Place Order",
+      "processing": "Processing...",
+      "selectAddress": "Please select a delivery address",
+      "loginRequired": "Please login to checkout",
+      "cartEmpty": "Your cart is empty",
+      "loadAddressesFailed": "Failed to load addresses",
+      "fillRequired": "Please fill in all required fields",
+      "addressAdded": "Address added successfully",
+      "createAddressFailed": "Failed to create address",
+      "errors": {
+        "required": "{{field}} is required",
+        "minLength": "{{field}} must be at least {{min}} characters",
+        "maxLength": "{{field}} must not exceed {{max}} characters",
+        "invalidPhone": "Invalid Vietnamese phone number format (e.g., 0912345678)"
+      }
+    },
+    "payment": {
+      "title": "Payment Method",
+      "selectMethod": "Select Payment Method",
+      "orderId": "Order ID",
+      "amountToPay": "Amount to Pay",
+      "cod": {
+        "title": "Cash on Delivery",
+        "desc": "Pay when you receive your order"
+      },
+      "card": {
+        "title": "Debit/Credit Card",
+        "desc": "Pay securely with your card"
+      },
+      "bank": {
+        "title": "Bank Transfer",
+        "desc": "Transfer directly to our bank account"
+      },
+      "confirm": "Confirm Payment",
+      "processing": "Processing...",
+      "invalidRequest": "Invalid payment request",
+      "invalidOrder": "Invalid order",
+      "failed": "Payment failed"
+    },
+    "paymentConfirmation": {
+      "title": "Payment Confirmation",
+      "heading": "Confirm Your Payment",
+      "date": "Date",
+      "cardHolder": "Card Holder",
+      "cardType": "Card Type",
+      "cardNumber": "Card Number",
+      "email": "Email",
+      "phone": "Phone",
+      "cancel": "Cancel Payment"
+    },
+    "paymentSuccess": {
+      "title": "Payment Success",
+      "heading": "Payment Successful!",
+      "message": "Thank you for your order. Your payment has been processed successfully.",
+      "paymentId": "Payment ID",
+      "amountPaid": "Amount Paid",
+      "method": "Payment Method",
+      "viewInvoice": "View Invoice",
+      "viewOrders": "View Orders"
+    },
+    "paymentFailure": {
+      "title": "Payment Failed",
+      "heading": "Payment Failed",
+      "help": "Please try again or contact support if the problem persists.",
+      "tryAgain": "Try Again",
+      "backToCart": "Back to Cart",
+      "contactSupport": "Contact Support",
+      "defaultError": "Payment processing failed"
+    },
+    "shipping": {
+      "title": "Shipping Method",
+      "deliveryOption": "Delivery Option",
+      "deliveryDesc": "Delivery Option: Choose your preferred delivery option for seamless convenience. Get your items delivered on your terms, hassle-free.",
+      "time": "Time",
+      "cost": "Cost",
+      "standard": "Standard Delivery",
+      "quick": "Quick Delivery",
+      "regular": "Regular Working Day",
+      "superFast": "Super Fast Delivery",
+      "days": "{{count}} Days",
+      "hours": "{{count}} Hour",
+      "free": "FREE",
+      "rulesTitle": "Shipping Rule",
+      "rulesDesc": "Shipping Rule: Discover our transparent shipping rules, ensuring clarity and peace of mind. We prioritize efficient delivery, ensuring your items arrive safely and on time. With clear guidelines in place, you can shop confidently knowing your orders are handled with care."
+    },
+    "invoice": {
+      "title": "Invoice #{{id}}",
+      "print": "Print Invoice",
+      "orderDate": "Order Date",
+      "deliveryDate": "Delivery Date",
+      "status": "Status",
+      "shopInfo": "Shop Information",
+      "shopName": "Gear Store",
+      "shopAddress1": "123 Gear Street",
+      "shopAddress2": "Ho Chi Minh City, Vietnam",
+      "shopPhone": "0123 456 789",
+      "shopWebsite": "gearstore.vn",
+      "shopTax": "Tax ID",
+      "shopTaxNum": "0123456789",
+      "shopBank": "Vietcombank - Branch Ho Chi Minh City",
+      "shopBankAcc": "0123456789",
+      "customerInfo": "Customer Information",
+      "note": "Note",
+      "orderInfo": "Order Information",
+      "totalAmount": "Total Amount",
+      "notFound": "Order not found",
+      "backToOrders": "Back to Orders",
+      "invoiceTitle": "SALES INVOICE",
+      "invoiceSubtitle": "(Electronic invoice)",
+      "serialLabel": "Serial:",
+      "serialValue": "GS26TQB",
+      "noLabel": "No.:",
+      "sellerLabel": "Seller",
+      "buyerLabel": "Buyer",
+      "buyerName": "Customer name:",
+      "buyerAddress": "Address:",
+      "buyerPhone": "Phone:",
+      "paymentMethod": "Payment method:",
+      "paymentValue": "Online / COD",
+      "stt": "No.",
+      "goods": "Product / Service",
+      "unit": "Unit",
+      "qty": "Qty",
+      "unitPrice": "Unit Price",
+      "amount": "Amount",
+      "subtotal": "Subtotal",
+      "vatRate": "VAT rate",
+      "vatRateValue": "10%",
+      "vatAmount": "VAT amount",
+      "grandTotal": "Total payment",
+      "inWords": "Amount in words",
+      "buyerSig": "Buyer",
+      "sellerSig": "Seller",
+      "sigNote": "(Sign and write full name)",
+      "verifyNote": "(Please verify before issuing, delivering and receiving invoice)",
+      "phoneLabel": "Phone:",
+      "websiteLabel": "Website:",
+      "dateDay": "Date",
+      "dateMonth": "",
+      "dateYear": "",
+      "bankAccLabel": "Bank Account:",
+      "bankLabel": "Bank:",
+      "customerLabel": "Customer:",
+      "taxIdLabel": "Tax ID:",
+      "unitNameLabel": "Company:",
+      "statusLabel": "Status:",
+      "addressLabel": "Address:",
+      "atBankLabel": "At bank:",
+      "paymentDeadlineLabel": "Payment deadline:",
+      "paymentDeadlineValue": "Upon ordering",
+      "noteLabel": "Note:",
+      "unitCai": "Unit",
+      "discountRateLabel": "Discount rate:",
+      "discountAmountLabel": "Discount amount:",
+      "inWordsUnit": "VND (exact)"
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "story": {
+      "label": "Our Story",
+      "title": "Gear Store – Where Technology Meets Passion",
+      "paragraph1": "At Gear Store, our story is one of passion, expertise, and a relentless pursuit of excellence. It all began with a vision to redefine the way people experience technology – not just as devices, but as tools that empower creativity, productivity, and performance. Driven by a love for innovation and a commitment to quality, we embarked on a journey to bring the best gear to every enthusiast.",
+      "paragraph2": "Over the years, our dedication to innovation and customer satisfaction has fueled our growth and earned us a reputation for excellence. From humble beginnings, Gear Store has grown into a trusted name in the tech retail industry, known for delivering products that exceed expectations."
+    },
+    "stats": {
+      "customers": "Happy Customers",
+      "products": "Products Available",
+      "years": "Years of Experience",
+      "support": "Support 24/7",
+      "rating": "Average Rating"
+    },
+    "why": {
+      "label": "Why Choose Us",
+      "title": "Why Choose Gear Store",
+      "subtitle": "We stand out with genuine products, competitive prices, and dedicated technical support for every customer."
+    },
+    "features": {
+      "1": {
+        "title": "Genuine Products",
+        "desc": "Every item we sell is 100% authentic, sourced directly from official distributors and manufacturers worldwide."
+      },
+      "2": {
+        "title": "Expert Support",
+        "desc": "Our technical team provides professional advice and dedicated after-sales support to keep you performing at your best."
+      },
+      "3": {
+        "title": "Premium Warranty",
+        "desc": "All products come with full manufacturer warranty plus our dedicated in-store service guarantee for complete peace of mind."
+      },
+      "4": {
+        "title": "Best Prices",
+        "desc": "We offer highly competitive pricing and regular promotions to make the latest technology accessible to everyone."
+      },
+      "5": {
+        "title": "Nationwide Shipping",
+        "desc": "Fast and reliable delivery across the country with real-time order tracking from warehouse to your doorstep."
+      },
+      "6": {
+        "title": "Trusted Reviews",
+        "desc": "Thousands of verified customer reviews help you make the most informed purchase decisions with confidence."
+      }
+    },
+    "offer": {
+      "label": "What We Offer",
+      "title": "Complete Tech Solutions",
+      "subtitle": "From gaming rigs to professional workstations — we carry everything you need to build, upgrade, and excel.",
+      "items": {
+        "1": {
+          "title": "Laptops & PCs",
+          "desc": "From everyday laptops to powerful workstations — we carry top brands for every purpose and budget."
+        },
+        "2": {
+          "title": "PC Components",
+          "desc": "CPUs, GPUs, RAM, SSDs and more — build or upgrade your system with premium, certified components."
+        },
+        "3": {
+          "title": "Gaming Gear",
+          "desc": "High-performance gaming mice, keyboards, headsets, and monitors for the ultimate competitive setup."
+        },
+        "4": {
+          "title": "Accessories",
+          "desc": "Cables, docks, webcams and peripherals — complete your workspace with all the right tools."
+        }
+      }
+    },
+    "cta": {
+      "title": "Ready to Upgrade Your Setup?",
+      "subtitle": "Explore thousands of genuine tech products with competitive prices and fast nationwide delivery.",
+      "button": "Shop Now"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "heading": "Get in Touch",
+    "subtitle": "We're here to address your inquiries, feedback, and partnership opportunities promptly and effectively.",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Enter your full name",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email address",
+    "phone": "Phone No.",
+    "phonePlaceholder": "Type your phone number",
+    "subject": "Subject",
+    "selectSubject": "Select Subject",
+    "subjects": {
+      "payment": "Payment Issue",
+      "quality": "Product Quality",
+      "shipping": "Shipping & Delivery",
+      "return": "Return & Exchange",
+      "size": "Size & Fitting",
+      "other": "Other Inquiry"
+    },
+    "message": "Your Message",
+    "messagePlaceholder": "Type your message",
+    "submit": "Submit"
+  },
+
+  "admin": {
+    "sidebar": {
+      "title": "Admin Panel",
+      "dashboard": "Dashboard",
+      "products": "Products",
+      "orders": "Orders",
+      "users": "Users",
+      "backToSite": "Back to Site",
+      "logout": "Logout"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "welcome": "Welcome back",
+      "totalUsers": "Total Users",
+      "totalProducts": "Total Products",
+      "totalOrders": "Total Orders",
+      "totalRevenue": "Total Revenue",
+      "recentOrders": "Recent Orders",
+      "recentProducts": "Recent Products",
+      "noOrders": "No orders found",
+      "noProducts": "No products found",
+      "viewAll": "View All"
+    },
+    "products": {
+      "title": "Products",
+      "addProduct": "Add Product",
+      "editProduct": "Edit Product",
+      "createProduct": "Create Product",
+      "productList": "Product List",
+      "search": "Search products...",
+      "name": "Product Name",
+      "namePlaceholder": "Enter product name",
+      "price": "Price",
+      "pricePlaceholder": "Enter price (VND)",
+      "priceMin": "Price must be at least 1,000₫",
+      "stock": "Stock",
+      "stockPlaceholder": "Enter stock quantity",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter product description",
+      "descriptionEditor": {
+        "title": "Description Editor",
+        "markdown": "Markdown",
+        "preview": "Preview",
+        "placeholder": "Write product description in Markdown...",
+        "empty": "No description yet",
+        "open": "Open Markdown editor",
+        "edit": "Edit description",
+        "apply": "Apply Description",
+        "cancel": "Cancel"
+      },
+      "category": "Category",
+      "selectCategory": "Select category",
+      "thumbnail": "Thumbnail",
+      "images": "Images",
+      "imagesHint": "Upload 3 to 10 images. First image will be thumbnail.",
+      "imagesMin": "At least 3 images required",
+      "imagesMax": "Maximum 10 images allowed",
+      "uploadImages": "Click or drag images here",
+      "attributes": "Attributes",
+      "size": "Size",
+      "color": "Color",
+      "selectSizes": "Select sizes",
+      "selectColors": "Select colors",
+      "actions": "Actions",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this product?",
+      "deleteSuccess": "Product deleted successfully",
+      "createSuccess": "Product created successfully",
+      "updateSuccess": "Product updated successfully",
+      "save": "Save",
+      "cancel": "Cancel",
+      "noProducts": "No products found",
+      "backToList": "Back to list",
+      "errors": {
+        "required": "{{field}} is required",
+        "minLength": "{{field}} must be at least {{min}} characters",
+        "priceMin": "Price must be at least 1,000₫",
+        "priceMax": "Price must not exceed 10,000,000₫",
+        "stockMin": "Stock must be at least 0",
+        "stockMax": "Stock must not exceed 9,999"
+      }
+    },
+    "categories": {
+      "title": "Categories",
+      "manage": "Manage Categories",
+      "addCategory": "Add Category",
+      "name": "Category Name",
+      "namePlaceholder": "Enter category name",
+      "nameRequired": "Category name is required",
+      "nameTooShort": "Category name must be at least 2 characters",
+      "description": "Description",
+      "descriptionPlaceholder": "Enter category description",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this category?",
+      "deleteSuccess": "Category deleted successfully",
+      "createSuccess": "Category created successfully",
+      "updateSuccess": "Category updated successfully",
+      "save": "Save",
+      "cancel": "Cancel",
+      "noCategories": "No categories found"
+    },
+    "orders": {
+      "title": "Orders",
+      "search": "Search orders...",
+      "orderId": "Order ID",
+      "customer": "Customer",
+      "phone": "Phone",
+      "total": "Total",
+      "status": "Status",
+      "date": "Date",
+      "items": "Items",
+      "note": "Note",
+      "address": "Address",
+      "actions": "Actions",
+      "updateStatus": "Update Status",
+      "confirmStatusChange": "Change order status to",
+      "statusUpdateSuccess": "Order status updated successfully",
+      "noOrders": "No orders found",
+      "filterAll": "All",
+      "orderDetail": "Order Detail",
+      "product": "Product",
+      "quantity": "Qty",
+      "price": "Price",
+      "subtotal": "Subtotal",
+      "selectedAttributes": "Attributes",
+      "cancel": "Cancel",
+      "viewInvoice": "View Invoice",
+      "failedToLoadDetail": "Failed to load order details",
+      "statuses": {
+        "PENDING": "Pending",
+        "PAID": "Paid",
+        "SHIPPED": "Shipped",
+        "COMPLETED": "Completed",
+        "CANCELLED": "Cancelled"
+      }
+    },
+    "users": {
+      "title": "Users",
+      "search": "Search users...",
+      "avatar": "Avatar",
+      "fullName": "Full Name",
+      "email": "Email",
+      "role": "Role",
+      "status": "Status",
+      "joinDate": "Join Date",
+      "actions": "Actions",
+      "changeRole": "Change Role",
+      "deleteUser": "Delete User",
+      "setAdmin": "Set Admin",
+      "setUser": "Set User",
+      "confirmRoleChange": "Change this user's role to",
+      "confirmDelete": "Are you sure you want to delete this user?",
+      "roleUpdateSuccess": "User role updated successfully",
+      "deleteSuccess": "User deleted successfully",
+      "noUsers": "No users found",
+      "roles": {
+        "admin": "Admin",
+        "user": "User"
+      },
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "common": {
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "save": "Save",
+      "delete": "Delete",
+      "edit": "Edit",
+      "create": "Create",
+      "search": "Search",
+      "filter": "Filter",
+      "actions": "Actions",
+      "noData": "No data found",
+      "loading": "Loading...",
+      "showing": "Showing",
+      "of": "of",
+      "entries": "entries",
+      "yes": "Yes",
+      "no": "No"
+    }
+  },
+  "address": {
+    "province": "Province/City",
+    "selectProvince": "Select Province/City",
+    "district": "District",
+    "selectDistrict": "Select District",
+    "ward": "Ward/Commune",
+    "selectWard": "Select Ward/Commune"
+  }
+}

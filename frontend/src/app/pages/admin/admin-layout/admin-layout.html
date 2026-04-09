@@ -1,0 +1,161 @@
+<div class="admin-shell">
+  <div class="admin-bg-shapes" aria-hidden="true">
+    <svg class="admin-gear-decor admin-gear-decor--tr" viewBox="0 0 54 50" fill="currentColor">
+      <path fill-rule="evenodd" d="M39.47 19.83 L45.86 22.68 L45.86 27.32 L39.47 30.17 L41.97 36.70 L38.70 39.97 L32.17 37.47 L29.32 43.86 L24.68 43.86 L21.83 37.47 L15.30 39.97 L12.03 36.70 L14.53 30.17 L8.14 27.32 L8.14 22.68 L14.53 19.83 L12.03 13.30 L15.30 10.03 L21.83 12.53 L24.68 6.14 L29.32 6.14 L32.17 12.53 L38.70 10.03 L41.97 13.30 Z M33 25 A6 6 0 1 0 21 25 A6 6 0 1 0 33 25 Z"/>
+    </svg>
+    <svg class="admin-gear-decor admin-gear-decor--bl" viewBox="0 0 54 50" fill="currentColor">
+      <path fill-rule="evenodd" d="M39.47 19.83 L45.86 22.68 L45.86 27.32 L39.47 30.17 L41.97 36.70 L38.70 39.97 L32.17 37.47 L29.32 43.86 L24.68 43.86 L21.83 37.47 L15.30 39.97 L12.03 36.70 L14.53 30.17 L8.14 27.32 L8.14 22.68 L14.53 19.83 L12.03 13.30 L15.30 10.03 L21.83 12.53 L24.68 6.14 L29.32 6.14 L32.17 12.53 L38.70 10.03 L41.97 13.30 Z M33 25 A6 6 0 1 0 21 25 A6 6 0 1 0 33 25 Z"/>
+    </svg>
+    <svg class="admin-gear-decor admin-gear-decor--mid" viewBox="0 0 54 50" fill="currentColor">
+      <path fill-rule="evenodd" d="M39.47 19.83 L45.86 22.68 L45.86 27.32 L39.47 30.17 L41.97 36.70 L38.70 39.97 L32.17 37.47 L29.32 43.86 L24.68 43.86 L21.83 37.47 L15.30 39.97 L12.03 36.70 L14.53 30.17 L8.14 27.32 L8.14 22.68 L14.53 19.83 L12.03 13.30 L15.30 10.03 L21.83 12.53 L24.68 6.14 L29.32 6.14 L32.17 12.53 L38.70 10.03 L41.97 13.30 Z M33 25 A6 6 0 1 0 21 25 A6 6 0 1 0 33 25 Z"/>
+    </svg>
+    <div class="admin-blob admin-blob--1"></div>
+    <div class="admin-blob admin-blob--2"></div>
+  </div>
+
+  <div class="admin-shell__layout flex min-h-screen bg-transparent">
+  @if (sidebarOpen()) {
+    <div data-aos="fade" data-aos-duration="300" class="fixed inset-0 bg-black/50 z-40 lg:hidden" (click)="closeSidebar()"></div>
+  }
+
+  <aside class="admin-sidebar hidden lg:flex flex-col bg-white dark:bg-dark-secondary border-r border-bdr-clr dark:border-bdr-clr-drk transition-all duration-300 sticky top-0 h-screen"
+    [class.w-72]="!sidebarCollapsed()"
+    [class.w-20]="sidebarCollapsed()">
+
+    <div class="h-16 flex items-center border-b border-bdr-clr dark:border-bdr-clr-drk px-4"
+      [class.justify-center]="sidebarCollapsed()"
+      [class.gap-3]="!sidebarCollapsed()">
+      <button (click)="toggleCollapse()" class="text-title dark:text-white hover:text-primary dark:hover:text-primary transition-colors">
+        <span class="lnr lnr-menu text-xl"></span>
+      </button>
+      @if (!sidebarCollapsed()) {
+        <span class="font-primary font-bold text-lg text-title dark:text-white uppercase tracking-wider">
+          {{ 'admin.sidebar.title' | translate }}
+        </span>
+      }
+    </div>
+
+    <div class="p-4 border-b border-bdr-clr dark:border-bdr-clr-drk"
+      [class.flex]="!sidebarCollapsed()"
+      [class.items-center]="!sidebarCollapsed()"
+      [class.gap-3]="!sidebarCollapsed()"
+      [class.justify-center]="sidebarCollapsed()">
+      <div class="relative w-13 h-13 rounded-full overflow-hidden flex-shrink-0 border-2 border-primary group cursor-pointer" (click)="!isUploadingImage() && fileInput.click()">
+        <img [src]="userImage()" [alt]="userName()" class="w-full h-full object-cover">
+        @if (isUploadingImage()) {
+          <div class="absolute inset-0 bg-black/70 flex items-center justify-center">
+            <div class="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        } @else {
+          <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300">
+            <i class="fa-solid fa-camera text-white text-lg"></i>
+          </div>
+        }
+      </div>
+      @if (!sidebarCollapsed()) {
+        <div class="min-w-0">
+          <p class="text-base font-semibold text-title dark:text-white truncate">{{ userName() }}</p>
+          <p class="text-sm text-title/60 dark:text-white/60 truncate">{{ userEmail() }}</p>
+        </div>
+      }
+      <input #fileInput type="file" class="hidden" accept="image/*" (change)="onFileSelected($event)">
+    </div>
+
+    <nav class="flex-1 overflow-y-auto">
+      @for (item of navItems(); track item.path) {
+        <a [routerLink]="item.path" routerLinkActive="admin-active" #rla="routerLinkActive"
+          class="flex items-center py-4 lg:py-5 px-5 transition-all duration-300 text-base sm:text-lg lg:text-lg leading-none border-l-4 border-b border-bdr-clr dark:border-bdr-clr-drk"
+          [ngClass]="getDesktopNavItemClasses(rla.isActive)"
+          (click)="closeSidebar()">
+          <span [class]="item.icon" class="text-xl flex-shrink-0"></span>
+          @if (!sidebarCollapsed()) {
+            <span class="font-primary font-medium">{{ item.labelKey | translate }}</span>
+          }
+        </a>
+      }
+    </nav>
+
+    <div class="border-t border-bdr-clr dark:border-bdr-clr-drk">
+      <button (click)="logout()" class="flex items-center py-4 lg:py-5 px-5 w-full border-l-4 border-transparent text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all duration-300 text-base sm:text-lg lg:text-lg leading-none"
+        [class.justify-center]="sidebarCollapsed()"
+        [class.gap-3]="!sidebarCollapsed()">
+        <span class="lnr lnr-power-switch text-xl flex-shrink-0"></span>
+        @if (!sidebarCollapsed()) {
+          <span class="font-primary font-medium">{{ 'admin.sidebar.logout' | translate }}</span>
+        }
+      </button>
+    </div>
+  </aside>
+
+  @if (sidebarOpen()) {
+    <aside data-aos="fade-right" data-aos-duration="400" class="admin-sidebar fixed top-0 left-0 bottom-0 w-72 bg-white dark:bg-dark-secondary border-r border-bdr-clr dark:border-bdr-clr-drk z-50 flex flex-col lg:hidden">
+
+      <div class="h-16 flex items-center gap-3 border-b border-bdr-clr dark:border-bdr-clr-drk px-4">
+        <button (click)="closeSidebar()" class="text-title dark:text-white hover:text-primary dark:hover:text-primary transition-colors">
+          <span class="lnr lnr-cross text-lg"></span>
+        </button>
+        <span class="font-primary font-bold text-lg text-title dark:text-white uppercase tracking-wider">
+          {{ 'admin.sidebar.title' | translate }}
+        </span>
+      </div>
+
+      <div class="p-4 border-b border-bdr-clr dark:border-bdr-clr-drk flex items-center gap-3">
+        <div class="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border-2 border-primary group cursor-pointer" (click)="!isUploadingImage() && fileInputMobile.click()">
+          <img [src]="userImage()" [alt]="userName()" class="w-full h-full object-cover">
+          @if (isUploadingImage()) {
+            <div class="absolute inset-0 bg-black/70 flex items-center justify-center">
+              <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          } @else {
+            <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300">
+              <i class="fa-solid fa-camera text-white text-xs"></i>
+            </div>
+          }
+        </div>
+        <div class="min-w-0">
+          <p class="text-sm font-semibold text-title dark:text-white truncate">{{ userName() }}</p>
+          <p class="text-xs text-title/60 dark:text-white/60 truncate">{{ userEmail() }}</p>
+        </div>
+        <input #fileInputMobile type="file" class="hidden" accept="image/*" (change)="onFileSelected($event)">
+      </div>
+
+      <nav class="flex-1 overflow-y-auto">
+        @for (item of navItems(); track item.path) {
+          <a [routerLink]="item.path" routerLinkActive="admin-active" #rlaM="routerLinkActive"
+            class="flex items-center gap-3 py-4 px-5 border-l-4 border-b border-bdr-clr dark:border-bdr-clr-drk transition-all duration-300 text-base sm:text-lg leading-none"
+            [ngClass]="getMobileNavItemClasses(rlaM.isActive)"
+            (click)="closeSidebar()">
+            <span [class]="item.icon" class="text-xl"></span>
+            <span class="font-primary font-medium">{{ item.labelKey | translate }}</span>
+          </a>
+        }
+      </nav>
+
+      <div class="border-t border-bdr-clr dark:border-bdr-clr-drk">
+        <button (click)="logout()" class="flex items-center gap-3 py-4 px-5 w-full border-l-4 border-transparent text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all duration-300 text-base sm:text-lg leading-none">
+          <span class="lnr lnr-power-switch text-xl"></span>
+          <span class="font-primary font-medium">{{ 'admin.sidebar.logout' | translate }}</span>
+        </button>
+      </div>
+    </aside>
+  }
+
+  <div class="flex-1 flex flex-col min-w-0">
+    <header class="admin-topbar h-16 bg-white dark:bg-dark-secondary border-b border-bdr-clr dark:border-bdr-clr-drk flex items-center justify-between px-4 sm:px-6 sticky top-0 z-30">
+      <div class="flex items-center gap-3">
+        <button (click)="toggleSidebar()" class="lg:hidden text-title dark:text-white hover:text-primary dark:hover:text-primary transition-colors">
+          <span class="lnr lnr-menu text-xl"></span>
+        </button>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <app-switcher [showLangToggle]="true" />
+      </div>
+    </header>
+
+    <main data-aos="fade" data-aos-duration="300" class="admin-main flex-1 p-4 sm:p-6 lg:p-8">
+      <router-outlet />
+    </main>
+  </div>
+  </div>
+</div>

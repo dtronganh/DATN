@@ -1,0 +1,17 @@
+.product-dtls-nav {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.product-dtls-nav::-webkit-scrollbar {
+  width: 4px;
+}
+.product-dtls-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+.product-dtls-nav::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 2px;
+}
+.product-dtls-nav::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}

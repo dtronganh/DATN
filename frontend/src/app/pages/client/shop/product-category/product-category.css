@@ -1,0 +1,329 @@
+﻿.category-hero {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1.5fr 1fr;
+	gap: 1.25rem;
+	padding: 1.25rem;
+	border-radius: 1rem;
+	border: 1px solid rgba(227, 0, 0, 0.12);
+	background: linear-gradient(135deg, rgba(227, 0, 0, 0.08), rgba(255, 255, 255, 0.95));
+	overflow: hidden;
+}
+
+.hero-kicker {
+	font-size: 0.75rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: #e30000;
+	font-weight: 700;
+}
+
+.hero-title {
+	font-size: clamp(1.25rem, 2.5vw, 2rem);
+	font-weight: 700;
+	margin-top: 0.35rem;
+	color: #172430;
+	line-height: 1.2;
+}
+
+.hero-subtitle {
+	margin-top: 0.5rem;
+	color: rgba(23, 36, 48, 0.75);
+	font-size: 0.95rem;
+}
+
+.hero-stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	margin-top: 1rem;
+}
+
+.hero-chip {
+	border-radius: 999px;
+	border: 1px solid rgba(23, 36, 48, 0.1);
+	background: #fff;
+	padding: 0.45rem 0.85rem;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.hero-chip-label {
+	font-size: 0.75rem;
+	color: rgba(23, 36, 48, 0.65);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.hero-sort-panel {
+	border-radius: 0.9rem;
+	border: 1px solid rgba(23, 36, 48, 0.08);
+	background: rgba(255, 255, 255, 0.92);
+	padding: 1rem;
+}
+
+.hero-sort-title {
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: #172430;
+}
+
+.sort-pill-wrap {
+	margin-top: 0.75rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.price-range-wrap {
+	margin-top: 0.9rem;
+	padding-top: 0.9rem;
+	border-top: 1px dashed rgba(23, 36, 48, 0.15);
+}
+
+.price-inputs {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.price-input {
+	border: 1px solid rgba(23, 36, 48, 0.16);
+	border-radius: 0.55rem;
+	height: 2.35rem;
+	padding: 0 0.7rem;
+	font-size: 0.85rem;
+	background: #fff;
+}
+
+.price-sep {
+	color: rgba(23, 36, 48, 0.55);
+}
+
+.clear-price-btn {
+	margin-top: 0.65rem;
+	font-size: 0.78rem;
+	color: #e30000;
+	font-weight: 600;
+}
+
+.sort-pill {
+	border: 1px solid rgba(23, 36, 48, 0.12);
+	background: #fff;
+	color: #172430;
+	border-radius: 999px;
+	padding: 0.45rem 0.75rem;
+	font-size: 0.8rem;
+	line-height: 1;
+	transition: all 0.2s ease;
+}
+
+.sort-pill:hover {
+	border-color: rgba(227, 0, 0, 0.35);
+	color: #e30000;
+}
+
+.sort-pill.is-active {
+	border-color: #e30000;
+	background: #e30000;
+	color: #fff;
+}
+
+.category-content {
+	border-radius: 1rem;
+	border: 1px solid rgba(23, 36, 48, 0.07);
+	background: #fff;
+	padding: 1rem;
+}
+
+.result-head {
+	margin-bottom: 0.9rem;
+	color: rgba(23, 36, 48, 0.75);
+	font-size: 0.92rem;
+}
+
+.result-head strong {
+	color: #172430;
+}
+
+.skeleton-card {
+	border: 1px solid rgba(23, 36, 48, 0.08);
+	border-radius: 0.85rem;
+	padding: 0.75rem;
+	background: #fff;
+}
+
+.skeleton-thumb,
+.skeleton-line {
+	position: relative;
+	overflow: hidden;
+	background: #f2f4f7;
+}
+
+.skeleton-thumb {
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	border-radius: 0.65rem;
+}
+
+.skeleton-line {
+	height: 0.7rem;
+	border-radius: 999px;
+	margin-top: 0.65rem;
+}
+
+.skeleton-thumb::after,
+.skeleton-line::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	transform: translateX(-100%);
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+	animation: shimmer 1.4s infinite;
+}
+
+.empty-state {
+	min-height: 320px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	border: 1px dashed rgba(23, 36, 48, 0.2);
+	border-radius: 1rem;
+	background: #f9fafb;
+	padding: 2rem 1rem;
+}
+
+.empty-icon {
+	width: 72px;
+	height: 72px;
+	border-radius: 999px;
+	display: grid;
+	place-items: center;
+	background: rgba(227, 0, 0, 0.12);
+	color: #e30000;
+}
+
+.empty-title {
+	margin-top: 0.9rem;
+	font-size: 1.1rem;
+	font-weight: 700;
+	color: #172430;
+}
+
+.empty-desc {
+	margin-top: 0.35rem;
+	font-size: 0.92rem;
+	color: rgba(23, 36, 48, 0.68);
+}
+
+@keyframes shimmer {
+	100% {
+		transform: translateX(100%);
+	}
+}
+
+:host-context(.dark) .category-hero {
+	border-color: rgba(255, 255, 255, 0.08);
+	background: #0f1923;
+}
+
+:host-context(.dark) .hero-title,
+:host-context(.dark) .hero-sort-title,
+:host-context(.dark) .result-head strong,
+:host-context(.dark) .empty-title {
+	color: #fff;
+}
+
+:host-context(.dark) .hero-subtitle,
+:host-context(.dark) .hero-chip-label,
+:host-context(.dark) .result-head,
+:host-context(.dark) .empty-desc {
+	color: rgba(255, 255, 255, 0.72);
+}
+
+:host-context(.dark) .hero-chip,
+:host-context(.dark) .hero-sort-panel,
+:host-context(.dark) .category-content,
+:host-context(.dark) .skeleton-card {
+	border-color: rgba(255, 255, 255, 0.1);
+	background: #172430;
+	color: #fff;
+}
+
+:host-context(.dark) .sort-pill {
+	border-color: rgba(255, 255, 255, 0.16);
+	background: rgba(255, 255, 255, 0.04);
+	color: rgba(255, 255, 255, 0.88);
+}
+
+:host-context(.dark) .price-range-wrap {
+	border-top-color: rgba(255, 255, 255, 0.16);
+}
+
+:host-context(.dark) .price-input {
+	border-color: rgba(255, 255, 255, 0.2);
+	background: rgba(255, 255, 255, 0.04);
+	color: #fff;
+}
+
+:host-context(.dark) .price-sep {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+:host-context(.dark) .clear-price-btn {
+	color: #ff7575;
+}
+
+:host-context(.dark) .sort-pill:hover {
+	border-color: rgba(227, 0, 0, 0.5);
+	color: #ff7575;
+}
+
+:host-context(.dark) .sort-pill.is-active {
+	background: #e30000;
+	color: #fff;
+	border-color: #e30000;
+}
+
+:host-context(.dark) .skeleton-thumb,
+:host-context(.dark) .skeleton-line {
+	background: #223444;
+}
+
+:host-context(.dark) .empty-state {
+	border-color: rgba(255, 255, 255, 0.15);
+	background: rgba(23, 36, 48, 0.65);
+}
+
+@media (max-width: 1024px) {
+	.category-hero {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 640px) {
+	.sort-pill-wrap {
+		flex-wrap: wrap;
+		overflow-x: visible;
+		padding-right: 0.125rem;
+	}
+
+	.sort-pill {
+		flex: 0 1 auto;
+		white-space: nowrap;
+		max-width: 100%;
+	}
+
+	.price-inputs {
+		grid-template-columns: 1fr;
+		gap: 0.45rem;
+	}
+
+	.price-sep {
+		display: none;
+	}
+}

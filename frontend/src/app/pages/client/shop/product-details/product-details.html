@@ -1,0 +1,130 @@
+<app-navbar/>
+
+@if (product(); as p) {
+<app-breadcrumb
+  [title]="p.name"
+  [items]="[{ label: ('nav.home' | translate), link: '/' }, { label: p.name }]"
+/>
+}
+
+<div class="sticker-safe">
+
+@if (product(); as p) {
+<div class="s-py-50" data-aos="fade-up">
+    <div class="container-fluid">
+        <div class="max-w-[1720px] mx-auto flex justify-between gap-10 flex-col lg:flex-row">
+            <div class="w-full lg:w-[58%]">
+                <div class="relative product-dtls-wrapper">
+                    <div class="product-dtls-slider">
+                        @if (p.images && p.images.length > 0) {
+                          @for (img of p.images; track img; let i = $index) {
+                            <div [class.hidden]="activeImage() !== i"><img [src]="img" class="w-full" alt="product"></div>
+                          }
+                        } @else if (p.thumbnail) {
+                          <div><img [src]="p.thumbnail" class="w-full" alt="product"></div>
+                        }
+                    </div>
+                    <div class="product-dtls-nav">
+                        @if (p.images && p.images.length > 0) {
+                          @for (img of p.images; track img; let i = $index) {
+                            <div (click)="activeImage.set(i)" [class.mb-2]="i < p.images.length - 1" class="cursor-pointer"><img [src]="img" alt="product"></div>
+                          }
+                        } @else if (p.thumbnail) {
+                          <div class="cursor-pointer"><img [src]="p.thumbnail" alt="product"></div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="lg:max-w-[635px] w-full">
+                <div class="pb-4 sm:pb-6 border-b border-bdr-clr dark:border-bdr-clr-drk">
+                    <h2 class="font-semibold leading-none">{{p.name}}</h2>
+                    <div class="flex gap-4 items-center mt-[15px]">
+                        <span class="text-2xl sm:text-3xl text-primary leading-none block">{{ formatVND(p.price || 0) }}đ</span>
+                        @if (p.stock !== undefined) {
+                            @if (p.stock > 0) {
+                                <span class="text-sm text-green-600 font-medium">{{ 'product.inStock' | translate:{ count: p.stock } }}</span>
+                            } @else {
+                                <span class="text-sm text-red-600 font-medium">{{ 'product.outOfStock' | translate }}</span>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="py-4 sm:py-6 border-b border-bdr-clr dark:border-bdr-clr-drk" data-aos="fade-up" data-aos-delay="200">
+                    <app-inc-dec [val]="quantity()" (valChange)="quantity.set($event)" [min]="1" [max]="p.stock || 1"/>
+                    
+                    <div class="flex gap-4 mt-4 sm:mt-6">
+                        <app-button
+                            color="btn-solid"
+                            [text]="'product.addToCart' | translate"
+                            [disabled]="p.stock < 1"
+                            (clicked)="addToCart()"
+                        />
+                        <app-button
+                            color="btn-outline"
+                            [text]="isInWishlist() ? ('wishlist.remove' | translate) : ('wishlist.add' | translate)"
+                            [disabled]="p.stock < 1"
+                            (clicked)="toggleWishlist()"
+                        />
+                    </div>
+                </div>
+                <div class="py-4 sm:py-6 border-b border-bdr-clr dark:border-bdr-clr-drk" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex gap-x-12 gap-y-3 flex-wrap">
+                        <h6 class="leading-none font-medium">{{ 'product.sku' | translate }} : {{ sku() }}</h6>
+                        @if(categoryName()) {
+                            <h6 class="leading-none font-medium">{{ 'product.category' | translate }} : {{ categoryName() }}</h6>
+                        }
+                    </div>
+                    
+                    @if (tags().length > 0) {
+                        <div class="py-4 sm:py-6 border-b border-bdr-clr dark:border-bdr-clr-drk" data-aos="fade-up" data-aos-delay="400">
+                            <h4 class="font-medium leading-none">{{ 'product.tagsLabel' | translate }} :</h4>
+                            <div class="flex flex-wrap gap-[10px] md:gap-[15px] mt-5 md:mt-6">
+                                @for (tag of tags(); track tag) {
+                                    <app-button color="btn-theme-outline" size="btn-xs" [text]="tag" />
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="pt-4 sm:pt-6" data-aos="fade-up" data-aos-delay="500">
+                    <app-social-share title="product.share" gapClass="gap-6" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="s-py-50">
+    <app-detail-tab [description]="p.description || ''"/>
+</div>
+} @else if (loading()) {
+    <div class="s-py-100 text-center">
+        <div class="container">
+            <h2 class="text-2xl font-medium">{{ 'common.loading' | translate }}...</h2>
+        </div>
+    </div>
+} @else {
+    <div class="s-py-100 text-center">
+        <div class="container">
+            <h2 class="text-2xl font-medium">{{ 'product.notFound' | translate }}</h2>
+        </div>
+    </div>
+}
+
+<div class="s-py-50-100">
+    <div class="container-fluid">
+        <div class="max-w-[547px] mx-auto text-center">
+            <h6 class="text-2xl sm:text-3xl md:text-4xl leading-none">{{ 'product.related.title' | translate }}</h6>
+            <p class="mt-3">{{ 'product.related.desc' | translate }}</p>
+        </div>
+        <app-product-card 
+          [classList]="'max-w-[1720px] mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-8 pt-8 md:pt-[50px]'" 
+          [productList]="relatedProducts()"
+                    (onAddToCart)="onRelatedProductAddToCart($event)"
+        />
+    </div>
+</div>
+</div>
+
+<app-footer/>

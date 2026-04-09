@@ -1,0 +1,324 @@
+<div data-aos="fade-up" data-aos-duration="400" class="admin-page space-y-6">
+  <div>
+    <h1 class="text-3xl font-primary font-bold text-title dark:text-white">{{ 'admin.orders.title' | translate }}</h1>
+    <p class="mt-1 text-base text-title/60 dark:text-white/60">{{ total() }} {{ 'admin.orders.title' | translate }}</p>
+  </div>
+
+  <div class="admin-surface bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk p-4 space-y-4">
+    <div class="flex flex-wrap gap-2">
+      @for (status of statuses(); track status) {
+        <app-button
+          [text]="status === 'ALL' ? ('admin.orders.filterAll' | translate) : ('admin.orders.statuses.' + status | translate)"
+          [color]="filterStatus() === status ? 'btn-theme-solid' : 'btn-outline'"
+          size="btn-xs"
+          [padding]="''"
+          (clicked)="onFilterChange(status)"
+        />
+      }
+    </div>
+
+    <admin-search [placeholder]="'admin.orders.search' | translate" (search)="onSearch($event)" />
+  </div>
+
+  <app-admin-table
+    [loading]="loading()"
+    [empty]="orders().length === 0"
+    emptyIcon="lnr-cart"
+    [emptyMessage]="'admin.orders.noOrders'"
+    [totalPages]="totalPages()"
+    [currentPage]="currentPage()"
+    (pageChange)="onPageChange($event)"
+  >
+    <div mobile class="divide-y divide-bdr-clr dark:divide-bdr-clr-drk">
+      @for (order of orders(); track order.id) {
+        <div class="p-4 space-y-3">
+          <button type="button" class="w-full text-left space-y-3" (click)="toggleDetail(order.id)">
+            <div class="flex items-start justify-between gap-3">
+              <div class="min-w-0">
+                <p class="text-base font-semibold text-title dark:text-white">#{{ order.id }}</p>
+                <p class="text-sm text-title/70 dark:text-white/70 truncate">{{ getReceiverName(order) }}</p>
+                @if (order.itemCount) {
+                  <p class="text-xs text-title/50 dark:text-white/50">{{ order.itemCount }} {{ 'admin.orders.items' | translate }}</p>
+                }
+              </div>
+              <app-status-badge [status]="order.status" />
+            </div>
+            <div class="flex items-center justify-between text-sm text-title/70 dark:text-white/70">
+              <span>{{ 'admin.orders.total' | translate }}</span>
+              <span class="font-semibold text-title dark:text-white">{{ formatVND(order.totalAmount) }}₫</span>
+            </div>
+            
+          </button>
+
+          <div class="flex flex-wrap gap-2" (click)="$event.stopPropagation()">
+            @if (getNextStatuses(order.status).length > 0) {
+              @for (nextStatus of getNextStatuses(order.status); track nextStatus) {
+                @if (nextStatus === 'CANCELLED') {
+                  <app-button
+                    [text]="'admin.orders.cancel' | translate"
+                    color="btn-secondary-solid"
+                    size="btn-xs"
+                    [padding]="''"
+                    (clicked)="updateStatus(order, nextStatus)"
+                  />
+                } @else {
+                  <app-button
+                    [text]="'admin.orders.statuses.' + nextStatus | translate"
+                    color="btn-outline"
+                    size="btn-xs"
+                    [padding]="''"
+                    (clicked)="updateStatus(order, nextStatus)"
+                  />
+                }
+              }
+            } @else {
+              <span class="invisible btn btn-outline btn-xs border-2" aria-hidden="true"><span>&nbsp;</span></span>
+            }
+          </div>
+
+          @if (expandedOrderId() === order.id) {
+            <div class="mt-3 overflow-hidden rounded-lg bg-[#F8F8F9] dark:bg-title border border-bdr-clr dark:border-bdr-clr-drk">
+              @if (loadingDetail()) {
+                <app-loading-spinner size="sm" />
+              } @else if (expandedOrder()) {
+                <div class="p-4 space-y-4">
+                  <div class="flex items-center justify-between">
+                    <h4 class="font-primary font-bold text-title dark:text-white text-base">{{ 'admin.orders.orderDetail' | translate }}</h4>
+                    <a [routerLink]="'/invoice'" [queryParams]="{orderId: order.id}" class="text-primary text-xs font-semibold">
+                      {{ 'admin.orders.viewInvoice' | translate }}
+                    </a>
+                  </div>
+
+                  <div class="space-y-2 rounded-md bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk p-3">
+                    @if (expandedOrder()!.receiverPhone) {
+                      <div class="flex items-center justify-between text-sm">
+                        <span class="text-title/60 dark:text-white/60">{{ 'admin.orders.phone' | translate }}</span>
+                        <span class="text-title dark:text-white font-medium">{{ expandedOrder()!.receiverPhone }}</span>
+                      </div>
+                    }
+                    @if (expandedOrder()!.receiverAddress) {
+                      <div class="text-sm">
+                        <span class="text-title/60 dark:text-white/60">{{ 'admin.orders.address' | translate }}</span>
+                        <p class="text-title dark:text-white mt-1 leading-relaxed">{{ expandedOrder()!.receiverAddress }}</p>
+                      </div>
+                    }
+                    @if (expandedOrder()!.note) {
+                      <div class="text-sm">
+                        <span class="text-title/60 dark:text-white/60">{{ 'admin.orders.note' | translate }}</span>
+                        <p class="text-title dark:text-white mt-1">{{ expandedOrder()!.note }}</p>
+                      </div>
+                    }
+                  </div>
+
+                  @if (expandedOrder()!.previews && expandedOrder()!.previews!.length > 0) {
+                    <div class="space-y-3">
+                      <p class="text-sm font-semibold text-title dark:text-white">{{ 'admin.orders.product' | translate }}</p>
+                      @for (item of expandedOrder()!.previews; track item.productId) {
+                        <div class="flex gap-3 rounded-md bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk p-3">
+                          <div class="w-14 h-20 flex-shrink-0 border border-bdr-clr dark:border-bdr-clr-drk overflow-hidden">
+                            <img [src]="item.thumbnail" [alt]="item.productName" class="w-full h-full object-cover">
+                          </div>
+                          <div class="min-w-0 flex-1 space-y-1">
+                            <p class="text-sm font-semibold text-title dark:text-white truncate">{{ item.productName }}</p>
+                            <div class="flex items-center justify-between text-xs text-title/70 dark:text-white/70">
+                              <span>{{ 'admin.orders.quantity' | translate }}: <strong class="text-title dark:text-white">x{{ item.quantity }}</strong></span>
+                              <span class="font-semibold text-title dark:text-white">{{ formatVND(item.price) }}₫</span>
+                            </div>
+                          </div>
+                        </div>
+                      }
+                    </div>
+                  }
+
+                  @if (expandedOrder()!.items && expandedOrder()!.items!.length > 0 && (!expandedOrder()!.previews || expandedOrder()!.previews!.length === 0)) {
+                    <div class="space-y-3">
+                      <p class="text-sm font-semibold text-title dark:text-white">{{ 'admin.orders.product' | translate }}</p>
+                      @for (item of expandedOrder()!.items; track item.id) {
+                        <div class="rounded-md bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk p-3 space-y-2">
+                          <div class="flex items-center justify-between text-sm">
+                            <span class="text-title/60 dark:text-white/60">Product ID</span>
+                            <span class="font-semibold text-title dark:text-white">#{{ item.productId }}</span>
+                          </div>
+                          <div class="flex items-center justify-between text-xs text-title/70 dark:text-white/70">
+                            <span>{{ 'admin.orders.quantity' | translate }}: <strong class="text-title dark:text-white">x{{ item.quantity }}</strong></span>
+                            <span class="font-semibold text-title dark:text-white">{{ formatVND(item.subtotal) }}₫</span>
+                          </div>
+                        </div>
+                      }
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    <div table>
+      <table class="w-full min-w-[900px] table-auto">
+        <thead
+          appSortableTableHeader
+          [columns]="tableColumns"
+          [sortField]="sortField()"
+          [sortDirection]="sortDirection()"
+          (sortChange)="onSortChange($event)"
+        ></thead>
+        <tbody>
+          @for (order of orders(); track order.id) {
+            <tr class="border-b border-bdr-clr/50 dark:border-bdr-clr-drk/50 hover:bg-primary/5 dark:hover:bg-primary/5 transition-colors duration-200 cursor-pointer"
+              (click)="toggleDetail(order.id)">
+              <td class="px-4 py-3.5 align-middle">
+                <div class="flex flex-col gap-2 min-w-0">
+                  <h5 class="font-semibold leading-none text-title dark:text-white truncate">{{ 'profile.orderHistoryPage.orderNumber' | translate:{ id: order.id } }}</h5>
+                  @if (order.itemCount) {
+                    <span class="text-xs text-title/50 dark:text-white/50">{{ order.itemCount }} {{ 'admin.orders.items' | translate }}</span>
+                  }
+                </div>
+              </td>
+              <td class="px-4 py-3.5 align-middle">
+                <p class="text-lg font-medium text-title dark:text-white truncate">{{ getReceiverName(order) }}</p>
+              </td>
+              <td class="px-4 py-3.5 align-middle text-base font-medium text-title dark:text-white whitespace-nowrap">{{ formatVND(order.totalAmount) }}₫</td>
+              <td class="px-4 py-3.5 align-middle">
+                <app-status-badge [status]="order.status" />
+              </td>
+              <td class="pl-4 pr-4 py-3.5 align-middle whitespace-nowrap w-px" (click)="$event.stopPropagation()">
+                <div class="flex items-center justify-end gap-2">
+                  @if (getNextStatuses(order.status).length > 0) {
+                    @for (nextStatus of getNextStatuses(order.status); track nextStatus) {
+                      @if (nextStatus === 'CANCELLED') {
+                        <app-button
+                          [text]="'admin.orders.cancel' | translate"
+                          color="btn-secondary-solid"
+                          size="btn-xs"
+                          [padding]="''"
+                          (clicked)="updateStatus(order, nextStatus)"
+                        />
+                      } @else {
+                        <app-button
+                          [text]="'admin.orders.statuses.' + nextStatus | translate"
+                          color="btn-outline"
+                          size="btn-xs"
+                          [padding]="''"
+                          (clicked)="updateStatus(order, nextStatus)"
+                        />
+                      }
+                    }
+                  } @else {
+                    <span class="invisible btn btn-outline btn-xs border-2" aria-hidden="true"><span>&nbsp;</span></span>
+                  }
+                </div>
+              </td>
+            </tr>
+
+            @if (expandedOrderId() === order.id) {
+              <tr>
+                <td colspan="5" class="!p-0 overflow-hidden">
+                  <div data-aos="fade-down" data-aos-duration="300" class="overflow-hidden bg-[#F8F8F9] dark:bg-title border-t border-bdr-clr dark:border-bdr-clr-drk">
+                    @if (loadingDetail()) {
+                      <app-loading-spinner size="sm" />
+                    } @else if (expandedOrder()) {
+                      <div class="p-4 lg:p-6 space-y-4">
+                        <h4 class="font-primary font-bold text-title dark:text-white text-base">{{ 'admin.orders.orderDetail' | translate }}</h4>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-base">
+                          @if (expandedOrder()!.receiverPhone) {
+                            <div>
+                              <span class="text-title/50 dark:text-white/50">{{ 'admin.orders.phone' | translate }}:</span>
+                              <p class="text-title dark:text-white mt-1">{{ expandedOrder()!.receiverPhone }}</p>
+                            </div>
+                          }
+                          @if (expandedOrder()!.receiverAddress) {
+                            <div>
+                              <span class="text-title/50 dark:text-white/50">{{ 'admin.orders.address' | translate }}:</span>
+                              <p class="text-title dark:text-white mt-1">{{ expandedOrder()!.receiverAddress }}</p>
+                            </div>
+                          }
+                          @if (expandedOrder()!.note) {
+                            <div>
+                              <span class="text-title/50 dark:text-white/50">{{ 'admin.orders.note' | translate }}:</span>
+                              <p class="text-title dark:text-white mt-1">{{ expandedOrder()!.note }}</p>
+                            </div>
+                          }
+                        </div>
+
+                        @if (expandedOrder()!.previews && expandedOrder()!.previews!.length > 0) {
+                          <div class="bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk overflow-hidden">
+                            <div class="overflow-x-auto">
+                              <table class="w-full min-w-[720px] table-auto">
+                                <thead>
+                                  <tr class="border-b border-bdr-clr dark:border-bdr-clr-drk">
+                                    <th class="text-left px-4 py-3 text-lg font-primary font-bold text-title dark:text-white tracking-wide">{{ 'admin.orders.product' | translate }}</th>
+                                    <th class="text-left px-4 py-3 text-lg font-primary font-bold text-title dark:text-white tracking-wide">{{ 'admin.orders.selectedAttributes' | translate }}</th>
+                                    <th class="text-left px-4 py-3 text-lg font-primary font-bold text-title dark:text-white tracking-wide">{{ 'admin.orders.quantity' | translate }}</th>
+                                    <th class="text-right px-4 py-3 text-lg font-primary font-bold text-title dark:text-white tracking-wide whitespace-nowrap w-px">{{ 'admin.orders.price' | translate }}</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  @for (item of expandedOrder()!.previews; track item.productId) {
+                                    <tr class="border-b border-bdr-clr/50 dark:border-bdr-clr-drk/50 hover:bg-primary/5 dark:hover:bg-primary/5 transition-colors duration-200">
+                                      <td class="px-4 py-3">
+                                        <div class="flex items-center gap-3">
+                                          <div class="w-16 h-24 flex-shrink-0 border border-bdr-clr dark:border-bdr-clr-drk overflow-hidden">
+                                            <img [src]="item.thumbnail" [alt]="item.productName" class="w-full h-full object-cover">
+                                          </div>
+                                          <div class="min-w-0">
+                                            <p class="text-xl font-medium text-title dark:text-white truncate max-w-[200px] lg:max-w-[300px]">{{ item.productName }}</p>
+                                          </div>
+                                        </div>
+                                      </td>
+                                      <td class="px-4 py-3.5 text-base font-medium text-title dark:text-white">x{{ item.quantity }}</td>
+                                      <td class="text-right pl-4 pr-0 py-3.5 text-base font-medium text-title dark:text-white whitespace-nowrap w-px">{{ formatVND(item.price) }}₫</td>
+                                    </tr>
+                                  }
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        }
+
+                        @if (expandedOrder()!.items && expandedOrder()!.items!.length > 0 && (!expandedOrder()!.previews || expandedOrder()!.previews!.length === 0)) {
+                          <div class="bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk overflow-hidden">
+                            <div class="overflow-x-auto">
+                              <table class="w-full min-w-[720px] table-auto">
+                                <thead>
+                                  <tr class="border-b border-bdr-clr dark:border-bdr-clr-drk">
+                                    <th class="text-left px-4 py-3 text-lg font-primary font-bold text-title dark:text-white tracking-wide">Product ID</th>
+                                    <th class="text-left px-4 py-3 text-lg font-primary font-bold text-title dark:text-white tracking-wide">{{ 'admin.orders.selectedAttributes' | translate }}</th>
+                                    <th class="text-left px-4 py-3 text-lg font-primary font-bold text-title dark:text-white tracking-wide">{{ 'admin.orders.quantity' | translate }}</th>
+                                    <th class="text-right pl-4 pr-0 py-3 text-lg font-primary font-bold text-title dark:text-white tracking-wide whitespace-nowrap w-px">{{ 'admin.orders.subtotal' | translate }}</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  @for (item of expandedOrder()!.items; track item.id) {
+                                    <tr class="border-b border-bdr-clr/50 dark:border-bdr-clr-drk/50 hover:bg-primary/5 dark:hover:bg-primary/5 transition-colors duration-200">
+                                      <td class="px-4 py-3.5 text-base font-medium text-title dark:text-white">#{{ item.productId }}</td>
+            
+                                      <td class="px-4 py-3.5 text-base font-medium text-title dark:text-white">x{{ item.quantity }}</td>
+                                      <td class="text-right pl-4 pr-0 py-3.5 text-base font-medium text-title dark:text-white whitespace-nowrap w-px">{{ formatVND(item.subtotal) }}₫</td>
+                                    </tr>
+                                  }
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        }
+
+                        <div class="flex justify-end">
+                          <a [routerLink]="'/invoice'" [queryParams]="{orderId: order.id}" class="btn btn-solid btn-xs" [attr.data-text]="'admin.orders.viewInvoice' | translate">
+                            <span>{{ 'admin.orders.viewInvoice' | translate }}</span>
+                          </a>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          }
+        </tbody>
+      </table>
+    </div>
+  </app-admin-table>
+</div>

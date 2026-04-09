@@ -1,0 +1,66 @@
+{
+  "name": "gear",
+  "version": "0.1.0",
+  "description": "Gear - Angular Js Tech & Electronics eCommerce Template",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "vitest run"
+  },
+  "prettier": {
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "private": true,
+  "dependencies": {
+    "@angular-slider/ngx-slider": "^21.0.0",
+    "@angular/animations": "^21.1.3",
+    "@angular/common": "^21.1.3",
+    "@angular/compiler": "^21.1.3",
+    "@angular/core": "^21.1.3",
+    "@angular/forms": "^21.1.3",
+    "@angular/platform-browser": "^21.1.3",
+    "@angular/router": "^21.1.3",
+    "@ngx-translate/core": "^17.0.0",
+    "@ngx-translate/http-loader": "^17.0.0",
+    "@tailwindcss/postcss": "^4.1.13",
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/aos": "^3.0.7",
+    "aos": "^2.3.4",
+    "axios": "^1.13.6",
+    "datatables.net-dt": "^2.3.7",
+    "jquery-nice-select": "^1.1.0",
+    "jquery-ui-dist": "^1.13.3",
+    "linearicons": "^1.0.1",
+    "magnific-popup": "^1.2.0",
+    "marked": "^17.0.3",
+    "ng-click-outside2": "^18.0.1",
+    "ngx-owl-carousel-o": "^21.0.0",
+    "postcss": "^8.5.6",
+    "rxjs": "~7.8.0",
+    "slick-carousel": "^1.8.1",
+    "tailwindcss": "^4.1.13",
+    "tslib": "^2.3.0",
+    "zone.js": "^0.15.0"
+  },
+  "devDependencies": {
+    "@analogjs/vite-plugin-angular": "^2.2.3",
+    "@analogjs/vitest-angular": "^2.1.0",
+    "@angular/build": "^21.1.3",
+    "@angular/cli": "^21.1.3",
+    "@angular/compiler-cli": "^21.1.3",
+    "jsdom": "^26.1.0",
+    "postcss": "^8.5.3",
+    "typescript": "~5.9.3",
+    "vite-tsconfig-paths": "^6.0.0",
+    "vitest": "^4.0.8"
+  }
+}

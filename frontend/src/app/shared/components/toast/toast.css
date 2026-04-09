@@ -1,0 +1,40 @@
+@media (max-width: 640px) {
+  .fixed.top-24.right-6 {
+    right: 1rem;
+    top: 6rem;
+  }
+  .fixed.top-24.right-6 > div {
+    width: auto;
+  }
+}
+@media (min-width: 2560px) {
+  .fixed.top-24.right-6 {
+    right: max(70px, 4vw);
+  }
+}
+.toast-item {
+  animation: slideIn 300ms ease-out;
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes progress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+.progress-bar {
+  width: 100%;
+  animation: progress linear forwards;
+  transform-origin: left;
+}

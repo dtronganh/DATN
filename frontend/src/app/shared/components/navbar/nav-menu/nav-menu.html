@@ -1,0 +1,38 @@
+<div class="flex items-center gap-2 sm:gap-3">
+
+  
+  @if (!authStore.isAuthenticated()) {
+    <a routerLink="/auth/login" class="nav-login-btn hidden lg:flex">
+      <i class="mdi mdi-account-outline text-[16px]"></i>
+      <span>{{ 'nav.login' | translate }}</span>
+    </a>
+  }
+
+  
+  <button (click)="toggleSearch()" class="hdr_search_btn" [attr.aria-label]="'nav.searchLabel' | translate">
+    <i class="mdi mdi-magnify text-title dark:text-white text-[24px] sm:text-[28px] hover:text-primary transition-all duration-300"></i>
+  </button>
+
+  
+  @if (authStore.isAuthenticated()) {
+    <a routerLink="/my-profile" class="text-title dark:text-white hover:text-primary transition-colors duration-300">
+      <i class="mdi mdi-account-outline text-[24px] sm:text-[28px]"></i>
+    </a>
+  }
+
+  <app-wishlist-popup [categoryMap]="categoryMap()"></app-wishlist-popup>
+  <app-cart-popup></app-cart-popup>
+
+  
+  <button class="hamburger" [class.opened]="toggle()" (click)="toggleValue()">
+    <span class="mdi mdi-menu text-title dark:text-white text-[32px] sm:text-[36px] hover:text-primary transition-all duration-300" aria-hidden="true"></span>
+    <span class="sr-only">{{ 'nav.toggleMenu' | translate }}</span>
+  </button>
+
+  <div class="w-[1px] bg-title/20 dark:bg-white/20 h-7 hidden sm:block"></div>
+  <app-switcher />
+</div>
+
+@if (search()) {
+  <app-search-popup [open]="true" [categoryMap]="categoryMap()" (closed)="closeSearch()"></app-search-popup>
+}

@@ -1,0 +1,69 @@
+<div class="bg-[#F8F8F9] dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk overflow-hidden">
+    
+    <div class="bg-primary dark:bg-[#0f1923] px-5 py-4 flex items-center gap-3">
+        <div class="w-9 h-9 rounded flex items-center justify-center bg-white/20 flex-none">
+            <i class="mdi mdi-account text-white text-lg"></i>
+        </div>
+        <span class="text-white font-semibold text-sm uppercase tracking-wider leading-none">{{ 'profile.profile' | translate }}</span>
+    </div>
+
+    
+    <ul class="text-title dark:text-white text-sm sm:text-base flex flex-col leading-none" id="user-nav-tabs">
+        <li [class.active]="currentPath() === '/my-profile'"
+            class="border-l-[3px] border-transparent transition-colors duration-200"
+            [class.border-primary]="currentPath() === '/my-profile'"
+            [class.bg-white]="currentPath() === '/my-profile'"
+            [class.dark:bg-title]="currentPath() === '/my-profile'">
+            <a class="flex items-center gap-3 px-5 py-4 duration-300 hover:text-primary hover:bg-white dark:hover:bg-title"
+               [class.text-primary]="currentPath() === '/my-profile'"
+               routerLink="/my-profile">
+                <i class="mdi mdi-account-circle-outline text-xl w-5 flex-none"></i>
+                <span>{{ 'profile.myProfile' | translate }}</span>
+            </a>
+        </li>
+        <li [class.active]="currentPath() === '/edit-profile'"
+            class="border-l-[3px] border-transparent border-t border-bdr-clr dark:border-bdr-clr-drk transition-colors duration-200"
+            [class.border-primary]="currentPath() === '/edit-profile'"
+            [class.bg-white]="currentPath() === '/edit-profile'"
+            [class.dark:bg-title]="currentPath() === '/edit-profile'">
+            <a class="flex items-center gap-3 px-5 py-4 duration-300 hover:text-primary hover:bg-white dark:hover:bg-title"
+               [class.text-primary]="currentPath() === '/edit-profile'"
+               routerLink="/edit-profile">
+                <i class="mdi mdi-account-edit-outline text-xl w-5 flex-none"></i>
+                <span>{{ 'profile.editProfile' | translate }}</span>
+            </a>
+        </li>
+        <li [class.active]="currentPath() === '/order-history'"
+            class="border-l-[3px] border-transparent border-t border-bdr-clr dark:border-bdr-clr-drk transition-colors duration-200"
+            [class.border-primary]="currentPath() === '/order-history'"
+            [class.bg-white]="currentPath() === '/order-history'"
+            [class.dark:bg-title]="currentPath() === '/order-history'">
+            <a class="flex items-center gap-3 px-5 py-4 duration-300 hover:text-primary hover:bg-white dark:hover:bg-title"
+               [class.text-primary]="currentPath() === '/order-history'"
+               routerLink="/order-history">
+                <i class="mdi mdi-clipboard-list-outline text-xl w-5 flex-none"></i>
+                <span>{{ 'profile.orderHistory' | translate }}</span>
+            </a>
+        </li>
+        <li [class.active]="currentPath() === '/wishlist'"
+            class="border-l-[3px] border-transparent border-t border-bdr-clr dark:border-bdr-clr-drk transition-colors duration-200"
+            [class.border-primary]="currentPath() === '/wishlist'"
+            [class.bg-white]="currentPath() === '/wishlist'"
+            [class.dark:bg-title]="currentPath() === '/wishlist'">
+            <a class="flex items-center gap-3 px-5 py-4 duration-300 hover:text-primary hover:bg-white dark:hover:bg-title"
+               [class.text-primary]="currentPath() === '/wishlist'"
+               routerLink="/wishlist">
+                <i class="mdi mdi-heart-outline text-xl w-5 flex-none"></i>
+                <span>{{ 'profile.wishlist' | translate }}</span>
+            </a>
+        </li>
+        <li class="border-l-[3px] border-transparent border-t border-bdr-clr dark:border-bdr-clr-drk">
+            <button type="button"
+                class="w-full flex items-center gap-3 px-5 py-4 duration-300 hover:text-primary hover:bg-white dark:hover:bg-title text-left"
+                (click)="logout()">
+                <i class="mdi mdi-logout text-xl w-5 flex-none"></i>
+                <span>{{ 'profile.logout' | translate }}</span>
+            </button>
+        </li>
+    </ul>
+</div>

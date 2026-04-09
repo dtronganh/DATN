@@ -1,0 +1,30 @@
+<div [class]="containerClass()">
+  <app-select
+    [control]="provinceControl()"
+    [label]="'address.province'"
+    [placeholder]="'address.selectProvince'"
+    [options]="provinceOptions()"
+    [required]="required()"
+    [error]="provinceError()"
+    (changed)="onProvinceChange($event)"
+  />
+
+  <app-select
+    [control]="districtControl()"
+    [label]="'address.district'"
+    [placeholder]="'address.selectDistrict'"
+    [options]="districtOptions()"
+    [required]="required()"
+    [error]="districtError()"
+    (changed)="onDistrictChange($event)"
+  />
+
+  <app-select
+    [control]="wardControl()"
+    [label]="'address.ward'"
+    [placeholder]="'address.selectWard'"
+    [options]="wardOptions()"
+    [required]="required()"
+    [error]="wardError()"
+  />
+</div>

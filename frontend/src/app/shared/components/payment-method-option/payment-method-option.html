@@ -1,0 +1,22 @@
+<label [class]="labelClass()">
+  <div class="flex items-center gap-4">
+    <input
+      type="radio"
+      name="paymentMethod"
+      [value]="value()"
+      [checked]="isSelected()"
+      class="w-5 h-5"
+      readonly />
+    <div class="flex-1">
+      <div class="flex items-center gap-3">
+        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="iconPath()"></path>
+        </svg>
+        <div>
+          <h4 class="font-semibold text-lg text-title dark:text-white">{{ titleKey() | translate }}</h4>
+          <p class="text-sm text-title dark:text-white mt-1">{{ descKey() | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</label>

@@ -1,0 +1,174 @@
+<app-navbar/>
+
+<app-breadcrumb
+  [title]="'profile.orderHistory' | translate"
+  [items]="[{ label: ('nav.home' | translate), link: '/' }, { label: ('profile.orderHistory' | translate) }]"
+/>
+
+<div class="sticker-safe">
+<div class="s-py-100" data-aos="fade-up">
+  <div class="container-fluid">
+    <div class="max-w-[1720px] mx-auto flex items-start gap-5 md:gap-6 2xl:gap-10 flex-col md:flex-row my-profile-navtab">
+      <div class="w-full flex-none" style="max-width: 280px">
+        <app-account-tab/>
+      </div>
+      <div class="w-full min-w-0" style="flex: 1">
+        
+        <div class="bg-primary dark:bg-[#0f1923] px-5 sm:px-7 py-4 flex items-center gap-3 mb-[2px]">
+          <div class="w-8 h-8 bg-white/20 rounded flex items-center justify-center flex-none">
+            <i class="mdi mdi-clipboard-list text-white text-base"></i>
+          </div>
+          <h3 class="font-bold text-white text-sm uppercase tracking-wider leading-none">{{ 'profile.orderHistory' | translate }}</h3>
+        </div>
+
+        <div class="bg-[#F8F8F9] dark:bg-dark-secondary p-5 sm:p-8 lg:p-[50px] border-t-2 border-primary order-history-table">
+          @if (orderStore.loading()) {
+            <div class="flex justify-center items-center py-20">
+              <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            </div>
+          } @else if (orderStore.orderList().length === 0) {
+            <div class="text-center py-16">
+              <div class="w-16 h-16 bg-title dark:bg-[#0f1923] rounded flex items-center justify-center mx-auto mb-4">
+                <i class="mdi mdi-package-variant text-3xl text-gray-400"></i>
+              </div>
+              <p class="text-base font-semibold text-title dark:text-white mb-4">{{ 'profile.orderHistoryPage.emptyTitle' | translate }}</p>
+              <app-button
+                color="btn-outline"
+                [text]="'profile.orderHistoryPage.startShopping' | translate"
+                routerLink="/shop"
+              />
+            </div>
+          } @else {
+            
+            <div class="hidden lg:block">
+              <ul class="order-history">
+                <li class="title flex items-center justify-between gap-5 pb-[10px] sm:pb-5 border-b last:border-bdr-clr dark:border-bdr-clr-drk">
+                  <span class="cart-product-title text-lg md:text-xl font-semibold leading-none text-title dark:text-white block w-[250px] sm:w-[300px] xl:w-[350px]">{{ 'profile.orderHistoryPage.headers.orderInfo' | translate }}</span>
+                  <span class="text-lg md:text-xl font-semibold leading-none text-title dark:text-white w-[120px]">{{ 'profile.orderHistoryPage.headers.total' | translate }}</span>
+                  <span class="text-lg md:text-xl font-semibold leading-none text-title dark:text-white w-[100px]">{{ 'profile.orderHistoryPage.headers.status' | translate }}</span>
+                  <span class="text-lg md:text-xl font-semibold leading-none text-title dark:text-white w-[200px]">{{ 'profile.orderHistoryPage.headers.actions' | translate }}</span>
+                </li>
+                @for (order of orderStore.orderList(); track order.id) {
+                  <li class="flex items-center justify-between gap-5 py-[15px] sm:py-[20px] border-b last:border-none border-bdr-clr dark:border-bdr-clr-drk">
+                    <div class="flex flex-col gap-2 w-[250px] sm:w-[300px] xl:w-[350px]">
+                      <h5 class="font-semibold leading-none text-title dark:text-white">{{ 'profile.orderHistoryPage.orderNumber' | translate:{ id: order.id } }}</h5>
+                      <div class="flex items-center gap-1.5 text-sm text-paragraph dark:text-white">
+                        <i class="mdi mdi-calendar-clock-outline opacity-60"></i>
+                        <span>{{order.createdAt | date:'dd/MM/yyyy HH:mm'}}</span>
+                      </div>
+                      @if (order.receiverName) {
+                        <div class="flex items-center gap-1.5 text-sm text-paragraph dark:text-white">
+                          <i class="mdi mdi-account-outline opacity-60"></i>
+                          <span>{{order.receiverName}}</span>
+                        </div>
+                      }
+                      @if (order.itemCount) {
+                        <div class="flex items-center gap-1.5 text-xs text-paragraph dark:text-white">
+                          <i class="mdi mdi-package-variant-closed opacity-60"></i>
+                          <span>{{ 'profile.orderHistoryPage.itemsCount' | translate:{ count: order.itemCount } }}</span>
+                        </div>
+                      }
+                    </div>
+                    <div class="w-[120px] flex items-center gap-1.5 text-primary font-bold">
+                      <i class="mdi mdi-cash-multiple opacity-60 text-sm"></i>
+                      <span class="text-base md:text-lg leading-none text-left">{{formatVND(order.totalAmount)}}đ</span>
+                    </div>
+                    <div class="w-[100px]">
+                      <span [class]="getStatusClass(order.status)" class="py-[7px] px-[10px] font-semibold leading-none text-white text-sm rounded inline-block">
+                        {{getStatusLabel(order.status)}}
+                      </span>
+                    </div>
+                    <div class="w-[200px] flex gap-2">
+                      <app-button
+                        color="btn-outline"
+                        size="btn-xs"
+                        [text]="'profile.orderHistoryPage.invoice' | translate"
+                        routerLink="/invoice"
+                        [queryParams]="{orderId: order.id}"
+                      />
+                      @if (canCancelOrder(order.status)) {
+                        <app-button
+                          size="btn-xs"
+                          [text]="cancellingOrderId() === order.id ? ('profile.orderHistoryPage.cancelling' | translate) : ('profile.orderHistoryPage.cancel' | translate)"
+                          [disabled]="cancellingOrderId() === order.id"
+                          (clicked)="cancelOrder(order.id)"
+                        />
+                      }
+                    </div>
+                  </li>
+                }
+              </ul>
+            </div>
+
+            
+            <div class="lg:hidden space-y-4">
+              @for (order of orderStore.orderList(); track order.id) {
+                <div class="bg-white dark:bg-title p-5 rounded-xl border border-bdr-clr dark:border-bdr-clr-drk shadow-sm">
+                  <div class="flex justify-between items-start mb-4">
+                    <div>
+                      <h5 class="font-bold text-title dark:text-white text-lg">
+                        {{ 'profile.orderHistoryPage.orderNumber' | translate:{ id: order.id } }}
+                      </h5>
+                      <span class="text-sm text-gray-500 dark:text-gray-400 block mt-1">
+                        {{order.createdAt | date:'dd/MM/yyyy HH:mm' }}
+                      </span>
+                    </div>
+                    <span [class]="getStatusClass(order.status)" class="py-1.5 px-3 font-semibold text-white text-[11px] rounded uppercase tracking-wider">
+                      {{getStatusLabel(order.status)}}
+                    </span>
+                  </div>
+
+                  <div class="space-y-2 mb-5">
+                    @if (order.receiverName) {
+                      <div class="flex items-center gap-2 text-sm text-paragraph dark:text-white">
+                        <i class="mdi mdi-account-outline opacity-60"></i>
+                        <span>{{order.receiverName}}</span>
+                      </div>
+                    }
+                    @if (order.itemCount) {
+                      <div class="flex items-center gap-2 text-sm text-paragraph dark:text-white">
+                        <i class="mdi mdi-package-variant-closed opacity-60"></i>
+                        <span>{{ 'profile.orderHistoryPage.itemsCount' | translate:{ count: order.itemCount } }}</span>
+                      </div>
+                    }
+                    <div class="flex items-center gap-2 text-base font-bold text-primary">
+                      <i class="mdi mdi-cash-multiple opacity-60 text-sm"></i>
+                      <span>{{formatVND(order.totalAmount)}}đ</span>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-3 pt-4 border-t border-bdr-clr dark:border-bdr-clr-drk">
+                    <app-button
+                      class="flex-1"
+                      color="btn-theme-outline"
+                      size="btn-sm"
+                      [text]="'profile.orderHistoryPage.invoice' | translate"
+                      routerLink="/invoice"
+                      [queryParams]="{orderId: order.id}"
+                      padding="w-full"
+                    />
+                    @if (canCancelOrder(order.status)) {
+                      <app-button
+                        class="flex-1"
+                        size="btn-sm"
+                        [text]="cancellingOrderId() === order.id ? ('profile.orderHistoryPage.cancelling' | translate) : ('profile.orderHistoryPage.cancel' | translate)"
+                        [disabled]="cancellingOrderId() === order.id"
+                        (clicked)="cancelOrder(order.id)"
+                        padding="w-full"
+                      />
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<app-confirm/>
+<app-footer/>

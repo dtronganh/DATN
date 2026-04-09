@@ -1,0 +1,28 @@
+<app-navbar/>
+
+<div class="sticker-safe">
+<div class="py-16 sm:py-24">
+    <div class="container">
+        <div class="max-w-[710px] mx-auto text-center p-7 sm:p-10 lg:p-12">
+            <div class="div">
+                <img [src]="'assets/img/thank-you.png'" alt="thank-you">
+            </div>
+            <h3 class="leading-[1.2] mt-4 md:mt-6 text-2xl md:text-[32px] font-bold text-title dark:text-white">
+                {{ 'special.thankYou.title' | translate }}
+            </h3>
+            <p class="mt-3 text-base sm:text-lg text-paragraph dark:text-white">
+                {{ 'special.thankYou.descText' | translate }}
+                <a [routerLink]="'/shop'" class="text-primary underline">{{ 'special.thankYou.descLink' | translate }}</a>
+            </p>
+            <app-button 
+                color="btn-solid" 
+                padding="mt-4 md:mt-6" 
+                [text]="'special.thankYou.button' | translate" 
+                routerLink="/" />
+        </div>
+    </div>
+</div>
+
+</div>
+
+<app-footer/>

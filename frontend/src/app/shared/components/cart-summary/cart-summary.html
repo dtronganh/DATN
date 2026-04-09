@@ -1,0 +1,30 @@
+<div class="bg-[#FAFAFA] dark:bg-dark-secondary pt-[30px] md:pt-[40px] lg:pt-[50px] px-[30px] md:px-[40px] lg:px-[50px] pb-[30px] border border-[#17243026] border-opacity-15 rounded-xl">
+  <div class="text-right flex justify-end flex-col w-full ml-auto mr-0">
+    <div class="flex justify-between flex-wrap text-base sm:text-lg text-title dark:text-white font-medium">
+      <span>{{ 'shop.cart.subtotal' | translate }}:</span>
+      <span>{{ formatVND(total()) }}đ</span>
+    </div>
+  </div>
+
+  @if (shippingCost() > 0) {
+    <div class="mt-4">
+      <div class="flex justify-between flex-wrap text-base sm:text-lg text-title dark:text-white font-medium">
+        <span>{{ 'shop.checkout.shipping' | translate }}:</span>
+        <span>{{ formatVND(shippingCost()) }}đ</span>
+      </div>
+    </div>
+  }
+
+  <div class="mt-6 pt-6 border-t border-bdr-clr dark:border-bdr-clr-drk">
+    <div class="flex justify-between flex-wrap font-semibold leading-none text-2xl">
+      <span>{{ 'shop.cart.total' | translate }}:</span>
+      <span class="text-primary">{{ formatVND(finalTotal()) }}đ</span>
+    </div>
+  </div>
+
+  @if (showCheckoutBtn()) {
+    <div class="sm:mt-[10px] py-5 flex items-end gap-3 flex-wrap justify-end">
+      <ng-content select="[actions]"></ng-content>
+    </div>
+  }
+</div>

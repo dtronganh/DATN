@@ -1,0 +1,27 @@
+@if (state().open) {
+  <div class="fixed top-24 right-6 sm:right-8 lg:right-12 xl:right-[70px] 2xl:right-[clamp(70px,4vw,100px)] z-[10000] flex flex-col gap-2 pointer-events-none">
+    <div class="pointer-events-auto w-[320px] sm:w-[340px] rounded-lg shadow-xl overflow-hidden relative bg-white dark:bg-title border-l-4 border-primary">
+      <div class="p-5 sm:p-6">
+        <h4 class="text-lg sm:text-xl font-semibold text-title dark:text-white">
+          {{ state().title }}
+        </h4>
+        <p class="mt-3 text-base text-title/80 dark:text-white/80 break-words leading-relaxed">
+          {{ state().message }}
+        </p>
+        <div class="mt-5 sm:mt-6 flex flex-col sm:flex-row sm:justify-end gap-2">
+          <app-button
+            [text]="state().cancelText"
+            color="btn-outline"
+            size="btn-sm"
+            (clicked)="onCancel()"
+          />
+          <app-button
+            [text]="state().confirmText"
+            size="btn-sm"
+            (clicked)="onConfirm()"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+}

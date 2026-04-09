@@ -1,0 +1,39 @@
+<div class="fixed top-24 right-6 sm:right-8 lg:right-12 xl:right-[70px] 2xl:right-[clamp(70px,4vw,100px)] z-[9999] flex flex-col gap-2 pointer-events-none">
+  @for (toast of toasts(); track toast.id) {
+    @let config = getConfig(toast.type);
+    <div 
+      class="toast-item pointer-events-auto w-[310px] sm:w-[340px] rounded-lg shadow-xl overflow-hidden relative bg-white dark:bg-title border-l-4"
+      [class]="config.borderColor"
+    >
+      <div class="flex items-center p-4 sm:p-4 gap-3 sm:gap-3">
+        <span 
+          class="lnr text-xl sm:text-xl flex-shrink-0"
+          [class]="config.icon + ' ' + config.iconColor"
+          aria-hidden="true"
+        ></span>
+        
+        <div class="flex-1 min-w-0">
+          <p class="text-sm sm:text-sm font-medium text-title dark:text-white break-words">
+            {{ toast.message }}
+          </p>
+        </div>
+        
+        <button
+          type="button"
+          (click)="onDismiss(toast.id)"
+          class="lnr lnr-cross flex-shrink-0 ml-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary rounded-sm transition-colors"
+          [attr.aria-label]="'common.close' | translate"
+        >
+        </button>
+      </div>
+      
+      <div class="absolute bottom-0 left-0 right-0 h-1 bg-gray-200 dark:bg-gray-700 overflow-hidden">
+        <div 
+          class="h-full progress-bar"
+          [class]="config.progressColor"
+          [style.animation-duration.ms]="toast.duration"
+        ></div>
+      </div>
+    </div>
+  }
+</div>

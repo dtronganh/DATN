@@ -1,0 +1,16 @@
+<div class="bg-red-100 dark:bg-dark-secondary py-5 md:py-[30px]">
+  <div class="container-fluid">
+    <ul class="flex items-center gap-[10px] text-base md:text-lg leading-none font-normal text-title dark:text-white max-w-[1720px] mx-auto flex-wrap">
+      @for (item of items(); track item.label; let last = $last) {
+        @if (item.link && !last) {
+          <li><a [routerLink]="item.link" class="hover:text-primary">{{ item.label }}</a></li>
+        } @else {
+          <li class="text-primary">{{ item.label }}</li>
+        }
+        @if (!last) {
+          <li>/</li>
+        }
+      }
+    </ul>
+  </div>
+</div>

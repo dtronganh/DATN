@@ -1,0 +1,69 @@
+<div data-aos="fade-up" data-aos-duration="300" class="admin-page space-y-6">
+  <div class="flex items-center gap-4">
+    <button
+      type="button"
+      (click)="cancelAndBack()"
+      class="w-10 h-10 flex items-center justify-center border border-bdr-clr dark:border-bdr-clr-drk text-title/70 dark:text-white/70 hover:border-primary hover:text-primary dark:hover:border-primary dark:hover:text-primary transition-all duration-200"
+    >
+      <span class="lnr lnr-arrow-left"></span>
+    </button>
+    <div>
+      <h1 class="text-3xl font-primary font-bold text-title dark:text-white">
+        {{ 'admin.products.descriptionEditor.title' | translate }}
+      </h1>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+    <section class="admin-surface bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk p-5 lg:p-6">
+      <div class="flex items-center justify-between gap-3 pb-4 border-b border-bdr-clr dark:border-bdr-clr-drk">
+        <h2 class="font-primary font-bold text-title dark:text-white text-xl">
+          {{ 'admin.products.descriptionEditor.markdown' | translate }}
+        </h2>
+      </div>
+
+      <textarea
+        [formControl]="$any(form.get('description'))"
+        rows="14"
+        spellcheck="false"
+        [placeholder]="'admin.products.descriptionEditor.placeholder' | translate"
+        class="mt-4 w-full bg-white dark:bg-dark-secondary border border-[#E3E5E6] text-title dark:text-white focus:border-primary p-4 outline-none duration-300 font-mono text-sm leading-6"
+      ></textarea>
+    </section>
+
+    <section class="admin-surface bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk p-5 lg:p-6 flex flex-col">
+      <div class="flex items-center justify-between gap-3 pb-4 border-b border-bdr-clr dark:border-bdr-clr-drk">
+        <h2 class="font-primary font-bold text-title dark:text-white text-xl">
+          {{ 'admin.products.descriptionEditor.preview' | translate }}
+        </h2>
+      </div>
+
+      <div class="mt-4 description-preview description-preview-scroll">
+        @if (previewHtml()) {
+          <div class="description-content" [innerHTML]="previewHtml()"></div>
+        } @else {
+          <p class="text-title/60 dark:text-white/60 text-sm">
+            {{ 'admin.products.descriptionEditor.empty' | translate }}
+          </p>
+        }
+      </div>
+    </section>
+  </div>
+
+  <div class="admin-surface bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk px-5 py-4 lg:px-6 lg:py-4">
+    <div class="flex flex-col sm:flex-row gap-3 sm:justify-end">
+      <app-button
+        color="btn-outline"
+        [padding]="''"
+        [text]="'admin.products.descriptionEditor.cancel' | translate"
+        (clicked)="cancelAndBack()"
+      />
+      <app-button
+        color="btn-secondary-solid"
+        [padding]="''"
+        [text]="'admin.products.descriptionEditor.apply' | translate"
+        (clicked)="saveAndBack()"
+      />
+    </div>
+  </div>
+</div>
