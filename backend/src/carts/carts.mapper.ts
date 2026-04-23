@@ -7,6 +7,7 @@ export class CartsMapper {
       id: item.id,
       product: {
         id: item.product.id,
+        slug: item.product.slug,
         name: item.product.name,
         price: item.product.price,
         thumbnail: item.product.thumbnail,

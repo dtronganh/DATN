@@ -38,10 +38,10 @@ export class AdminLayout implements OnInit {
   readonly isUploadingImage = signal<boolean>(false);
 
   readonly navItems = signal<NavItem[]>([
-    { path: '/admin/dashboard', icon: 'lnr lnr-chart-bars', labelKey: 'admin.sidebar.dashboard' },
-    { path: '/admin/products', icon: 'lnr lnr-tag', labelKey: 'admin.sidebar.products' },
+    { path: '/admin/dashboard', icon: 'lnr lnr-pie-chart', labelKey: 'admin.sidebar.dashboard' },
+    { path: '/admin/products', icon: 'lnr lnr-gift', labelKey: 'admin.sidebar.products' },
     { path: '/admin/orders', icon: 'lnr lnr-cart', labelKey: 'admin.sidebar.orders' },
-    { path: '/admin/users', icon: 'lnr lnr-users', labelKey: 'admin.sidebar.users' },
+    { path: '/admin/users', icon: 'lnr lnr-user', labelKey: 'admin.sidebar.users' },
   ]);
 
   readonly userImage = computed(() => 
@@ -60,19 +60,19 @@ export class AdminLayout implements OnInit {
     Aos.init();
   }
 
-  toggleSidebar(): void {
+  toggleDock(): void {
     this.sidebarOpen.update(v => !v);
   }
 
-  closeSidebar(): void {
+  collapseDock(): void {
     this.sidebarOpen.set(false);
   }
 
-  toggleCollapse(): void {
+  toggleRailFold(): void {
     this.sidebarCollapsed.update(v => !v);
   }
 
-  getDesktopNavItemClasses(isActive: boolean): Record<string, boolean> {
+  desktopLinkState(isActive: boolean): Record<string, boolean> {
     return {
       'justify-center': this.sidebarCollapsed(),
       'gap-3': !this.sidebarCollapsed(),
@@ -91,7 +91,7 @@ export class AdminLayout implements OnInit {
     };
   }
 
-  getMobileNavItemClasses(isActive: boolean): Record<string, boolean> {
+  mobileLinkState(isActive: boolean): Record<string, boolean> {
     return {
       'border-primary': isActive,
       'text-primary': isActive,
@@ -107,7 +107,19 @@ export class AdminLayout implements OnInit {
     };
   }
 
-  onFileSelected(event: Event): void {
+  topTabState(isActive: boolean): Record<string, boolean> {
+    return {
+      'text-primary': isActive,
+      'bg-primary/10': isActive,
+      'font-semibold': isActive,
+      'text-title': !isActive,
+      'dark:text-white': !isActive,
+      'hover:text-primary': !isActive,
+      'hover:bg-primary/5': !isActive,
+    };
+  }
+
+  selectAvatarFile(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
@@ -127,13 +139,13 @@ export class AdminLayout implements OnInit {
       reader.onload = () => {
         const imageBase64 = reader.result as string;
         this.previewImage.set(imageBase64);
-        this.uploadImage(imageBase64);
+        this.persistAvatar(imageBase64);
       };
       reader.readAsDataURL(file);
     }
   }
 
-  private uploadImage(imageBase64: string): void {
+  private persistAvatar(imageBase64: string): void {
     const user = this.authStore.currentUser();
     if (!user) return;
 
@@ -156,7 +168,7 @@ export class AdminLayout implements OnInit {
     });
   }
 
-  async logout(): Promise<void> {
+  async startLogout(): Promise<void> {
     const confirmed = await this.confirmService.confirm(
       this.localeService.t('admin.sidebar.logout') + '?',
       { title: this.localeService.t('admin.common.confirm') }

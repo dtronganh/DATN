@@ -1,4 +1,4 @@
-export type PaymentMethod = 'COD' | 'CARD' | 'BANK_TRANSFER';
+export type PaymentMethod = 'COD' | 'VNPAY';
 export type PaymentStatus = 'PENDING' | 'SUCCESS' | 'FAILED';
 
 export interface Payment {
@@ -18,4 +18,18 @@ export interface CreatePaymentPayload {
 
 export interface UpdatePaymentPayload {
   status: PaymentStatus;
+}
+
+export interface CreateVnpayUrlPayload {
+  paymentId: number;
+  orderId: number;
+  amount: number;
+  bankCode?: string;
+}
+
+export interface VnpayUrlResponse {
+  paymentId: number;
+  orderId: number;
+  txnRef: string;
+  paymentUrl: string;
 }

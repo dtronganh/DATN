@@ -28,7 +28,9 @@ import {
   AcceptLanguageResolver,
 } from 'nestjs-i18n';
 import { join } from 'path';
-import { HttpModule, HttpService } from '@nestjs/axios';
+import { HttpModule } from '@nestjs/axios';
+import { AiChatboxModule } from './ai-chatbox/ai-chatbox.module';
+import { AdminDashboardModule } from './admin-dashboard/admin-dashboard.module';
 
 @Module({
   imports: [
@@ -60,6 +62,8 @@ import { HttpModule, HttpService } from '@nestjs/axios';
     PaymentModule,
     CartsModule,
     WishlistModule,
+    AiChatboxModule,
+    AdminDashboardModule,
     BackupModule,
     ConfigModule.forRoot({
       isGlobal: true,

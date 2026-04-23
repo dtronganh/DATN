@@ -45,7 +45,7 @@
                 <li class="title flex items-center justify-between gap-5 pb-[10px] sm:pb-5 border-b last:border-bdr-clr dark:border-bdr-clr-drk">
                   <span class="cart-product-title text-lg md:text-xl font-semibold leading-none text-title dark:text-white block w-[250px] sm:w-[300px] xl:w-[350px]">{{ 'profile.orderHistoryPage.headers.orderInfo' | translate }}</span>
                   <span class="text-lg md:text-xl font-semibold leading-none text-title dark:text-white w-[120px]">{{ 'profile.orderHistoryPage.headers.total' | translate }}</span>
-                  <span class="text-lg md:text-xl font-semibold leading-none text-title dark:text-white w-[100px]">{{ 'profile.orderHistoryPage.headers.status' | translate }}</span>
+                  <span class="text-lg md:text-xl font-semibold leading-none text-title dark:text-white w-[140px]">{{ 'profile.orderHistoryPage.headers.status' | translate }}</span>
                   <span class="text-lg md:text-xl font-semibold leading-none text-title dark:text-white w-[200px]">{{ 'profile.orderHistoryPage.headers.actions' | translate }}</span>
                 </li>
                 @for (order of orderStore.orderList(); track order.id) {
@@ -73,8 +73,8 @@
                       <i class="mdi mdi-cash-multiple opacity-60 text-sm"></i>
                       <span class="text-base md:text-lg leading-none text-left">{{formatVND(order.totalAmount)}}đ</span>
                     </div>
-                    <div class="w-[100px]">
-                      <span [class]="getStatusClass(order.status)" class="py-[7px] px-[10px] font-semibold leading-none text-white text-sm rounded inline-block">
+                    <div class="w-[140px]">
+                      <span [class]="getStatusClass(order.status)" class="py-[7px] px-[10px] font-semibold leading-none text-white text-sm rounded inline-block whitespace-nowrap">
                         {{getStatusLabel(order.status)}}
                       </span>
                     </div>
@@ -113,7 +113,7 @@
                         {{order.createdAt | date:'dd/MM/yyyy HH:mm' }}
                       </span>
                     </div>
-                    <span [class]="getStatusClass(order.status)" class="py-1.5 px-3 font-semibold text-white text-[11px] rounded uppercase tracking-wider">
+                    <span [class]="getStatusClass(order.status)" class="py-1.5 px-3 font-semibold text-white text-[11px] rounded uppercase tracking-wider whitespace-nowrap">
                       {{getStatusLabel(order.status)}}
                     </span>
                   </div>

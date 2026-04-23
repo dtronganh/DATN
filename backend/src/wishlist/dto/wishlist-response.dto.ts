@@ -4,6 +4,9 @@ export class WishlistProductResponseDto {
   @ApiProperty({ type: Number, example: 1 })
   id: number;
 
+  @ApiProperty({ example: 'sneaker-nike-air-max' })
+  slug: string;
+
   @ApiProperty({ example: 'Laptop' })
   name: string;
 

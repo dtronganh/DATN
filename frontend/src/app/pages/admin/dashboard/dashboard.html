@@ -1,35 +1,213 @@
 <div class="admin-page space-y-6 lg:space-y-8">
-  <div>
-    <h1 class="text-3xl sm:text-4xl font-primary font-bold text-title dark:text-white">
-      {{ 'admin.dashboard.title' | translate }}
-    </h1>
-    <p class="mt-1 text-base text-title/60 dark:text-white/60">
-      {{ 'admin.dashboard.welcome' | translate }}, <span class="font-semibold text-primary">{{
-        authStore.currentUser()?.fullName }}</span>
-    </p>
+  <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+    <div>
+      <h1 class="text-3xl sm:text-4xl font-primary font-bold text-title dark:text-white">
+        {{ 'admin.dashboard.title' | translate }}
+      </h1>
+      <p class="mt-1 text-base text-title/60 dark:text-white/60">
+        {{ 'admin.dashboard.welcome' | translate }},
+        <span class="font-semibold text-primary">{{ authStore.currentUser()?.fullName }}</span>
+      </p>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-3">
+      <div class="flex items-center gap-2">
+        <label class="text-sm text-title/70 dark:text-white/70" for="dashboard-export-period">
+          {{ 'admin.dashboard.exportPeriod' | translate }}
+        </label>
+        <select
+          id="dashboard-export-period"
+          [value]="exportGranularity()"
+          (change)="onExportGranularityChange($any($event.target).value)"
+          class="rounded-lg px-3 py-2 border border-bdr-clr dark:border-bdr-clr-drk bg-white dark:bg-dark-secondary text-title dark:text-white text-sm"
+        >
+          <option value="week">{{ 'admin.dashboard.byWeek' | translate }}</option>
+          <option value="month">{{ 'admin.dashboard.byMonth' | translate }}</option>
+          <option value="year">{{ 'admin.dashboard.byYear' | translate }}</option>
+        </select>
+      </div>
+
+      <button
+        type="button"
+        (click)="exportStatisticsExcel()"
+        class="rounded-full inline-flex items-center justify-center px-5 py-3 bg-primary text-white font-semibold hover:opacity-90 transition-opacity"
+      >
+        {{ (exporting() ? 'admin.dashboard.exporting' : 'admin.dashboard.exportExcel') | translate }}
+      </button>
+    </div>
   </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6">
     @for (card of statCards(); track card.labelKey; let i = $index) {
-    <div [attr.data-aos]="'fade-up'" [attr.data-aos-delay]="i * 70"
-      class="admin-stat-card bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk p-5 lg:p-6 hover:border-primary dark:hover:border-primary transition-colors duration-300 group">
+    <button
+      type="button"
+      [attr.data-aos]="'fade-up'"
+      [attr.data-aos-delay]="i * 70"
+      (click)="selectMetric(card.metric)"
+      class="admin-stat-card w-full min-w-0 rounded-xl shadow-[0_8px_24px_rgba(15,23,42,0.05)] bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk p-5 lg:p-6 hover:border-primary dark:hover:border-primary transition-colors duration-300 group text-left"
+      [class.border-primary]="selectedMetric() === card.metric"
+      [class.dark:border-primary]="selectedMetric() === card.metric"
+    >
       <div class="flex items-center justify-between">
         <div>
-          <p class="text-base font-primary text-title/60 dark:text-white/60 uppercase tracking-wide">{{ card.labelKey |
-            translate }}</p>
+          <p class="text-base font-primary text-title/60 dark:text-white/60 uppercase tracking-wide">{{ card.labelKey | translate }}</p>
           <p class="mt-2 text-4xl font-bold text-title dark:text-white">{{ card.value() }}</p>
         </div>
         <div
-          [ngClass]="[card.iconBgClass, card.iconColorClass, 'w-14 h-14 flex items-center justify-center group-hover:text-white transition-all duration-300', card.hoverBgClass]">
+          [ngClass]="[card.iconBgClass, card.iconColorClass, 'w-14 h-14 flex items-center justify-center group-hover:text-white transition-all duration-300', card.hoverBgClass]"
+        >
           <span [class]="card.icon" class="text-2xl"></span>
         </div>
       </div>
-    </div>
+    </button>
     }
   </div>
 
-  <div data-aos="fade-up" data-aos-delay="100" class="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6">
-    <div class="admin-surface bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk">
+  <div class="admin-surface w-full bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk p-4 lg:p-6 space-y-5">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+      <div>
+        <h3 class="font-primary font-bold text-title dark:text-white text-xl">
+          {{ 'admin.dashboard.analyticsTitle' | translate }}: {{ metricLabelKey(selectedMetric()) | translate }}
+        </h3>
+        <p class="text-sm text-title/60 dark:text-white/60 mt-1">{{ 'admin.dashboard.analyticsDesc' | translate }}</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <button
+          type="button"
+          (click)="setGranularity('week')"
+          class="rounded-full px-3 py-2 text-sm font-semibold border"
+          [class.bg-primary]="granularity() === 'week'"
+          [class.text-white]="granularity() === 'week'"
+          [class.border-primary]="granularity() === 'week'"
+          [class.border-bdr-clr]="granularity() !== 'week'"
+          [class.dark:border-bdr-clr-drk]="granularity() !== 'week'"
+          [class.text-title]="granularity() !== 'week'"
+          [class.dark:text-white]="granularity() !== 'week'"
+        >
+          {{ 'admin.dashboard.byWeek' | translate }}
+        </button>
+        <button
+          type="button"
+          (click)="setGranularity('month')"
+          class="rounded-full px-3 py-2 text-sm font-semibold border"
+          [class.bg-primary]="granularity() === 'month'"
+          [class.text-white]="granularity() === 'month'"
+          [class.border-primary]="granularity() === 'month'"
+          [class.border-bdr-clr]="granularity() !== 'month'"
+          [class.dark:border-bdr-clr-drk]="granularity() !== 'month'"
+          [class.text-title]="granularity() !== 'month'"
+          [class.dark:text-white]="granularity() !== 'month'"
+        >
+          {{ 'admin.dashboard.byMonth' | translate }}
+        </button>
+        <button
+          type="button"
+          (click)="setGranularity('year')"
+          class="rounded-full px-3 py-2 text-sm font-semibold border"
+          [class.bg-primary]="granularity() === 'year'"
+          [class.text-white]="granularity() === 'year'"
+          [class.border-primary]="granularity() === 'year'"
+          [class.border-bdr-clr]="granularity() !== 'year'"
+          [class.dark:border-bdr-clr-drk]="granularity() !== 'year'"
+          [class.text-title]="granularity() !== 'year'"
+          [class.dark:text-white]="granularity() !== 'year'"
+        >
+          {{ 'admin.dashboard.byYear' | translate }}
+        </button>
+      </div>
+    </div>
+
+    @if (chartPoints().length > 0) {
+    <div class="space-y-4">
+      <div class="relative w-full overflow-x-auto overflow-y-visible border border-bdr-clr dark:border-bdr-clr-drk">
+        <svg viewBox="0 0 720 280" class="w-full min-w-[640px] h-[280px]">
+          <line x1="28" y1="252" x2="692" y2="252" class="forge-dashboard__chart-axis" />
+          <path [attr.d]="chartPath()" fill="none" stroke="currentColor" stroke-width="3" class="text-primary" />
+          @for (point of chartPoints(); track point.key; let idx = $index) {
+          <g>
+            <circle
+              [attr.cx]="pointX(idx)"
+              [attr.cy]="pointY(point.value)"
+              r="5"
+              class="fill-primary cursor-pointer"
+              (click)="selectPoint(point, idx)"
+            ></circle>
+            @if (shouldShowTimeTick(idx)) {
+            <text
+              [attr.x]="pointX(idx)"
+              y="266"
+              text-anchor="middle"
+              class="forge-dashboard__chart-tick"
+            >
+              {{ point.label }}
+            </text>
+            }
+          </g>
+          }
+        </svg>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div class="border border-bdr-clr dark:border-bdr-clr-drk p-4">
+          <p class="text-sm text-title/60 dark:text-white/60">{{ 'admin.dashboard.pointsLabel' | translate }}</p>
+          <p class="mt-1 text-2xl font-bold text-title dark:text-white">{{ totalInRange() }}</p>
+        </div>
+        <div class="border border-bdr-clr dark:border-bdr-clr-drk p-4">
+          <p class="text-sm text-title/60 dark:text-white/60">{{ 'admin.dashboard.growthLabel' | translate }}</p>
+          <p class="mt-1 text-2xl font-bold" [class.text-green-600]="growthPercent() >= 0" [class.text-red-600]="growthPercent() < 0">
+            {{ growthPercent() | number:'1.2-2' }}%
+          </p>
+        </div>
+        <div class="border border-bdr-clr dark:border-bdr-clr-drk p-4">
+          <p class="text-sm text-title/60 dark:text-white/60">{{ 'admin.dashboard.peakLabel' | translate }}</p>
+          <p class="mt-1 text-2xl font-bold text-title dark:text-white">{{ peakValue() }}</p>
+        </div>
+      </div>
+
+      @if (activePoint(); as point) {
+      <div class="p-3 border border-bdr-clr dark:border-bdr-clr-drk bg-primary/5 space-y-1">
+        <p class="text-xs text-title/60 dark:text-white/60">{{ point.label }}</p>
+        <p class="text-sm text-title dark:text-white">{{ pointDetail(point) }}</p>
+        @if (pointDeleteDetail(point)) {
+        <p class="text-xs text-red-500">{{ pointDeleteDetail(point) }}</p>
+        }
+      </div>
+      }
+    </div>
+    } @else {
+    <div class="p-6 text-center text-base text-title/50 dark:text-white/50">
+      {{ 'admin.dashboard.noChartData' | translate }}
+    </div>
+    }
+
+    <div class="border border-bdr-clr dark:border-bdr-clr-drk p-4 lg:p-5 space-y-3">
+      <h4 class="text-lg font-semibold text-title dark:text-white">{{ 'admin.dashboard.aiTitle' | translate }}</h4>
+      <textarea
+        [value]="aiQuestion()"
+        (input)="onAiQuestionInput($event)"
+        [placeholder]="'admin.dashboard.aiPlaceholder' | translate"
+        class="w-full min-h-[100px] p-3 border border-bdr-clr dark:border-bdr-clr-drk bg-white dark:bg-dark-secondary text-title dark:text-white"
+      ></textarea>
+      <div class="flex items-center justify-between gap-3">
+        <button
+          type="button"
+          (click)="askStatisticsAi()"
+          [disabled]="askingAi()"
+          class="px-4 py-2 bg-primary text-white font-semibold disabled:opacity-60 rounded-full"
+        >
+          {{ (askingAi() ? 'admin.dashboard.aiThinking' : 'admin.dashboard.askAi') | translate }}
+        </button>
+      </div>
+      @if (aiAnswer()) {
+      <div class="p-4 border border-bdr-clr dark:border-bdr-clr-drk bg-primary/5 text-title dark:text-white whitespace-pre-wrap">
+        {{ aiAnswer() }}
+      </div>
+      }
+    </div>
+  </div>
+
+  <div data-aos="fade-up" data-aos-delay="100" class="grid grid-cols-1 2xl:grid-cols-3 gap-4 lg:gap-6">
+    <div class="admin-surface w-full bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk">
       <div class="flex items-center justify-between p-4 lg:p-5 border-b border-bdr-clr dark:border-bdr-clr-drk">
         <h3 class="font-primary font-bold text-title dark:text-white text-xl">{{ 'admin.dashboard.recentOrders' |
           translate }}</h3>
@@ -106,7 +284,7 @@
       }
     </div>
 
-    <div class="admin-surface bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk">
+    <div class="admin-surface w-full bg-white dark:bg-dark-secondary border border-bdr-clr dark:border-bdr-clr-drk">
       <div class="flex items-center justify-between p-4 lg:p-5 border-b border-bdr-clr dark:border-bdr-clr-drk">
         <h3 class="font-primary font-bold text-title dark:text-white text-xl">{{ 'admin.dashboard.recentProducts' |
           translate }}</h3>

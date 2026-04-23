@@ -4,6 +4,19 @@
     "close": "Close",
     "shopNow": "Shop Now"
   },
+  "gearChatbox": {
+    "title": "AI Shopping Assistant",
+    "subtitle": "Product support from store data",
+    "welcome": "Hello! I can suggest products by your needs, budget, or size. What are you looking for today?",
+    "error": "The chatbot is busy right now. Please try again in a few seconds.",
+    "emptyAnswer": "Sorry, I don't have a suitable answer right now.",
+    "inputPlaceholder": "Ask about products...",
+    "send": "Send",
+    "processing": "Processing...",
+    "inStock": "In stock {{count}}",
+    "closeLabel": "Close chatbot",
+    "openLabel": "Open chatbot"
+  },
   "nav": {
     "home": "Home",
     "shop": "Shop",
@@ -164,6 +177,7 @@
         "paid": "Paid",
         "shipping": "Shipping",
         "shipped": "Shipped",
+        "failed": "Failed",
         "cancelled": "Cancelled",
         "completed": "Completed"
       }
@@ -252,6 +266,7 @@
       "pending": "Pending",
       "paid": "Paid",
       "shipped": "Shipped",
+      "failed": "Failed",
       "cancelled": "Cancelled",
       "completed": "Completed"
     }
@@ -512,6 +527,10 @@
         "title": "Cash on Delivery",
         "desc": "Pay when you receive your order"
       },
+      "vnpay": {
+        "title": "VNPay",
+        "desc": "Pay securely via VNPay gateway"
+      },
       "card": {
         "title": "Debit/Credit Card",
         "desc": "Pay securely with your card"
@@ -761,6 +780,35 @@
       "totalProducts": "Total Products",
       "totalOrders": "Total Orders",
       "totalRevenue": "Total Revenue",
+      "analyticsTitle": "Analytics",
+      "analyticsDesc": "Trend summary based on selected metric and time range.",
+      "byWeek": "By Week",
+      "byMonth": "By Month",
+      "byYear": "By Year",
+      "pointsLabel": "Total in Range",
+      "growthLabel": "Growth",
+      "peakLabel": "Peak",
+      "noChartData": "No chart data available",
+      "aiTitle": "AI Stats Assistant",
+      "aiPlaceholder": "Ask for trend explanation, anomaly checks, or action suggestions...",
+      "askAi": "Ask AI",
+      "aiThinking": "Analyzing...",
+      "aiFallback": "AI insight is temporarily unavailable. Please try again.",
+      "aiNoPermission": "Only admin can use AI analytics.",
+      "aiEmptyQuestion": "Please enter your analytics question.",
+      "exportExcel": "Export Excel",
+      "exporting": "Exporting...",
+      "exportPeriod": "Export Range",
+      "exportMode": "Export Mode",
+      "exportModeSnapshot": "Snapshot",
+      "exportModeRecalculation": "Recalculation",
+      "tooltip": {
+        "products": "{{label}}: {{value}} products uploaded",
+        "users": "{{label}}: {{value}} new users",
+        "orders": "{{label}}: {{value}} orders",
+        "revenue": "{{label}}: {{value}} VND revenue",
+        "deletedProducts": "{{label}}: {{deleted}} products deleted"
+      },
       "recentOrders": "Recent Orders",
       "recentProducts": "Recent Products",
       "noOrders": "No orders found",
@@ -878,6 +926,7 @@
         "PENDING": "Pending",
         "PAID": "Paid",
         "SHIPPED": "Shipped",
+        "FAILED": "Failed",
         "COMPLETED": "Completed",
         "CANCELLED": "Cancelled"
       }

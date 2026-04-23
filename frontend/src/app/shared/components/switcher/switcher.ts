@@ -13,42 +13,28 @@ import { LocaleService } from '@core/services/locale.service';
 export class Switcher implements OnInit {
   private readonly document = inject(DOCUMENT);
   private readonly localeService = inject(LocaleService);
-  private readonly THEME_KEY = 'theme';
   readonly showLangToggle = input<boolean>(true);
-  readonly defaultLang = input<'en' | 'vi'>('en');
+  readonly defaultLang = input<'en' | 'vi'>('vi');
   readonly currentLang = signal(this.localeService.currentLang());
 
   ngOnInit() {
-    const savedTheme = localStorage.getItem(this.THEME_KEY);
-    if (savedTheme) {
-      this.document.documentElement.classList.remove('dark', 'light');
-      this.document.documentElement.classList.add(savedTheme);
-    } else {
-      const defaultTheme = 'light';
-      this.document.documentElement.classList.add(defaultTheme);
-      localStorage.setItem(this.THEME_KEY, defaultTheme);
-    }
+    const defaultTheme = 'light';
+    this.document.documentElement.classList.remove('dark', 'light');
+    this.document.documentElement.classList.add(defaultTheme);
 
-    const storedLang = localStorage.getItem('lang');
-    if (!storedLang) {
-      const lang = this.defaultLang();
-      this.localeService.use(lang).subscribe({
-        next: () => this.currentLang.set(lang)
-      });
-    } else {
-      this.currentLang.set(this.localeService.currentLang());
-    }
+    const defaultLang: 'vi' = 'vi';
+    this.localeService.use(defaultLang).subscribe({
+      next: () => this.currentLang.set(defaultLang)
+    });
   }
 
   changeMode() {
     if (this.document.documentElement.classList.contains("dark")) {
       this.document.documentElement.classList.remove('dark');
       this.document.documentElement.classList.add('light');
-      localStorage.setItem(this.THEME_KEY, 'light');
     } else {
       this.document.documentElement.classList.remove('light');
       this.document.documentElement.classList.add('dark');
-      localStorage.setItem(this.THEME_KEY, 'dark');
     }
   }
 

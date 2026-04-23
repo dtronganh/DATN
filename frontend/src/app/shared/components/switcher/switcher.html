@@ -1,35 +1,40 @@
-<div class="flex items-center gap-3">
-    @if (showLangToggle()) {
-        <div class="flex items-center gap-1 border border-title/10 dark:border-white/10 bg-white/80 dark:bg-title p-1 shadow-sm backdrop-blur">
-            <button
-                type="button"
-                class="px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold transition-all w-6"
-                [class.bg-primary]="currentLang() === 'en'"
-                [class.text-white]="currentLang() === 'en'"
-                [class.text-title]="currentLang() !== 'en'"
-                [class.dark:text-white]="currentLang() !== 'en'"
-                (click)="setLang('en')"
-                aria-label="Switch to English"
-            >
-                EN
-            </button>
-            <button
-                type="button"
-                class="px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold transition-all w-6"
-                [class.bg-primary]="currentLang() === 'vi'"
-                [class.text-white]="currentLang() === 'vi'"
-                [class.text-title]="currentLang() !== 'vi'"
-                [class.dark:text-white]="currentLang() !== 'vi'"
-                (click)="setLang('vi')"
-                aria-label="Chuyển sang tiếng Việt"
-            >
-                VI
-            </button>
-        </div>
-    }
+<!--
+  Temporarily hidden switcher UI.
+  Keep this block for re-enable later.
 
-    <button type="button" class="switcher cursor-pointer order-first sm:order-last w-6 bg-transparent border-0 p-0" (click)="changeMode()">
-        <img class="moon w-[22px] sm:w-7 block dark:hidden" src="assets/img/icon/simple-sun.svg" alt="moon">
-        <img class="sun w-[22px] sm:w-7 hidden dark:block" src="assets/img/icon/simple-light.svg" alt="sun">
-    </button>
-</div>
+  <div class="flex items-center gap-3">
+      @if (showLangToggle()) {
+          <div class="flex items-center gap-1 border border-title/10 dark:border-white/10 bg-white/80 dark:bg-title p-1 shadow-sm backdrop-blur">
+              <button
+                  type="button"
+                  class="px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold transition-all w-6"
+                  [class.bg-primary]="currentLang() === 'en'"
+                  [class.text-white]="currentLang() === 'en'"
+                  [class.text-title]="currentLang() !== 'en'"
+                  [class.dark:text-white]="currentLang() !== 'en'"
+                  (click)="setLang('en')"
+                  aria-label="Switch to English"
+              >
+                  EN
+              </button>
+              <button
+                  type="button"
+                  class="px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold transition-all w-6"
+                  [class.bg-primary]="currentLang() === 'vi'"
+                  [class.text-white]="currentLang() === 'vi'"
+                  [class.text-title]="currentLang() !== 'vi'"
+                  [class.dark:text-white]="currentLang() !== 'vi'"
+                  (click)="setLang('vi')"
+                  aria-label="Chuyển sang tiếng Việt"
+              >
+                  VI
+              </button>
+          </div>
+      }
+
+      <button type="button" class="switcher cursor-pointer order-first sm:order-last w-6 bg-transparent border-0 p-0" (click)="changeMode()">
+          <img class="moon w-[22px] sm:w-7 block dark:hidden" src="assets/img/icon/simple-sun.svg" alt="moon">
+          <img class="sun w-[22px] sm:w-7 hidden dark:block" src="assets/img/icon/simple-light.svg" alt="sun">
+      </button>
+  </div>
+-->

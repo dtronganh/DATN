@@ -46,7 +46,9 @@
       "order_already_has_payment": "Order already has a payment",
       "user_mismatch": "Mismatch user id",
       "amount_mismatch": "Amount of items mismatch with the existed items in database",
-      "payment_not_found": "Payment not found"
+      "payment_not_found": "Payment not found",
+      "invalid_vnpay_method": "This payment is not using VNPay",
+      "vnpay_verification_failed": "VNPay verification failed"
     }
   },
   "users": {

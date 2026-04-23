@@ -32,4 +32,36 @@ export class AppConfigService {
   get jwtRefreshTokenExpiresIn(): string {
     return this.config.getOrThrow<string>('JWT_REFRESH_TOKEN_EXPIRES_IN');
   }
+
+  get aiApiKey(): string {
+    return this.config.getOrThrow<string>('AI_API_KEY');
+  }
+
+  get aiBaseUrl(): string {
+    return this.config.getOrThrow<string>('AI_BASE_URL');
+  }
+
+  get aiModel(): string {
+    return this.config.getOrThrow<string>('AI_MODEL');
+  }
+
+  get vnpayTmnCode(): string {
+    return this.config.getOrThrow<string>('VNPAY_TMN_CODE');
+  }
+
+  get vnpaySecureSecret(): string {
+    return this.config.getOrThrow<string>('VNPAY_SECURE_SECRET');
+  }
+
+  get vnpayUrl(): string {
+    return this.config.getOrThrow<string>('VNPAY_URL');
+  }
+
+  get vnpayReturnUrl(): string {
+    return this.config.getOrThrow<string>('VNPAY_RETURN_URL');
+  }
+
+  get vnpayFrontendRedirectBaseUrl(): string {
+    return this.config.getOrThrow<string>('VNPAY_FRONTEND_REDIRECT_BASE_URL');
+  }
 }

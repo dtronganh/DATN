@@ -1,0 +1,21 @@
+.forge-dashboard__chart-axis {
+	stroke: rgba(15, 23, 42, 0.18);
+	stroke-width: 1.25;
+}
+
+.forge-dashboard__chart-tick {
+	fill: rgba(15, 23, 42, 0.62);
+	font-size: 11px;
+}
+
+:host-context(.dark) .forge-dashboard::before {
+	opacity: 0.45;
+}
+
+:host-context(.dark) .forge-dashboard__chart-axis {
+	stroke: rgba(226, 232, 240, 0.28);
+}
+
+:host-context(.dark) .forge-dashboard__chart-tick {
+	fill: rgba(226, 232, 240, 0.7);
+}

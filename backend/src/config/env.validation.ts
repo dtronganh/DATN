@@ -44,6 +44,38 @@ class EnvironmentVariables {
   @IsString()
   @IsNotEmpty()
   JWT_REFRESH_TOKEN_EXPIRES_IN: string;
+
+  @IsString()
+  @IsNotEmpty()
+  AI_API_KEY: string;
+
+  @IsString()
+  @IsNotEmpty()
+  AI_BASE_URL: string;
+
+  @IsString()
+  @IsNotEmpty()
+  AI_MODEL: string;
+
+  @IsString()
+  @IsNotEmpty()
+  VNPAY_TMN_CODE: string;
+
+  @IsString()
+  @IsNotEmpty()
+  VNPAY_SECURE_SECRET: string;
+
+  @IsString()
+  @IsNotEmpty()
+  VNPAY_URL: string;
+
+  @IsString()
+  @IsNotEmpty()
+  VNPAY_RETURN_URL: string;
+
+  @IsString()
+  @IsNotEmpty()
+  VNPAY_FRONTEND_REDIRECT_BASE_URL: string;
 }
 
 export function validate(config: Record<string, unknown>) {

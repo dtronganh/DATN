@@ -3,7 +3,13 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_URL } from './api-url';
 import { ApiResponse, PaginatedResponse } from '@core/models/api.response';
-import { Payment, CreatePaymentPayload, UpdatePaymentPayload } from '@core/models/payment.model';
+import {
+  Payment,
+  CreatePaymentPayload,
+  UpdatePaymentPayload,
+  CreateVnpayUrlPayload,
+  VnpayUrlResponse,
+} from '@core/models/payment.model';
 
 @Injectable({ providedIn: 'root' })
 export class PaymentApi {
@@ -15,6 +21,10 @@ export class PaymentApi {
 
   create(payload: CreatePaymentPayload): Observable<ApiResponse<Payment>> {
     return this.http.post<ApiResponse<Payment>>(`${API_URL}/payment`, payload);
+  }
+
+  createVnpayUrl(payload: CreateVnpayUrlPayload): Observable<ApiResponse<VnpayUrlResponse>> {
+    return this.http.post<ApiResponse<VnpayUrlResponse>>(`${API_URL}/payment/vnpay/create-url`, payload);
   }
 
   confirm(id: number, payload: UpdatePaymentPayload): Observable<ApiResponse<Payment>> {

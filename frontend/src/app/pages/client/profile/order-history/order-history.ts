@@ -49,6 +49,7 @@ export class OrderHistory {
       'PENDING': 'bg-[#EC991D]',
       'PAID': 'bg-[#60A5FA]',
       'SHIPPED': 'bg-[#31A051]',
+      'FAILED': 'bg-[#E13939]',
       'CANCELLED': 'bg-[#E13939]',
     };
     return statusMap[status] || 'bg-gray-500';
@@ -57,8 +58,9 @@ export class OrderHistory {
   getStatusLabel(status: string): string {
     const statusKeyMap: Record<string, string> = {
       'PENDING': 'profile.orderHistoryPage.status.pending',
-      'PAID': 'profile.orderHistoryPage.status.shipping',
-      'SHIPPED': 'profile.orderHistoryPage.status.completed',
+      'PAID': 'profile.orderHistoryPage.status.paid',
+      'SHIPPED': 'profile.orderHistoryPage.status.shipping',
+      'FAILED': 'profile.orderHistoryPage.status.failed',
       'CANCELLED': 'profile.orderHistoryPage.status.cancelled',
     };
     const key = statusKeyMap[status];

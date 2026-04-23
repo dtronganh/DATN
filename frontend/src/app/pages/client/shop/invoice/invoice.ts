@@ -2,7 +2,6 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Switcher } from "@shared/components/switcher/switcher";
 import { Order, OrderPreview } from '@core/models/order.model';
 import { OrderApi } from '@core/api/order.api';
 import { formatVND } from '@shared/utils';
@@ -12,7 +11,6 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   selector: 'app-invoice',
   imports: [
     RouterLink,
-    Switcher,
     CommonModule,
     TranslateModule
 ],
@@ -54,6 +52,7 @@ export class Invoice implements OnInit {
       'PENDING': this.translate.instant('order.status.pending'),
       'PAID': this.translate.instant('order.status.paid'),
       'SHIPPED': this.translate.instant('order.status.shipped'),
+      'FAILED': this.translate.instant('order.status.failed'),
       'CANCELLED': this.translate.instant('order.status.cancelled'),
       'COMPLETED': this.translate.instant('order.status.completed')
     };

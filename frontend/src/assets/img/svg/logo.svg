@@ -27,7 +27,7 @@
 
   <!-- GEAR -->
   <text x="56" y="33"
-    font-family="'Be Vietnam Pro','Segoe UI',Arial,sans-serif"
+    font-family="'Roboto','Segoe UI',Arial,sans-serif"
     font-size="24" font-weight="800" letter-spacing="2"
     fill="#e30000">GEAR</text>
 
@@ -36,7 +36,7 @@
 
   <!-- STORE -->
   <text x="57" y="47"
-    font-family="'Be Vietnam Pro','Segoe UI',Arial,sans-serif"
+    font-family="'Roboto','Segoe UI',Arial,sans-serif"
     font-size="8" font-weight="600" letter-spacing="8"
     fill="#3C474E">STORE</text>
 </svg>

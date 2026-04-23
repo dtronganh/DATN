@@ -403,9 +403,10 @@ export class OrdersService extends BaseService {
     }
 
     const validTransitions: Record<Status, Status[]> = {
-      [Status.PENDING]: [Status.PAID, Status.CANCELLED],
+      [Status.PENDING]: [Status.PAID, Status.FAILED, Status.CANCELLED],
       [Status.PAID]: [Status.SHIPPED],
       [Status.SHIPPED]: [],
+      [Status.FAILED]: [],
       [Status.CANCELLED]: [],
     };
 

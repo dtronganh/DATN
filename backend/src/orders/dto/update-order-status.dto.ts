@@ -5,7 +5,7 @@ import { Status } from '../entities/status.entity';
 export class UpdateOrderStatusRequestDto {
   @ApiProperty({ enum: Status, example: Status.SHIPPED, description: 'Order status' })
   @IsEnum(Status, {
-    message: 'Status must be one of: PENDING, PAID, SHIPPED, CANCELLED',
+    message: 'Status must be one of: PENDING, PAID, SHIPPED, FAILED, CANCELLED',
   })
   status: Status;
 }

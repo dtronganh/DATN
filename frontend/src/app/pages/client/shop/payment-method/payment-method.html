@@ -25,7 +25,7 @@
           </div>
         </div>
 
-        <div class="space-y-4 mb-8">
+        <div class="mb-8 flex flex-col gap-4">
           @for (method of paymentMethods(); track method.value) {
             <app-payment-method-option
               [value]="method.value"

@@ -23,9 +23,10 @@ import {
 } from '@shared/components';
 
 const STATUS_FLOW_MAP: Record<OrderStatus, OrderStatus[]> = {
-  'PENDING': ['PAID', 'CANCELLED'],
+  'PENDING': ['PAID', 'FAILED', 'CANCELLED'],
   'PAID': ['SHIPPED', 'CANCELLED'],
   'SHIPPED': [],
+  'FAILED': [],
   'CANCELLED': [],
 };
 
@@ -67,7 +68,7 @@ export class OrdersPage implements OnInit {
   readonly sortField = signal<string>('createdAt');
   readonly sortDirection = signal<'ASC' | 'DESC'>('DESC');
 
-  readonly statuses = signal<(OrderStatus | 'ALL')[]>(['ALL', 'PENDING', 'PAID', 'SHIPPED', 'CANCELLED']);
+  readonly statuses = signal<(OrderStatus | 'ALL')[]>(['ALL', 'PENDING', 'PAID', 'SHIPPED', 'FAILED', 'CANCELLED']);
   readonly tableColumns: TableColumn[] = [
     { field: 'id', label: 'admin.orders.orderId', sortable: true },
     { field: 'customer', label: 'admin.orders.customer', sortable: false },

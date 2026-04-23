@@ -15,7 +15,7 @@
 
   <div class="admin-shell__layout flex min-h-screen bg-transparent">
   @if (sidebarOpen()) {
-    <div data-aos="fade" data-aos-duration="300" class="fixed inset-0 bg-black/50 z-40 lg:hidden" (click)="closeSidebar()"></div>
+    <div data-aos="fade" data-aos-duration="300" class="fixed inset-0 bg-black/50 z-40 lg:hidden" (click)="collapseDock()"></div>
   }
 
   <aside class="admin-sidebar hidden lg:flex flex-col bg-white dark:bg-dark-secondary border-r border-bdr-clr dark:border-bdr-clr-drk transition-all duration-300 sticky top-0 h-screen"
@@ -25,7 +25,7 @@
     <div class="h-16 flex items-center border-b border-bdr-clr dark:border-bdr-clr-drk px-4"
       [class.justify-center]="sidebarCollapsed()"
       [class.gap-3]="!sidebarCollapsed()">
-      <button (click)="toggleCollapse()" class="text-title dark:text-white hover:text-primary dark:hover:text-primary transition-colors">
+      <button (click)="toggleRailFold()" class="text-title dark:text-white hover:text-primary dark:hover:text-primary transition-colors">
         <span class="lnr lnr-menu text-xl"></span>
       </button>
       @if (!sidebarCollapsed()) {
@@ -40,7 +40,7 @@
       [class.items-center]="!sidebarCollapsed()"
       [class.gap-3]="!sidebarCollapsed()"
       [class.justify-center]="sidebarCollapsed()">
-      <div class="relative w-13 h-13 rounded-full overflow-hidden flex-shrink-0 border-2 border-primary group cursor-pointer" (click)="!isUploadingImage() && fileInput.click()">
+      <div class="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-primary group cursor-pointer" (click)="!isUploadingImage() && fileInput.click()">
         <img [src]="userImage()" [alt]="userName()" class="w-full h-full object-cover">
         @if (isUploadingImage()) {
           <div class="absolute inset-0 bg-black/70 flex items-center justify-center">
@@ -58,15 +58,15 @@
           <p class="text-sm text-title/60 dark:text-white/60 truncate">{{ userEmail() }}</p>
         </div>
       }
-      <input #fileInput type="file" class="hidden" accept="image/*" (change)="onFileSelected($event)">
+      <input #fileInput type="file" class="hidden" accept="image/*" (change)="selectAvatarFile($event)">
     </div>
 
-    <nav class="flex-1 overflow-y-auto">
+    <nav class="hidden flex-1 overflow-y-auto">
       @for (item of navItems(); track item.path) {
         <a [routerLink]="item.path" routerLinkActive="admin-active" #rla="routerLinkActive"
           class="flex items-center py-4 lg:py-5 px-5 transition-all duration-300 text-base sm:text-lg lg:text-lg leading-none border-l-4 border-b border-bdr-clr dark:border-bdr-clr-drk"
-          [ngClass]="getDesktopNavItemClasses(rla.isActive)"
-          (click)="closeSidebar()">
+          [ngClass]="desktopLinkState(rla.isActive)"
+          (click)="collapseDock()">
           <span [class]="item.icon" class="text-xl flex-shrink-0"></span>
           @if (!sidebarCollapsed()) {
             <span class="font-primary font-medium">{{ item.labelKey | translate }}</span>
@@ -76,7 +76,7 @@
     </nav>
 
     <div class="border-t border-bdr-clr dark:border-bdr-clr-drk">
-      <button (click)="logout()" class="flex items-center py-4 lg:py-5 px-5 w-full border-l-4 border-transparent text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all duration-300 text-base sm:text-lg lg:text-lg leading-none"
+      <button (click)="startLogout()" class="flex items-center py-4 lg:py-5 px-5 w-full border-l-4 border-transparent text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all duration-300 text-base sm:text-lg lg:text-lg leading-none"
         [class.justify-center]="sidebarCollapsed()"
         [class.gap-3]="!sidebarCollapsed()">
         <span class="lnr lnr-power-switch text-xl flex-shrink-0"></span>
@@ -91,7 +91,7 @@
     <aside data-aos="fade-right" data-aos-duration="400" class="admin-sidebar fixed top-0 left-0 bottom-0 w-72 bg-white dark:bg-dark-secondary border-r border-bdr-clr dark:border-bdr-clr-drk z-50 flex flex-col lg:hidden">
 
       <div class="h-16 flex items-center gap-3 border-b border-bdr-clr dark:border-bdr-clr-drk px-4">
-        <button (click)="closeSidebar()" class="text-title dark:text-white hover:text-primary dark:hover:text-primary transition-colors">
+        <button (click)="collapseDock()" class="text-title dark:text-white hover:text-primary dark:hover:text-primary transition-colors">
           <span class="lnr lnr-cross text-lg"></span>
         </button>
         <span class="font-primary font-bold text-lg text-title dark:text-white uppercase tracking-wider">
@@ -116,15 +116,15 @@
           <p class="text-sm font-semibold text-title dark:text-white truncate">{{ userName() }}</p>
           <p class="text-xs text-title/60 dark:text-white/60 truncate">{{ userEmail() }}</p>
         </div>
-        <input #fileInputMobile type="file" class="hidden" accept="image/*" (change)="onFileSelected($event)">
+        <input #fileInputMobile type="file" class="hidden" accept="image/*" (change)="selectAvatarFile($event)">
       </div>
 
       <nav class="flex-1 overflow-y-auto">
         @for (item of navItems(); track item.path) {
           <a [routerLink]="item.path" routerLinkActive="admin-active" #rlaM="routerLinkActive"
             class="flex items-center gap-3 py-4 px-5 border-l-4 border-b border-bdr-clr dark:border-bdr-clr-drk transition-all duration-300 text-base sm:text-lg leading-none"
-            [ngClass]="getMobileNavItemClasses(rlaM.isActive)"
-            (click)="closeSidebar()">
+            [ngClass]="mobileLinkState(rlaM.isActive)"
+            (click)="collapseDock()">
             <span [class]="item.icon" class="text-xl"></span>
             <span class="font-primary font-medium">{{ item.labelKey | translate }}</span>
           </a>
@@ -132,7 +132,7 @@
       </nav>
 
       <div class="border-t border-bdr-clr dark:border-bdr-clr-drk">
-        <button (click)="logout()" class="flex items-center gap-3 py-4 px-5 w-full border-l-4 border-transparent text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all duration-300 text-base sm:text-lg leading-none">
+        <button (click)="startLogout()" class="flex items-center gap-3 py-4 px-5 w-full border-l-4 border-transparent text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all duration-300 text-base sm:text-lg leading-none">
           <span class="lnr lnr-power-switch text-xl"></span>
           <span class="font-primary font-medium">{{ 'admin.sidebar.logout' | translate }}</span>
         </button>
@@ -143,9 +143,20 @@
   <div class="flex-1 flex flex-col min-w-0">
     <header class="admin-topbar h-16 bg-white dark:bg-dark-secondary border-b border-bdr-clr dark:border-bdr-clr-drk flex items-center justify-between px-4 sm:px-6 sticky top-0 z-30">
       <div class="flex items-center gap-3">
-        <button (click)="toggleSidebar()" class="lg:hidden text-title dark:text-white hover:text-primary dark:hover:text-primary transition-colors">
+        <button (click)="toggleDock()" class="lg:hidden text-title dark:text-white hover:text-primary dark:hover:text-primary transition-colors">
           <span class="lnr lnr-menu text-xl"></span>
         </button>
+
+        <nav class="hidden lg:flex items-center gap-2">
+          @for (item of navItems(); track item.path) {
+            <a [routerLink]="item.path" routerLinkActive #rlaTop="routerLinkActive"
+              class="admin-topbar__tab flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200"
+              [ngClass]="topTabState(rlaTop.isActive)">
+              <span [class]="item.icon" class="text-base"></span>
+              <span class="text-sm leading-none">{{ item.labelKey | translate }}</span>
+            </a>
+          }
+        </nav>
       </div>
 
       <div class="flex items-center gap-4">

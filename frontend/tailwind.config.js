@@ -22,8 +22,8 @@ module.exports = {
         pink: "#FFC0CB"
       },
       fontFamily: {
-        primary: ["Be Vietnam Pro", "sans-serif"],
-        secondary: ["Be Vietnam Pro", "sans-serif"]
+        primary: ["Roboto", "sans-serif"],
+        secondary: ["Roboto", "sans-serif"]
       }
     }
   },

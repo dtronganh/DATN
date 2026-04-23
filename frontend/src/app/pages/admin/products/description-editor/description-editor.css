@@ -24,7 +24,7 @@
 }
 
 :host ::ng-deep .description-content {
-  font-family: 'Be Vietnam Pro', sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #3C474E;
   line-height: 1.7;
   font-size: 0.95rem;
@@ -36,7 +36,7 @@
 :host ::ng-deep .description-content h4,
 :host ::ng-deep .description-content h5,
 :host ::ng-deep .description-content h6 {
-  font-family: 'Be Vietnam Pro', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
   margin-top: 1.25em;
   margin-bottom: 0.5em;
@@ -63,7 +63,7 @@
 }
 
 :host ::ng-deep .description-content strong {
-  font-family: 'Be Vietnam Pro', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
 }
 

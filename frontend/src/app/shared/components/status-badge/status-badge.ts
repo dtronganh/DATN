@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
-export type OrderStatus = 'PENDING' | 'PAID' | 'PROCESSING' | 'SHIPPED' | 'COMPLETED' | 'CANCELLED';
+export type OrderStatus = 'PENDING' | 'PAID' | 'PROCESSING' | 'SHIPPED' | 'COMPLETED' | 'FAILED' | 'CANCELLED';
 
 @Component({
   selector: 'app-status-badge',
@@ -31,6 +31,8 @@ export class StatusBadgeComponent {
         return 'bg-[#8B5CF6]';
       case 'COMPLETED':
         return 'bg-[#31A051]';
+      case 'FAILED':
+        return 'bg-[#E13939]';
       case 'CANCELLED':
         return 'bg-[#E13939]';
       default:

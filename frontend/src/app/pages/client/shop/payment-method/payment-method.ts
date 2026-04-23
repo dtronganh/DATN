@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Button } from "@shared/components/button/button";
 import { PaymentMethodOptionComponent } from '@shared/components';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-payment-method',
@@ -54,15 +55,9 @@ export class PaymentMethod implements OnInit {
       iconPath: 'M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z'
     },
     {
-      value: 'CARD' as const,
-      titleKey: 'shop.payment.card.title',
-      descKey: 'shop.payment.card.desc',
-      iconPath: 'M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z'
-    },
-    {
-      value: 'BANK_TRANSFER' as const,
-      titleKey: 'shop.payment.bank.title',
-      descKey: 'shop.payment.bank.desc',
+      value: 'VNPAY' as const,
+      titleKey: 'shop.payment.vnpay.title',
+      descKey: 'shop.payment.vnpay.desc',
       iconPath: 'M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z'
     }
   ]);
@@ -113,34 +108,48 @@ export class PaymentMethod implements OnInit {
       return;
     }
 
-    this.paymentApi.create({
-      orderId: this.orderId()!,
-      method: this.selectedMethod(),
-      amount: this.orderAmount()
-    }).subscribe({
-      next: (response) => {
-        this.toastService.success(this.translate.instant('order.toast.created'));
-        this.cartStore.clearCart(true);
-        
-        this.router.navigate(['/payment-success'], {
-          queryParams: {
-            orderId: this.orderId(),
-            paymentId: response.data.id,
+    try {
+      const paymentResponse = await firstValueFrom(
+        this.paymentApi.create({
+          orderId: this.orderId()!,
+          method: this.selectedMethod(),
+          amount: this.orderAmount()
+        })
+      );
+
+      if (this.selectedMethod() === 'VNPAY') {
+        const vnpayUrlResponse = await firstValueFrom(
+          this.paymentApi.createVnpayUrl({
+            paymentId: paymentResponse.data.id,
+            orderId: this.orderId()!,
             amount: this.orderAmount(),
-            method: this.selectedMethod()
-          }
-        });
-      },
-      error: (err) => {
-        console.error('Payment error:', err);
-        this.processing.set(false);
-        this.router.navigate(['/payment-failure'], {
-          queryParams: {
-            orderId: this.orderId(),
-            error: err.error?.message || this.translate.instant('shop.payment.failed')
-          }
-        });
+          })
+        );
+
+        window.location.href = vnpayUrlResponse.data.paymentUrl;
+        return;
       }
-    });
+
+      this.toastService.success(this.translate.instant('order.toast.created'));
+      this.cartStore.clearCart(true);
+
+      this.router.navigate(['/payment-success'], {
+        queryParams: {
+          orderId: this.orderId(),
+          paymentId: paymentResponse.data.id,
+          amount: this.orderAmount(),
+          method: this.selectedMethod()
+        }
+      });
+    } catch (err: any) {
+      console.error('Payment error:', err);
+      this.processing.set(false);
+      this.router.navigate(['/payment-failure'], {
+        queryParams: {
+          orderId: this.orderId(),
+          error: err?.error?.message || this.translate.instant('shop.payment.failed')
+        }
+      });
+    }
   }
 }

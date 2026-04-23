@@ -7,7 +7,24 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-password-input',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TranslateModule],
-  templateUrl: './password-input.html'
+  templateUrl: './password-input.html',
+  styles: [
+    `
+      .auth-password-input::-ms-reveal,
+      .auth-password-input::-ms-clear {
+        display: none;
+      }
+
+      .auth-password-input::-webkit-credentials-auto-fill-button,
+      .auth-password-input::-webkit-contacts-auto-fill-button {
+        visibility: hidden;
+        display: none !important;
+        pointer-events: none;
+        position: absolute;
+        right: 0;
+      }
+    `
+  ]
 })
 export class PasswordInputComponent {
   control = input.required<FormControl>();

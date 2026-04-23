@@ -59,15 +59,7 @@ export const guestGuard: CanActivateFn = () => {
 export const clientGuard: CanActivateFn = () => {
   const authStore = inject(AuthStore);
   const router = inject(Router);
-  const toast = inject(ToastService);
-  const translate = inject(TranslateService);
-
-  if (!authStore.isAuthenticated()) {
-    toast.warning(translate.instant('auth.toasts.loginRequired'));
-    router.navigate(['/auth/login']);
-    return false;
-  }
-
+  
   if (authStore.isAdmin()) {
     router.navigate(['/admin']);
     return false;

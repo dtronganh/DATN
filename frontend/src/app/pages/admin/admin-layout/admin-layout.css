@@ -1,0 +1,35 @@
+:host {
+	display: block;
+}
+
+.admin-shell__layout {
+	min-height: 100vh;
+}
+
+.admin-sidebar {
+	border-right-style: dashed;
+	margin: 0.75rem;
+	border-radius: 0.85rem;
+	overflow: hidden;
+	height: calc(100vh - 1.5rem);
+	top: 0.75rem;
+}
+
+.admin-topbar {
+	backdrop-filter: blur(8px);
+	margin: 0.75rem 0.75rem 0 0;
+	border-radius: 0.85rem;
+}
+
+.admin-topbar__tab {
+	border: 1px solid transparent;
+}
+
+.admin-topbar__tab.router-link-active {
+	border-color: rgba(99, 102, 241, 0.3);
+}
+
+.admin-main {
+	max-width: 100%;
+	padding-top: 0.75rem;
+}

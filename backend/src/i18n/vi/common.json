@@ -46,7 +46,9 @@
       "order_already_has_payment": "Đơn hàng đã có thanh toán",
       "user_mismatch": "Không khớp id người dùng",
       "amount_mismatch": "Số tiền các sản phẩm không khớp với dữ liệu trong hệ thống",
-      "payment_not_found": "Không tìm thấy thanh toán"
+      "payment_not_found": "Không tìm thấy thanh toán",
+      "invalid_vnpay_method": "Thanh toán này không sử dụng VNPay",
+      "vnpay_verification_failed": "Xác thực VNPay thất bại"
     }
   },
   "users": {

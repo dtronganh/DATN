@@ -4,6 +4,19 @@
     "close": "Đóng",
     "shopNow": "Mua ngay"
   },
+  "gearChatbox": {
+    "title": "AI Shopping Assistant",
+    "subtitle": "Tư vấn sản phẩm từ dữ liệu cửa hàng",
+    "welcome": "Xin chào! Mình có thể gợi ý sản phẩm theo nhu cầu, ngân sách hoặc size. Bạn đang tìm gì hôm nay?",
+    "error": "Hệ thống chatbot đang bận. Bạn vui lòng thử lại sau vài giây nhé.",
+    "emptyAnswer": "Xin lỗi, mình chưa có câu trả lời phù hợp lúc này.",
+    "inputPlaceholder": "Nhập câu hỏi về sản phẩm...",
+    "send": "Gửi",
+    "processing": "Đang xử lý...",
+    "inStock": "Còn {{count}}",
+    "closeLabel": "Đóng chatbot",
+    "openLabel": "Mở chatbot"
+  },
   "nav": {
     "home": "Trang chủ",
     "shop": "Cửa hàng",
@@ -164,6 +177,7 @@
         "paid": "Đã thanh toán",
         "shipping": "Đang giao",
         "shipped": "Đã giao",
+        "failed": "Thất bại",
         "cancelled": "Đã hủy",
         "completed": "Hoàn thành"
       }
@@ -252,6 +266,7 @@
       "pending": "Chờ xử lý",
       "paid": "Đã thanh toán",
       "shipped": "Đang giao",
+      "failed": "Thất bại",
       "cancelled": "Đã hủy",
       "completed": "Hoàn thành"
     }
@@ -514,6 +529,10 @@
         "title": "Thanh toán khi nhận hàng",
         "desc": "Thanh toán khi bạn nhận đơn"
       },
+      "vnpay": {
+        "title": "VNPay",
+        "desc": "Thanh toán an toàn qua cổng VNPay"
+      },
       "card": {
         "title": "Thẻ ghi nợ/Thẻ tín dụng",
         "desc": "Thanh toán an toàn bằng thẻ"
@@ -763,6 +782,35 @@
       "totalProducts": "Tổng sản phẩm",
       "totalOrders": "Tổng đơn hàng",
       "totalRevenue": "Tổng doanh thu",
+      "analyticsTitle": "Phân tích",
+      "analyticsDesc": "Tóm tắt xu hướng theo chỉ số và phạm vi thời gian đã chọn.",
+      "byWeek": "Theo tuần",
+      "byMonth": "Theo tháng",
+      "byYear": "Theo năm",
+      "pointsLabel": "Tổng trong phạm vi",
+      "growthLabel": "Tăng trưởng",
+      "peakLabel": "Giá trị đỉnh",
+      "noChartData": "Không có dữ liệu biểu đồ",
+      "aiTitle": "AI thống kê",
+      "aiPlaceholder": "Nhập câu hỏi về xu hướng, bất thường hoặc gợi ý hành động...",
+      "askAi": "Hỏi AI",
+      "aiThinking": "Đang phân tích...",
+      "aiFallback": "AI thống kê tạm thời chưa sẵn sàng. Vui lòng thử lại.",
+      "aiNoPermission": "Chỉ quản trị viên mới dùng được AI thống kê.",
+      "aiEmptyQuestion": "Vui lòng nhập câu hỏi thống kê.",
+      "exportExcel": "Xuất Excel",
+      "exporting": "Đang xuất...",
+      "exportPeriod": "Phạm vi xuất",
+      "exportMode": "Chế độ xuất",
+      "exportModeSnapshot": "Snapshot",
+      "exportModeRecalculation": "Tính lại",
+      "tooltip": {
+        "products": "{{label}}: tải mới {{value}} sản phẩm",
+        "users": "{{label}}: {{value}} người dùng mới",
+        "orders": "{{label}}: {{value}} đơn hàng",
+        "revenue": "{{label}}: doanh thu {{value}} VNĐ",
+        "deletedProducts": "{{label}}: đã xóa {{deleted}} sản phẩm"
+      },
       "recentOrders": "Đơn hàng gần đây",
       "recentProducts": "Sản phẩm mới nhất",
       "noOrders": "Không có đơn hàng",
@@ -880,6 +928,7 @@
         "PENDING": "Chờ xử lý",
         "PAID": "Đã thanh toán",
         "SHIPPED": "Đang giao",
+        "FAILED": "Thất bại",
         "COMPLETED": "Hoàn thành",
         "CANCELLED": "Đã huỷ"
       }
