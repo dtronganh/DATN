@@ -206,9 +206,9 @@ export class OrdersService extends BaseService {
             payload.role === Role.ADMIN
               ? undefined
               : {
-                  id: payload.userId,
-                  deletedAt: IsNull(),
-                },
+                id: payload.userId,
+                deletedAt: IsNull(),
+              },
         },
         relations: ['orderItems', 'user'],
       },
@@ -230,9 +230,9 @@ export class OrdersService extends BaseService {
           payload.role === Role.ADMIN
             ? undefined
             : {
-                id: payload.userId,
-                deletedAt: IsNull(),
-              },
+              id: payload.userId,
+              deletedAt: IsNull(),
+            },
       },
       relations: ['user'],
     });
@@ -244,7 +244,6 @@ export class OrdersService extends BaseService {
     const order = data[0];
     const orderItems = await this.orderItemRepository.find({
       where: { order: { id }, deletedAt: IsNull() },
-      take: 2,
     });
     const productIds = orderItems.map((item) => item.productId);
     const products = await this.productRepository.find({
@@ -345,9 +344,9 @@ export class OrdersService extends BaseService {
           payload.role === Role.ADMIN
             ? undefined
             : {
-                id: payload.userId,
-                deletedAt: IsNull(),
-              },
+              id: payload.userId,
+              deletedAt: IsNull(),
+            },
       },
       relations: ['user'],
     });
@@ -404,8 +403,8 @@ export class OrdersService extends BaseService {
 
     const validTransitions: Record<Status, Status[]> = {
       [Status.PENDING]: [Status.PAID, Status.FAILED, Status.CANCELLED],
-      [Status.PAID]: [Status.SHIPPED],
-      [Status.SHIPPED]: [Status.COMPLETED],
+      [Status.PAID]: [Status.SHIPPED, Status.CANCELLED],
+      [Status.SHIPPED]: [Status.COMPLETED, Status.CANCELLED, Status.FAILED],
       [Status.COMPLETED]: [],
       [Status.FAILED]: [],
       [Status.CANCELLED]: [],
@@ -420,15 +419,37 @@ export class OrdersService extends BaseService {
       );
     }
 
-    await this.orderRepository.update(id, {
-      status: updateStatusDto.status,
-    });
+    return this.dataSource.transaction(async (manager) => {
+      const orderRepo = manager.getRepository(Order);
+      const orderItemRepo = manager.getRepository(OrderItem);
+      const productRepo = manager.getRepository(Product);
 
-    return {
-      id: order.id,
-      status: updateStatusDto.status,
-      updatedAt: new Date(),
-    };
+      await orderRepo.update(id, {
+        status: updateStatusDto.status,
+      });
+
+      // If transitioning to CANCELLED or FAILED, we must restock the items
+      if (
+        (updateStatusDto.status === Status.CANCELLED || updateStatusDto.status === Status.FAILED) &&
+        order.status !== Status.CANCELLED &&
+        order.status !== Status.FAILED
+      ) {
+        const orderItems = await orderItemRepo.find({ where: { order: { id } } });
+        for (const item of orderItems) {
+          await productRepo.increment(
+            { id: item.productId },
+            'stock',
+            item.quantity,
+          );
+        }
+      }
+
+      return {
+        id: order.id,
+        status: updateStatusDto.status,
+        updatedAt: new Date(),
+      };
+    });
   }
 
   async searchOrders(

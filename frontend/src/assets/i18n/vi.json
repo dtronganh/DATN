@@ -293,6 +293,7 @@
     "resetNote": "Lưu ý: Chúng tôi sẽ gửi liên kết đặt lại mật khẩu qua email",
     "rememberPassword": "Bạn nhớ mật khẩu?",
     "resetComingSoon": "Tính năng đặt lại mật khẩu sẽ sớm được cập nhật",
+    "resetLinkSent": "Đã gửi link khôi phục mật khẩu (Vui lòng kiểm tra Console)",
     "trust": {
       "shipping": "Vận chuyển toàn quốc",
       "support": "Hỗ trợ 24/7",
@@ -318,7 +319,8 @@
       "emailExists": "Email đã tồn tại",
       "invalidRegistration": "Dữ liệu đăng ký không hợp lệ",
       "invalidEmailEntry": "Vui lòng nhập email hợp lệ",
-      "serverError": "Lỗi máy chủ. Vui lòng thử lại sau"
+      "serverError": "Lỗi máy chủ. Vui lòng thử lại sau",
+      "resetFailed": "Gửi link khôi phục thất bại"
     }
   },
   "home": {

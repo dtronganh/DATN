@@ -25,7 +25,7 @@ import {
 const STATUS_FLOW_MAP: Record<OrderStatus, OrderStatus[]> = {
   'PENDING': ['PAID', 'FAILED', 'CANCELLED'],
   'PAID': ['SHIPPED', 'CANCELLED'],
-  'SHIPPED': ['COMPLETED'],
+  'SHIPPED': ['COMPLETED', 'CANCELLED', 'FAILED'],
   'COMPLETED': [],
   'FAILED': [],
   'CANCELLED': [],

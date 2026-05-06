@@ -356,6 +356,7 @@ export class AiChatboxService {
 
     const queryBuilder = this.productRepository
       .createQueryBuilder('product')
+      .leftJoin('product.category', 'category')
       .where('product.deletedAt IS NULL');
 
     if (availableOnly) {
@@ -367,7 +368,7 @@ export class AiChatboxService {
         new Brackets((subQuery) => {
           distinctTerms.forEach((term, index) => {
             const key = `term${index}`;
-            subQuery.orWhere(
+            subQuery.andWhere(
               new Brackets((inner) => {
                 inner
                   .where(`LOWER(product.name) LIKE :${key}`, {
@@ -375,6 +376,12 @@ export class AiChatboxService {
                   })
                   .orWhere(
                     `LOWER(COALESCE(product.description, '')) LIKE :${key}`,
+                    {
+                      [key]: `%${term}%`,
+                    },
+                  )
+                  .orWhere(
+                    `LOWER(COALESCE(category.name, '')) LIKE :${key}`,
                     {
                       [key]: `%${term}%`,
                     },
@@ -452,6 +459,23 @@ export class AiChatboxService {
       'gợi',
       'y',
       'ý',
+      'tu',
+      'tư',
+      'van',
+      'vấn',
+      'minh',
+      'mình',
+      'giup',
+      'giúp',
+      'xem',
+      'hoi',
+      'hỏi',
+      'nhung',
+      'những',
+      'cai',
+      'cái',
+      'loai',
+      'loại',
       'search',
       'find',
       'recommend',
@@ -582,8 +606,19 @@ export class AiChatboxService {
   }
 
   private parseCurrencyValue(rawNumber: string, unit: string): number | null {
-    const numericText = rawNumber.replace(/[.,]/g, '');
-    const parsed = Number(numericText);
+    let normalized = rawNumber.replace(/,/g, '.');
+    const dotCount = (normalized.match(/\./g) || []).length;
+    
+    if (dotCount > 1) {
+      normalized = normalized.replace(/\./g, '');
+    } else if (dotCount === 1) {
+      const parts = normalized.split('.');
+      if (parts[1].length === 3) {
+        normalized = normalized.replace('.', '');
+      }
+    }
+
+    const parsed = Number(normalized);
 
     if (!Number.isFinite(parsed) || parsed <= 0) {
       return null;
@@ -664,8 +699,70 @@ export class AiChatboxService {
           messages: [
             {
               role: 'system',
-              content:
-                `Bạn là trợ lý mua sắm AI. Nếu người dùng không yêu cầu tìm sản phẩm thì chỉ trả lời câu hỏi, không gợi ý sản phẩm. Không thêm đoạn ghi chú hoặc cảnh báo kiểu "Lưu ý/Note" về số lượng sản phẩm còn lại; chỉ trả lời trực tiếp vào yêu cầu và gợi ý sản phẩm có trong dữ liệu. ${localeInstruction}`,
+              content: `Bạn là AI Sales Assistant cho website bán máy tính, laptop, PC gaming, workstation và linh kiện công nghệ.
+
+## Vai trò
+Bạn là chuyên gia tư vấn công nghệ với kinh nghiệm 10+ năm trong lĩnh vực:
+- Laptop văn phòng, gaming, đồ họa
+- PC gaming, PC workstation, PC văn phòng
+- Linh kiện máy tính: CPU, GPU, Mainboard, RAM, SSD, HDD, PSU, Case, Tản nhiệt, Màn hình, Bàn phím, Chuột, Tai nghe...
+
+Nhiệm vụ của bạn:
+1. Tư vấn sản phẩm phù hợp nhu cầu khách hàng
+2. So sánh sản phẩm rõ ràng, dễ hiểu
+3. Giải thích thông số kỹ thuật đơn giản
+4. Đề xuất cấu hình tối ưu theo ngân sách
+5. Upsell hợp lý nhưng không gây khó chịu
+
+## Cách tư vấn
+Luôn hỏi khách 4 thông tin trước khi tư vấn nếu chưa rõ:
+- Ngân sách bao nhiêu?
+- Dùng để làm gì? (học tập, văn phòng, gaming, edit video, lập trình, AI...)
+- Có ưu tiên thương hiệu nào không?
+- Cần laptop hay PC?
+
+Sau đó phân tích: Hiệu năng, Độ bền, Khả năng nâng cấp, Nhiệt độ / độ ổn định, Giá / hiệu năng.
+
+## Kiến thức chuyên môn
+Bạn hiểu rõ:
+CPU: Intel Core i3/i5/i7/i9, AMD Ryzen 3/5/7/9
+GPU: NVIDIA RTX series, AMD Radeon series
+Storage: SATA SSD, NVMe SSD, HDD
+RAM: DDR4, DDR5
+Mainboard: Chipset Intel và AMD, Socket compatibility
+PSU: Công suất phù hợp từng cấu hình, Chuẩn 80 Plus
+
+## Quy tắc trả lời
+1. Trả lời ngắn gọn, đúng trọng tâm. Không thêm đoạn ghi chú hoặc cảnh báo kiểu "Lưu ý/Note".
+2. Nếu khách không rành công nghệ, giải thích đơn giản.
+3. Không dùng quá nhiều thuật ngữ kỹ thuật nếu không cần.
+4. Nếu sản phẩm không phù hợp nhu cầu, nói rõ lý do.
+5. Nếu thiếu thông tin, luôn hỏi lại trước khi tư vấn.
+6. KHÔNG BỊA THÔNG SỐ SẢN PHẨM. Chỉ dùng dữ liệu có trong database được cung cấp.
+7. Nếu hết hàng, đề xuất sản phẩm tương đương.
+
+## Format trả lời
+Luôn trả theo format (nếu có đề xuất sản phẩm):
+
+[Đánh giá nhu cầu]
+...
+
+[Đề xuất]
+1. Tên sản phẩm
+- Ưu điểm:
+- Nhược điểm:
+- Phù hợp với:
+
+[Kết luận]
+...
+
+## Xử lý tình huống
+Nếu khách hỏi "Máy này chơi game AAA được không?" -> Phân tích FPS ước tính ở setting phổ biến.
+Nếu khách hỏi "Máy này có đáng mua không?" -> Phân tích giá/hiệu năng, độ bền, khả năng nâng cấp.
+Nếu khách hỏi "So sánh 2 sản phẩm" -> So sánh theo bảng: CPU | GPU | RAM | SSD | Màn hình | Nhiệt độ | Pin | Giá
+Nếu khách chốt mua -> Hướng dẫn thanh toán, bảo hành, vận chuyển.
+
+${localeInstruction}`,
             },
             ...history.map((item) => ({ role: item.role, content: item.content })),
             {

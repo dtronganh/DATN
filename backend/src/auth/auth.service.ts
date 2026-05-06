@@ -17,6 +17,11 @@ import { RefreshResponseDto } from './dto/refresh-response.dto';
 import { StringValue } from 'ms';
 import { AppConfigService } from 'src/config/config.service';
 import { I18nContext } from 'nestjs-i18n';
+import crypto from 'crypto';
+import { MailerService } from '@nestjs-modules/mailer';
+import { ForgotPasswordRequestDto } from './dto/forgot-password-request.dto';
+import { ResetPasswordRequestDto } from './dto/reset-password-request.dto';
+import { BadRequestException } from '@nestjs/common';
 
 @Injectable()
 export class AuthService {
@@ -24,6 +29,7 @@ export class AuthService {
     private userService: UsersService,
     private jwtService: JwtService,
     private configService: AppConfigService,
+    private mailerService: MailerService,
   ) {}
 
   async validateUser(
@@ -108,5 +114,59 @@ export class AuthService {
 
   async logout(userId: number): Promise<void> {
     await this.userService.update(userId, { refreshToken: null });
+  }
+
+  async forgotPassword(
+    i18n: I18nContext,
+    { email }: ForgotPasswordRequestDto,
+  ): Promise<void> {
+    const user = await this.userService.findByEmail(email);
+    if (!user) {
+      // Don't leak whether user exists, just return
+      return;
+    }
+
+    const token = crypto.randomBytes(32).toString('hex');
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1);
+
+    await this.userService.update(user.id, {
+      resetPasswordToken: token,
+      resetPasswordExpires: expires,
+    });
+
+    const resetUrl = `http://localhost:4200/auth/reset-password?token=${token}`;
+    
+    // Log token to console for easy testing
+    console.log(`\n\n[RESET PASSWORD LINK]: ${resetUrl}\n\n`);
+
+    try {
+      await this.mailerService.sendMail({
+        to: user.email,
+        subject: 'Reset Password - Gear Ecommerce',
+        text: `You requested a password reset. Click the following link to reset your password: ${resetUrl}`,
+        html: `<p>You requested a password reset.</p><p><a href="${resetUrl}">Click here to reset your password</a></p><p>This link is valid for 1 hour.</p>`,
+      });
+    } catch (err) {
+      console.error('Error sending reset email (SMTP might not be configured yet):', err);
+    }
+  }
+
+  async resetPassword(
+    i18n: I18nContext,
+    { token, password }: ResetPasswordRequestDto,
+  ): Promise<void> {
+    const user = await this.userService.findByResetToken(token);
+
+    if (!user || !user.resetPasswordExpires || user.resetPasswordExpires < new Date()) {
+      throw new BadRequestException('Token không hợp lệ hoặc đã hết hạn');
+    }
+
+    const hash = await bcrypt.hash(password, 10);
+    await this.userService.update(user.id, {
+      password: hash,
+      resetPasswordToken: null,
+      resetPasswordExpires: null,
+    });
   }
 }

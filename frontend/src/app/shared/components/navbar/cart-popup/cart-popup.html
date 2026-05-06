@@ -15,7 +15,7 @@
       } @else if (cartStore.isEmpty()) {
         <p class="text-center py-4">{{ 'cart.empty' | translate }}</p>
       } @else {
-        <div class="hdr-cart-item pr-4 md:pr-5">
+        <div class="hdr-cart-item pr-4 md:pr-5 max-h-[300px] md:max-h-[400px] overflow-y-auto">
           @for (item of cartStore.items(); track item.id) {
           <a [routerLink]="['/product-details', item.product.slug]"
             class="flex items-center gap-[15px] relative pb-[15px] mb-[15px] border-b border-bdr-clr dark:border-bdr-clr-drk">

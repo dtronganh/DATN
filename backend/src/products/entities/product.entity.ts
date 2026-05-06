@@ -69,7 +69,7 @@ export class Product extends BaseEntity {
 
   @Column({
     name: 'images',
-    type: 'simple-array',
+    type: 'simple-json',
     nullable: true,
   })
   images: string[] | null;

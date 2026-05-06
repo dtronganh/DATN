@@ -33,6 +33,10 @@ export class UsersService extends BaseService {
     return await this.userRepository.findOneBy({ id: id });
   }
 
+  async findByResetToken(token: string): Promise<User | null> {
+    return await this.userRepository.findOneBy({ resetPasswordToken: token });
+  }
+
   async update(id: number, user: Partial<Omit<User, 'id'>>) {
     return await this.userRepository.update(id, user);
   }

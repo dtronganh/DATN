@@ -18,6 +18,11 @@ export const authRoutes: Routes = [
     loadComponent: () => import('./forgot-password/forgot-password').then(m => m.ForgotPassword)
   },
   {
+    path: 'reset-password',
+    canActivate: [guestGuard],
+    loadComponent: () => import('./reset-password/reset-password').then(m => m.ResetPassword)
+  },
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'

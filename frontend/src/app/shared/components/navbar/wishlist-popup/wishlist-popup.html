@@ -11,7 +11,7 @@
     [class.hidden]="!open()" [class.block]="open()">
     <h4 class="font-medium leading-none dark:text-white mb-4 text-xl md:text-2xl">{{ 'wishlist.title' | translate }}</h4>
     <div>
-      <div class="pr-4 md:pr-5 wishlist-item">
+      <div class="pr-4 md:pr-5 wishlist-item max-h-[300px] md:max-h-[400px] overflow-y-auto">
         @for (item of wishlistStore.items(); track item.id) {
         <a [routerLink]="['/product-details', item.slug]"
           class="flex items-center gap-[15px] relative pb-[15px] mb-[15px] border-b border-bdr-clr dark:border-bdr-clr-drk">

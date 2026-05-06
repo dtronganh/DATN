@@ -107,14 +107,21 @@ export class ProductDetails {
 
     this.productApi.getBySlug(slug).subscribe({
       next: (response) => {
-        this.product.set(response.data);
+        const product = response.data;
+        if (product.images && Array.isArray(product.images)) {
+          product.images = product.images.flatMap((img: string) => 
+            img.split(',').map((i: string) => i.trim()).filter((i: string) => i.length > 0)
+          );
+        }
+        
+        this.product.set(product);
         this.loading.set(false);
         
-        this.generateTags(response.data);
+        this.generateTags(product);
         
-        if (response.data.categoryId) {
-          this.loadRelatedProducts(response.data.categoryId, response.data.id);
-          this.loadCategoryName(response.data.categoryId);
+        if (product.categoryId) {
+          this.loadRelatedProducts(product.categoryId, product.id);
+          this.loadCategoryName(product.categoryId);
         }
       },
       error: (err) => {

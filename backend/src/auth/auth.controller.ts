@@ -10,6 +10,8 @@ import { LoginRequestDto } from './dto/login-request.dto';
 import { LoginResponseDto } from './dto/login-response.dto';
 import { RegisterRequestDto } from './dto/register-request.dto';
 import { RegisterResponseDto } from './dto/register-response.dto';
+import { ForgotPasswordRequestDto } from './dto/forgot-password-request.dto';
+import { ResetPasswordRequestDto } from './dto/reset-password-request.dto';
 import { GetUser } from './decorators/get-user.decorator';
 import { Payload } from 'src/common/payload';
 import { RefreshAuthGuard } from './guards/refresh.guard';
@@ -90,5 +92,26 @@ export class AuthController {
       payload.userId,
       request.refreshToken,
     );
+  }
+
+  @ApiOperation({ summary: 'Request password reset email' })
+  @ApiResponse({ status: 201, description: 'Reset email sent successfully' })
+  @Post('forgot-password')
+  async forgotPassword(
+    @I18n() i18n: I18nContext,
+    @Body() request: ForgotPasswordRequestDto,
+  ): Promise<void> {
+    return await this.authService.forgotPassword(i18n, request);
+  }
+
+  @ApiOperation({ summary: 'Reset password using token' })
+  @ApiResponse({ status: 201, description: 'Password reset successfully' })
+  @ApiResponse({ status: 400, description: 'Invalid or expired token' })
+  @Post('reset-password')
+  async resetPassword(
+    @I18n() i18n: I18nContext,
+    @Body() request: ResetPasswordRequestDto,
+  ): Promise<void> {
+    return await this.authService.resetPassword(i18n, request);
   }
 }

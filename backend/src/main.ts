@@ -10,11 +10,16 @@ import {
 import { logger } from './common/logger';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppConfigService } from './config/config.service';
+import { json, urlencoded } from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: logger,
   });
+
+  app.use(json({ limit: '50mb' }));
+  app.use(urlencoded({ extended: true, limit: '50mb' }));
+
   const config = new DocumentBuilder()
     .setTitle('Ecommerce API')
     .setDescription('API documentation')

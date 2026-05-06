@@ -16,4 +16,12 @@ export class AuthApi {
   register(payload: RegisterPayload): Observable<ApiResponse<AuthTokens>> {
     return this.http.post<ApiResponse<AuthTokens>>(`${API_URL}/auth/register`, payload);
   }
+
+  forgotPassword(email: string): Observable<ApiResponse<void>> {
+    return this.http.post<ApiResponse<void>>(`${API_URL}/auth/forgot-password`, { email });
+  }
+
+  resetPassword(token: string, password: string): Observable<ApiResponse<void>> {
+    return this.http.post<ApiResponse<void>>(`${API_URL}/auth/reset-password`, { token, password });
+  }
 }

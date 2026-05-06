@@ -58,6 +58,21 @@ export class User extends BaseEntity {
   })
   refreshToken: string | null;
 
+  @Column({
+    name: 'reset_password_token',
+    type: 'varchar',
+    length: 255,
+    nullable: true,
+  })
+  resetPasswordToken: string | null;
+
+  @Column({
+    name: 'reset_password_expires',
+    type: 'datetime',
+    nullable: true,
+  })
+  resetPasswordExpires: Date | null;
+
   @OneToMany(() => Address, (address) => address.user)
   addresses: Array<Address>;
 

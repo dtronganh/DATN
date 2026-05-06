@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { ToastService } from '@core/services/toast.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Button } from '@shared/components/button/button';
+import { AuthApi } from '@core/api/auth.api';
 
 @Component({
   selector: 'app-forgot-password',
@@ -28,6 +29,7 @@ export class ForgotPassword {
   private fb = inject(FormBuilder);
   private toastService = inject(ToastService);
   private translate = inject(TranslateService);
+  private authApi = inject(AuthApi);
 
   forgotPasswordForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]]
@@ -53,6 +55,14 @@ export class ForgotPassword {
     }
 
     const { email } = this.forgotPasswordForm.getRawValue();
-    this.toastService.info(this.translate.instant('auth.resetComingSoon'));
+    
+    this.authApi.forgotPassword(email!).subscribe({
+      next: () => {
+        this.toastService.success(this.translate.instant('auth.resetLinkSent', { defaultValue: 'Reset link sent to your email' }));
+      },
+      error: () => {
+        this.toastService.error(this.translate.instant('auth.errors.resetFailed', { defaultValue: 'Failed to send reset link' }));
+      }
+    });
   }
 }

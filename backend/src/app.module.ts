@@ -31,6 +31,7 @@ import { join } from 'path';
 import { HttpModule } from '@nestjs/axios';
 import { AiChatboxModule } from './ai-chatbox/ai-chatbox.module';
 import { AdminDashboardModule } from './admin-dashboard/admin-dashboard.module';
+import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
   imports: [
@@ -46,7 +47,7 @@ import { AdminDashboardModule } from './admin-dashboard/admin-dashboard.module';
       type: 'sqlite',
       database: 'db.sqlite',
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: false,
     }),
     ScheduleModule.forRoot(),
     BaseModule,
@@ -85,6 +86,19 @@ import { AdminDashboardModule } from './admin-dashboard/admin-dashboard.module';
       ],
     }),
     HttpModule.register({}),
+    MailerModule.forRoot({
+      transport: {
+        host: process.env.SMTP_HOST || 'smtp.ethereal.email',
+        port: process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT, 10) : 587,
+        auth: {
+          user: process.env.SMTP_USER || 'test@example.com',
+          pass: process.env.SMTP_PASS || 'password',
+        },
+      },
+      defaults: {
+        from: '"No Reply" <noreply@example.com>',
+      },
+    }),
   ],
   controllers: [],
   providers: [

@@ -10,14 +10,30 @@
       "node"
     ],
     "paths": {
-      "@core/*": ["src/app/core/*"],
-      "@components/*": ["src/app/shared/components/*"],
-      "@shared/*": ["src/app/shared/*"],
-      "@data/*": ["src/app/data/*"],
-      "@assets/*": ["src/assets/*"],
-      "@app/*": ["src/app/*"],
-      "@pages/*": ["src/app/pages/*"],
-      "@env/*": ["src/environments/*"]
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      "@components/*": [
+        "src/app/shared/components/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@data/*": [
+        "src/app/data/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@pages/*": [
+        "src/app/pages/*"
+      ],
+      "@env/*": [
+        "src/environments/*"
+      ]
     }
   },
   "include": [

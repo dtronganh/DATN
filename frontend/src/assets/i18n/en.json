@@ -291,11 +291,9 @@
     "forgotTitle": "Forget Password",
     "sendInfo": "Send Info",
     "resetNote": "Note: We will send a password reset link to your email",
-    "rememberPassword": "Remember your password?",    "trust": {
-      "shipping": "Nationwide Shipping",
-      "support": "24/7 Support",
-      "warranty": "Official Warranty"
-    },    "resetComingSoon": "Password reset feature will be implemented soon",
+    "rememberPassword": "Remember your password?",
+    "resetComingSoon": "Password reset feature will be implemented soon",
+    "resetLinkSent": "Reset link has been sent to your email (Please check Console)",
     "loginSuccess": "Login successfully",
     "loginFailed": "Login failed",
     "toasts": {
@@ -316,7 +314,8 @@
       "emailExists": "Email already exists",
       "invalidRegistration": "Invalid registration data",
       "invalidEmailEntry": "Please enter a valid email",
-      "serverError": "Server error. Please try again later"
+      "serverError": "Server error. Please try again later",
+      "resetFailed": "Failed to send reset link"
     }
   },
   "home": {
