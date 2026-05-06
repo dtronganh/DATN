@@ -294,7 +294,7 @@ export class OrdersService extends BaseService {
         i18n.t('common.orders.errors.order_not_found'),
       );
     }
-    if (order.status === Status.SHIPPED || order.status === Status.CANCELLED) {
+    if (order.status === Status.SHIPPED || order.status === Status.COMPLETED || order.status === Status.CANCELLED) {
       throw new ConflictException(
         i18n.t('common.orders.errors.cannot_cancel_completed_order'),
       );
@@ -405,7 +405,8 @@ export class OrdersService extends BaseService {
     const validTransitions: Record<Status, Status[]> = {
       [Status.PENDING]: [Status.PAID, Status.FAILED, Status.CANCELLED],
       [Status.PAID]: [Status.SHIPPED],
-      [Status.SHIPPED]: [],
+      [Status.SHIPPED]: [Status.COMPLETED],
+      [Status.COMPLETED]: [],
       [Status.FAILED]: [],
       [Status.CANCELLED]: [],
     };

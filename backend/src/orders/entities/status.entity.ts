@@ -2,6 +2,7 @@ export enum Status {
   PENDING = 'PENDING',
   PAID = 'PAID',
   SHIPPED = 'SHIPPED',
+  COMPLETED = 'COMPLETED',
   FAILED = 'FAILED',
   CANCELLED = 'CANCELLED',
 }
